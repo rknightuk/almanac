@@ -23,7 +23,7 @@ class PostController extends Controller
     public function index()
     {
 	    return Post::orderBy('date_completed', 'desc')
-		    ->paginate(5);
+		    ->paginate(10);
     }
 
 	public function show($id)
