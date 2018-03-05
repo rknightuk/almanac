@@ -229,7 +229,7 @@ class Editor extends Component<Props, State> {
 						type="button"
 						className="btn btn-success"
 						onClick={this.handleSave}
-						disabled={this.props.saving}
+						disabled={this.props.saving || !this.isValid()}
 					>
 						{this.props.saving ? (
 							<span>
@@ -248,6 +248,24 @@ class Editor extends Component<Props, State> {
 			date_completed: this.state.post.date_completed.toDate(),
 			content: this.state.post.content.text,
 		})
+	}
+
+	isValid = () => Object.keys(this.getErrors()).length
+
+	getErrors = () => {
+		const { post } = this.state
+
+		let errors = {}
+
+		if (!post.title || post.title === '') {
+			errors.title = 'Title is required'
+		}
+
+		if (!post.path || post.path === '') {
+			errors.path = 'Path is required'
+		}
+
+		return errors
 	}
 
 	updatePost = (key: string, value: any) => {
