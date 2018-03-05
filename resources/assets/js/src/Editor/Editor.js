@@ -250,7 +250,7 @@ class Editor extends Component<Props, State> {
 		})
 	}
 
-	isValid = () => Object.keys(this.getErrors()).length
+	isValid = () => Object.keys(this.getErrors()).length === 0
 
 	getErrors = () => {
 		const { post } = this.state
