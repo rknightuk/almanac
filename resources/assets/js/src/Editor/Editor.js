@@ -9,6 +9,7 @@ import FormRow from '../ui/FormRow'
 import TextInput from '../ui/TextInput'
 import Checkbox from '../ui/Checkbox'
 import Select from '../ui/Select'
+import TagInput from '../ui/TagInput'
 
 import DatePicker from 'react-day-picker/DayPickerInput'
 import { formatDate, parseDate } from 'react-day-picker/moment'
@@ -53,6 +54,7 @@ class Editor extends Component<Props, State> {
 			season: '',
 			platform: '',
 			published: true,
+			tags: [],
 		},
 	}
 
@@ -216,6 +218,17 @@ class Editor extends Component<Props, State> {
 							)}
 						/>
 					)}
+
+					<FormRow
+						label="Tags"
+						inputKey="post-tags"
+						input={(
+							<TagInput
+								onChange={tags => this.updatePost('tags', tags)}
+								tags={post.tags}
+							/>
+						)}
+					/>
 
 					<FormRow
 						label="Published?"

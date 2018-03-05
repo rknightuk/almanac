@@ -16,6 +16,7 @@ export type Post = {
 	season: string,
 	platform: string,
 	published: boolean,
+	tags: string[],
 }
 
 export type PostTypes =
