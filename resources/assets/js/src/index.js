@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
 
 import Navigation from './Navigation'
 
@@ -20,6 +21,10 @@ const App = () => (
 				<Route exact path="/app/new/:type" component={Create}/>
 				<Route exact path="/app/posts/:id" component={Update}/>
 			</div>
+
+			<ToastContainer
+				position={toast.POSITION.BOTTOM_LEFT}
+			/>
 		</div>
 	</BrowserRouter>
 )

@@ -4,6 +4,8 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
+import { toast } from 'react-toastify'
+
 import Editor from './Editor'
 import type { Post, PostTypes } from '../types'
 
@@ -48,6 +50,8 @@ class Create extends Component<Props, State> {
 		this.setState((s: State) => ({
 			saving: false,
 		}))
+
+		toast.success('Post Created')
 
 		this.props.history.push(`/app`)
 	}

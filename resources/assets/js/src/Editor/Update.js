@@ -4,6 +4,8 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
+import { toast } from 'react-toastify'
+
 import Editor from './Editor'
 import Loader from '../ui/Loader'
 import type { Post } from '../types'
@@ -84,6 +86,8 @@ class Update extends Component<Props, State> {
 		this.setState((s: State) => ({
 			saving: false,
 		}))
+
+		toast.success('Post Updated')
 
 		this.props.history.push('/app')
 	}

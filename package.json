@@ -48,6 +48,7 @@
     "react-router-dom": "^4.2.2",
     "react-select": "^1.2.0",
     "react-tagsinput": "^3.19.0",
+    "react-toastify": "^3.3.4",
     "sass": "^1.0.0-beta.3",
     "sass-loader": "^6.0.6",
     "showdown": "^1.8.6",
