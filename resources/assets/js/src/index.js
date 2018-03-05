@@ -4,8 +4,6 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 
-import Navigation from './Navigation'
-
 import Dashboard from './Dashboard'
 import Create from './Editor/Create'
 import Update from './Editor/Update'
@@ -13,8 +11,6 @@ import Update from './Editor/Update'
 const App = () => (
 	<BrowserRouter>
 		<div>
-			<Navigation />
-
 			<div style={{ maxWidth: '1000px', margin: '0 auto', padding: '20px' }}>
 				<Route exact path="/app" component={Dashboard}/>
 				<Route exact path="/app/new" component={Create}/>
