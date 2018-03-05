@@ -51,6 +51,7 @@ class Editor extends Component<Props, State> {
 			creator: '',
 			season: '',
 			platform: '',
+			published: true,
 		}
 	}
 
@@ -208,6 +209,17 @@ class Editor extends Component<Props, State> {
 							<TextInput
 								value={post.season}
 								onChange={v => this.updatePost('season', v)}
+							/>
+						)}
+					/>
+
+					<FormRow
+						label="Published?"
+						inputKey="post-published"
+						input={(
+							<Checkbox
+								value={post.published}
+								onChange={v => this.updatePost('published', v)}
 							/>
 						)}
 					/>

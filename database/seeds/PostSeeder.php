@@ -30,6 +30,7 @@ class PostSeeder extends Seeder
 			    'created_at' => $now,
 			    'updated_at' => $now,
 			    'platform' => null,
+			    'published' => true,
 		    ],
 		    [
 				'type' => 'tv',
@@ -47,6 +48,7 @@ class PostSeeder extends Seeder
 			    'created_at' => $now,
 			    'updated_at' => $now,
 			    'platform' => null,
+			    'published' => true,
 		    ],
 		    [
 			    'type' => 'game',
@@ -64,6 +66,7 @@ class PostSeeder extends Seeder
 			    'created_at' => $now,
 			    'updated_at' => $now,
 			    'platform' => null,
+			    'published' => true,
 		    ],
 		    [
 			    'type' => 'game',
@@ -81,6 +84,7 @@ class PostSeeder extends Seeder
 			    'created_at' => $now,
 			    'updated_at' => $now,
 			    'platform' => 'Amiga',
+			    'published' => true,
 		    ],
 		    [
 			    'type' => 'music',
@@ -98,6 +102,7 @@ class PostSeeder extends Seeder
 			    'created_at' => $now,
 			    'updated_at' => $now,
 			    'platform' => null,
+			    'published' => true,
 		    ],
 		    [
 			    'type' => 'book',
@@ -115,6 +120,7 @@ class PostSeeder extends Seeder
 			    'created_at' => $now,
 			    'updated_at' => $now,
 			    'platform' => null,
+			    'published' => true,
 		    ],
 		    [
 			    'type' => 'podcast',
@@ -132,6 +138,7 @@ class PostSeeder extends Seeder
 			    'created_at' => $now,
 			    'updated_at' => $now,
 			    'platform' => null,
+			    'published' => true,
 		    ],
 		    [
 			    'type' => 'video',
@@ -149,6 +156,7 @@ class PostSeeder extends Seeder
 			    'created_at' => $now,
 			    'updated_at' => $now,
 			    'platform' => null,
+			    'published' => true,
 		    ],
 		    [
 			    'type' => 'comic',
@@ -166,6 +174,7 @@ class PostSeeder extends Seeder
 			    'created_at' => $now,
 			    'updated_at' => $now,
 			    'platform' => null,
+			    'published' => true,
 		    ],
 	    ]);
     }

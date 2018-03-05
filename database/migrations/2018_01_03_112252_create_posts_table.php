@@ -28,6 +28,7 @@ class CreatePostsTable extends Migration
 	        $table->string('creator', 500)->nullable();
 	        $table->string('season', 100)->nullable();
 	        $table->string('platform', 100)->nullable();
+	        $table->boolean('published')->default(1);
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
