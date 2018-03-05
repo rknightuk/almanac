@@ -1,0 +1,96 @@
+.picker {
+	display: flex;
+	margin-top: 10px;
+	border: 1px solid #F0F0F4;
+}
+
+.block {
+	flex: 1;
+	border-left: 1px solid #F0F0F4;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px 10px 10px 10px;
+}
+
+.block:first-child {
+	border-left: none;
+}
+
+.active,
+.block:hover {
+	background: #F0F0F4;
+	cursor: pointer;
+}
+
+.icon {
+	margin-right: 0 !important;
+	font-size: 2.5em !important;
+}
+
+.icon__film {
+	composes: icon;
+	color: #EC644B;
+}
+
+.icon__tv {
+	composes: icon;
+	color: #87D37C;
+}
+
+.icon__game {
+	composes: icon;
+	color: #FABE58;
+}
+
+.icon__music {
+	composes: icon;
+	color: #52B3D9;
+}
+
+.icon__podcast {
+	composes: icon;
+	color: #EC8436;
+}
+
+.icon__book {
+	composes: icon;
+	color: #947CB0;
+}
+
+.icon__video {
+	composes: icon;
+	color: #ff0000;
+}
+
+.icon__text {
+	composes: icon;
+	color: #95A5A6;
+}
+
+.name {
+	color: black;
+	margin-top: 5px;
+	margin-left: 0;
+}
+
+@media (max-width: 460px) {
+	.picker {
+		flex-direction: column;
+	}
+
+	.block {
+		flex-direction: row;
+		padding: 10px;
+		border-left: none !important;
+	}
+
+	.icon {
+		font-size: 1.5em !important;
+	}
+
+	.name {
+		margin-left: 10px;
+		margin-bottom: 5px;
+	}
+}

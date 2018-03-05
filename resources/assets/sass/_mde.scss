@@ -1,0 +1,35 @@
+.almanac-mde {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin: 25px 0;
+
+	.mde-header {
+		width: 100%;
+	}
+
+	.mde-text {
+		flex: 1;
+	}
+
+	.mde-preview {
+		flex: 1;
+	}
+
+	.mde-preview-content {
+		border: 1px dashed rgba(0, 0, 0, 0.15)!important;
+		margin-top: 0!important;
+		padding: 0 10px!important;
+		min-height: 200px;
+	}
+}
+
+@media (max-width: 600px) {
+	.almanac-mde {
+		flex-direction: column;
+
+		.mde-preview-content {
+			margin-top: 10px!important;
+		}
+	}
+}
