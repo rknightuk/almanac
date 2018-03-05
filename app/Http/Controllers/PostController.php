@@ -4,11 +4,22 @@ namespace Almanac\Http\Controllers;
 
 use Almanac\Http\Requests\CreatePost;
 use Almanac\Http\Requests\UpdatePost;
+use Almanac\Posts\PathGenerator;
 use Almanac\Posts\Post;
 use Carbon\Carbon;
 
 class PostController extends Controller
 {
+	/**
+	 * @var PathGenerator
+	 */
+	private $pathGenerator;
+
+	public function __construct(PathGenerator $pathGenerator)
+	{
+		$this->pathGenerator = $pathGenerator;
+	}
+
     public function index()
     {
 	    return Post::with('tags')
@@ -28,7 +39,12 @@ class PostController extends Controller
     	$data = $request->input();
 
     	unset($data['id']);
-	    $data['date_completed'] = new Carbon($data['date_completed']);
+	    $data['date_completed'] = $data['date_completed'] ? new Carbon($data['date_completed']) : new Carbon();
+	    $data['path'] = $this->pathGenerator->getValidPath(
+	    	$data['path'],
+		    $data['type'],
+		    $data['date_completed']
+	    );
 
         $post = Post::create($data);
 
@@ -42,7 +58,13 @@ class PostController extends Controller
 	    $post = Post::find($id);
 
 	    unset($data['id']);
-	    $data['date_completed'] = new Carbon($data['date_completed']);
+	    $data['date_completed'] = $data['date_completed'] ? new Carbon($data['date_completed']) : new Carbon();
+	    $data['path'] = $this->pathGenerator->getValidPath(
+	    	$data['path'],
+		    $data['type'],
+		    $data['date_completed'],
+		    $id
+	    );
 
 	    $post->update($data);
 
