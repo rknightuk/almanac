@@ -22,15 +22,13 @@ class PostController extends Controller
 
     public function index()
     {
-	    return Post::with('tags')
-		    ->orderBy('date_completed', 'desc')
+	    return Post::orderBy('date_completed', 'desc')
 		    ->paginate(5);
     }
 
 	public function show($id)
 	{
-		return Post::with('tags')
-			->where('id', $id)
+		return Post::with('tags')->where('id', $id)
 			->first();
 	}
 
@@ -47,6 +45,8 @@ class PostController extends Controller
 	    );
 
         $post = Post::create($data);
+
+        $post->attachTags($data['tags']);
 
         return $post;
     }
@@ -67,6 +67,8 @@ class PostController extends Controller
 	    );
 
 	    $post->update($data);
+
+	    $post->syncTags($data['tags']);
 
 	    return $post;
     }

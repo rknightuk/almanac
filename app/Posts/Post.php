@@ -2,13 +2,13 @@
 
 namespace Almanac\Posts;
 
-use Almanac\PostTag;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Tags\HasTags;
 
 class Post extends Model
 {
-	use SoftDeletes;
+	use SoftDeletes, HasTags;
 
 	protected $table = 'posts';
 
@@ -31,10 +31,5 @@ class Post extends Model
 	    'season',
 	    'platform',
     ];
-
-	public function tags()
-	{
-		return $this->hasMany(PostTag::class, 'post_id', 'id');
-	}
 
 }

@@ -49,7 +49,7 @@ class Update extends Component<Props, State> {
 					text: response.data.content,
 				},
 				date_completed: moment(response.data.date_completed),
-				tags: response.data.tags.map(t => t.name),
+				tags: response.data.tags.map(t => t.name.en),
 			},
 			loading: false,
 		})
