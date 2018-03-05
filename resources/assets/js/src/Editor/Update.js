@@ -22,6 +22,7 @@ type Props = {
 type State = {
 	loading: boolean,
 	post: Post,
+	saving: boolean,
 }
 
 class Update extends Component<Props, State> {
@@ -31,6 +32,7 @@ class Update extends Component<Props, State> {
 	state: State = {
 		loading: true,
 		post: {},
+		saving: false,
 	}
 
 	componentDidMount() {
@@ -66,12 +68,21 @@ class Update extends Component<Props, State> {
 			<Editor
 				onSave={this.handleSave}
 				post={this.state.post}
+				saving={this.state.saving}
 			/>
 		)
 	}
 
 	handleSave = async (post: Post) => {
+		this.setState((s: State) => ({
+			saving: true,
+		}))
+
 		await axios.put(`/api/posts/${this.props.match.params.id}`, post)
+
+		this.setState((s: State) => ({
+			saving: false,
+		}))
 
 		this.props.history.push('/app')
 	}

@@ -23,6 +23,7 @@ type Props = {
 	type?: PostTypes,
 	onSave: (post: Post) => any,
 	post?: Post,
+	saving: boolean,
 }
 
 type State = {
@@ -52,7 +53,7 @@ class Editor extends Component<Props, State> {
 			season: '',
 			platform: '',
 			published: true,
-		}
+		},
 	}
 
 	render() {
@@ -228,8 +229,13 @@ class Editor extends Component<Props, State> {
 						type="button"
 						className="btn btn-success"
 						onClick={this.handleSave}
+						disabled={this.props.saving}
 					>
-						Save
+						{this.props.saving ? (
+							<span>
+								<i className="fas fa-spinner fa-spin" data-fa-transform="grow-6" /> Saving
+							</span>
+						) : 'Save'}
 					</button>
 				</form>
 			</div>
