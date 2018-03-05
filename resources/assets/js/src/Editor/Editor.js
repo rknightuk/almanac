@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react'
-import type { PostTypes } from '../Dashboard'
 
 import ReactMde, { ReactMdeCommands } from 'react-mde'
 import 'react-mde/lib/styles/css/react-mde-all.css'
@@ -18,7 +17,7 @@ import 'react-day-picker/lib/style.css'
 import { PLATFORMS } from '../constants'
 
 import moment from 'moment'
-import type { Post } from '../types'
+import type { Post, PostTypes } from '../types'
 
 type Props = {
 	type?: PostTypes,

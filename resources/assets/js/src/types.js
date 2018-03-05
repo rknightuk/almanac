@@ -16,3 +16,14 @@ export type Post = {
 	season: string,
 	platform: string,
 }
+
+export type PostTypes =
+	'movie'
+	| 'tv'
+	| 'game'
+	| 'music'
+	| 'book'
+	| 'podcast'
+	| 'video'
+	| 'text'
+	| 'comic'

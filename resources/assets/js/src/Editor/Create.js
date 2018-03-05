@@ -5,8 +5,7 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 import Editor from './Editor'
-import type { Post } from '../types'
-import type { PostTypes } from '../Dashboard'
+import type { Post, PostTypes } from '../types'
 
 type Props = {
 	match: {

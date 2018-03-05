@@ -3,7 +3,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-import type { PostTypes } from './index'
+import { PostTypes } from '../types'
 
 // import css from './styles.css'
 
