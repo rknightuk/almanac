@@ -176,43 +176,46 @@ class Editor extends Component<Props, State> {
 						)}
 					/>
 
-					<strong>GAME ONLY</strong>
-					<FormRow
-						label="Platform"
-						inputKey="post-platform"
-						input={(
-							<Select
-								value={post.platform}
-								onChange={v => this.updatePost('platform', v)}
-								options={PLATFORMS}
-								withBlank
-							/>
-						)}
-					/>
+					{this.showPlatform() && (
+						<FormRow
+							label="Platform"
+							inputKey="post-platform"
+							input={(
+								<Select
+									value={post.platform}
+									onChange={v => this.updatePost('platform', v)}
+									options={PLATFORMS}
+									withBlank
+								/>
+							)}
+						/>
+					)}
 
-					<strong>BOOK/MUSIC ONLY</strong>
-					<FormRow
-						label={post.type === 'book' ? 'Author' : 'Artist'}
-						inputKey="post-author"
-						input={(
-							<TextInput
-								value={post.creator}
-								onChange={v => this.updatePost('creator', v)}
-							/>
-						)}
-					/>
+					{this.showCreator() && (
+						<FormRow
+							label={post.type === 'book' ? 'Author' : 'Artist'}
+							inputKey="post-author"
+							input={(
+								<TextInput
+									value={post.creator}
+									onChange={v => this.updatePost('creator', v)}
+								/>
+							)}
+						/>
+					)}
 
-					<strong>TV/COMIC ONLY</strong>
-					<FormRow
-						label={post.type === 'comic' ? 'Series' : 'Season'}
-						inputKey="post-season"
-						input={(
-							<TextInput
-								value={post.season}
-								onChange={v => this.updatePost('season', v)}
-							/>
-						)}
-					/>
+					{this.showSeason() && (
+						<FormRow
+							label={post.type === 'comic' ? 'Series' : 'Season'}
+							inputKey="post-season"
+							input={(
+								<TextInput
+									value={post.season}
+									onChange={v => this.updatePost('season', v)}
+								/>
+							)}
+						/>
+					)}
 
 					<FormRow
 						label="Published?"
@@ -249,6 +252,10 @@ class Editor extends Component<Props, State> {
 			content: this.state.post.content.text,
 		})
 	}
+
+	showPlatform = () => this.state.post.type === 'game'
+	showCreator = () => ['book', 'music'].includes(this.state.post.type)
+	showSeason = () => ['tv', 'comic'].includes(this.state.post.type)
 
 	isValid = () => Object.keys(this.getErrors()).length === 0
 
