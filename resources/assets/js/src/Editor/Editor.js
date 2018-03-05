@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 import ReactMde, { ReactMdeCommands } from 'react-mde'
 import 'react-mde/lib/styles/css/react-mde-all.css'
@@ -19,16 +20,20 @@ import { PLATFORMS } from '../constants'
 
 import moment from 'moment'
 import type { Post, PostTypes } from '../types'
+import { toast } from 'react-toastify'
+import axios from 'axios/index'
 
 type Props = {
 	type?: PostTypes,
 	onSave: (post: Post) => any,
 	post?: Post,
 	saving: boolean,
+	history: any,
 }
 
 type State = {
 	post: Post,
+	deleting: boolean,
 }
 
 class Editor extends Component<Props, State> {
@@ -56,6 +61,7 @@ class Editor extends Component<Props, State> {
 			published: true,
 			tags: [],
 		},
+		deleting: false,
 	}
 
 	render() {
@@ -245,7 +251,7 @@ class Editor extends Component<Props, State> {
 						type="button"
 						className="btn btn-success"
 						onClick={this.handleSave}
-						disabled={this.props.saving || !this.isValid()}
+						disabled={this.props.saving || !this.isValid() || this.state.deleting}
 					>
 						{this.props.saving ? (
 							<span>
@@ -253,6 +259,21 @@ class Editor extends Component<Props, State> {
 							</span>
 						) : 'Save'}
 					</button>
+
+					{this.state.post.id && (
+						<button
+							type="button"
+							className="btn btn-danger"
+							onClick={this.handleDelete}
+							disabled={this.state.deleting || this.props.saving}
+						>
+							{this.state.deleting ? (
+								<span>
+								<i className="fas fa-spinner fa-spin" data-fa-transform="grow-6" /> Deleting
+							</span>
+							) : 'Delete'}
+						</button>
+					)}
 				</form>
 			</div>
 		)
@@ -296,6 +317,22 @@ class Editor extends Component<Props, State> {
 			}
 		}))
 	}
+
+	handleDelete = async () => {
+		this.setState((s: State) => ({
+			deleting: true,
+		}))
+
+		await axios.delete(`/api/posts/${this.state.post.id}`)
+
+		this.setState((s: State) => ({
+			deleting: false,
+		}))
+
+		toast.success('Post Deleted')
+
+		this.props.history.push(`/app`)
+	}
 }
 
-export default Editor
+export default withRouter(Editor)
