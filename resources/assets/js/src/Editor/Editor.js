@@ -177,7 +177,7 @@ class Editor extends Component<Props, State> {
 							<DatePicker
 								format="DD-MM-YYYY"
 								value={moment(post.date_completed).format('DD-MM-YYYY')}
-								onChange={v => this.updatePost('date_completed', v)}
+								onDayChange={v => this.updatePost('date_completed', moment(v))}
 								formatDate={formatDate}
 								parseDate={parseDate}
 							/>
