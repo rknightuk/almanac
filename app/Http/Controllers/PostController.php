@@ -2,9 +2,10 @@
 
 namespace Almanac\Http\Controllers;
 
+use Almanac\Http\Requests\CreatePost;
+use Almanac\Http\Requests\UpdatePost;
 use Almanac\Posts\Post;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -22,13 +23,7 @@ class PostController extends Controller
 			->first();
 	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(CreatePost $request)
     {
     	$data = $request->input();
 
@@ -40,14 +35,7 @@ class PostController extends Controller
         return $post;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdatePost $request, $id)
     {
 	    $data = $request->input();
 
