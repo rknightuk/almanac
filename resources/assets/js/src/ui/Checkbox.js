@@ -11,6 +11,7 @@ const Checkbox = ({ value, onChange }: Props) => (
 		type="checkbox"
 		value={value}
 		onChange={e => onChange(e.target.checked)}
+		checked={value}
 	/>
 )
 

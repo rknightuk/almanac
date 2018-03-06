@@ -11,6 +11,7 @@ import TextInput from '../ui/TextInput'
 import Checkbox from '../ui/Checkbox'
 import Select from '../ui/Select'
 import TagInput from '../ui/TagInput'
+import Rating from '../ui/Rating'
 
 import DatePicker from 'react-day-picker/DayPickerInput'
 import { formatDate, parseDate } from 'react-day-picker/moment'
@@ -129,20 +130,9 @@ class Editor extends Component<Props, State> {
 						)}
 					/>
 
-					<FormRow
-						label="Rating"
-						inputKey="post-rating"
-						input={(
-							<Select
-								value={post.rating}
-								onChange={v => this.updatePost('rating', v)}
-								options={[
-									{ value: '0', label: 'Bad' },
-									{ value: '1', label: 'Fine' },
-									{ value: '2', label: 'Good' },
-								]}
-							/>
-						)}
+					<Rating
+						value={post.rating}
+						onChange={v => this.updatePost('rating', v)}
 					/>
 
 					<FormRow
