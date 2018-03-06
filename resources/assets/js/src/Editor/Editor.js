@@ -22,7 +22,9 @@ import { PLATFORMS } from '../constants'
 import moment from 'moment'
 import type { Post, PostTypes } from '../types'
 import { toast } from 'react-toastify'
-import axios from 'axios/index'
+import axios from 'axios'
+import slugify from 'slug'
+
 
 type Props = {
 	type?: PostTypes,
@@ -35,6 +37,7 @@ type Props = {
 type State = {
 	post: Post,
 	deleting: boolean,
+	pathManuallyChanged: boolean,
 }
 
 class Editor extends Component<Props, State> {
@@ -63,6 +66,7 @@ class Editor extends Component<Props, State> {
 			tags: [],
 		},
 		deleting: false,
+		pathManuallyChanged: false,
 	}
 
 	render() {
@@ -82,7 +86,7 @@ class Editor extends Component<Props, State> {
 						input={(
 							<TextInput
 								value={post.title}
-								onChange={v => this.updatePost('title', v)}
+								onChange={v => this.handleTitleChange(v)}
 							/>
 						)}
 					/>
@@ -300,10 +304,29 @@ class Editor extends Component<Props, State> {
 	}
 
 	updatePost = (key: string, value: any) => {
+		const pathManuallyChanged = key === 'path' ? true : this.state.pathManuallyChanged
+
 		this.setState((s: State) => ({
 			post: {
 				...s.post,
 				[key]: value,
+			},
+			pathManuallyChanged,
+		}))
+	}
+
+	shouldGeneratePath = () => {
+		return !this.props.post && !this.state.pathManuallyChanged
+	}
+
+	handleTitleChange = (title: string) => {
+		const path = this.shouldGeneratePath() ? slugify(title) : this.state.post.path
+
+		this.setState((s: State) => ({
+			post: {
+				...s.post,
+				title,
+				path,
 			}
 		}))
 	}
