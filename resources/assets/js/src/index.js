@@ -11,7 +11,7 @@ import Update from './Editor/Update'
 const App = () => (
 	<BrowserRouter>
 		<div>
-			<div style={{ maxWidth: '1000px', margin: '0 auto', padding: '20px' }}>
+			<div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 20px' }}>
 				<Route exact path="/app" component={Dashboard}/>
 				<Route exact path="/app/new" component={Create}/>
 				<Route exact path="/app/new/:type" component={Create}/>
