@@ -1,5 +1,7 @@
 @extends('layouts.site')
 
 @section('content')
-	MAIN SITE
+	SINGLE POST
+
+	{{ $post['title'] }}
 @endsection

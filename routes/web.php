@@ -3,9 +3,9 @@
 
 Auth::routes();
 
-Route::get('/', function () {
-	return view('site');
-});
+//Route::get('/', 'SiteController@index');
+
+Route::get('/{type?}/{year?}/{month?}/{day?}/{path?}', 'SiteController@index');
 
 Route::group(['prefix' => '/app', 'middleware' => 'auth'], function()
 {
