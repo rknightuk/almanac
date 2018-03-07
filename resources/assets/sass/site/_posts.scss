@@ -12,6 +12,10 @@ $spoiler-color: #383838;
 	margin: 0 auto;
 	margin-bottom: 25px;
 
+	@media (max-width: 600px) {
+		margin-left: 15px;
+	}
+
 	&:last-child {
 		margin-bottom: 0;
 	}
