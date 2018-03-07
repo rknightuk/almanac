@@ -88,6 +88,10 @@ $spoiler-color: #383838;
 		color: $light-text-color;
 		margin-bottom: 15px;
 
+		& img {
+			max-width: 100%;
+		}
+
 		& a {
 			text-decoration: underline;
 			transition: all 0.4s;
