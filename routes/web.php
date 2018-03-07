@@ -3,10 +3,6 @@
 
 Auth::routes();
 
-//Route::get('/', 'SiteController@index');
-
-Route::get('/{type?}/{year?}/{month?}/{day?}/{path?}', 'SiteController@index');
-
 Route::group(['prefix' => '/app', 'middleware' => 'auth'], function()
 {
 	Route::get('/', function () {
@@ -17,3 +13,5 @@ Route::group(['prefix' => '/app', 'middleware' => 'auth'], function()
 		return view( 'admin' );
 	})->where('path', '.*');
 });
+
+Route::get('/{type?}/{year?}/{month?}/{day?}/{path?}', 'SiteController@index');

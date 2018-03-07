@@ -1,7 +1,5 @@
 @extends('layouts.site')
 
 @section('content')
-	SINGLE POST
-
-	{{ $post['title'] }}
+	@include('site._partials.post', ['post' => $post])
 @endsection

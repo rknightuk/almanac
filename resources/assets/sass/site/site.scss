@@ -1,3 +1,19 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+
+@import "variables";
+
 body {
-	background: #eee;
+	background: #EDF0F1;
+	font-family: "Montserrat", sans-serif;
 }
+
+a {
+	text-decoration: none;
+	transition: all 0.4s;
+	color: $lighter-text-color;
+	&:hover {
+		color: $primary-color;
+	}
+}
+
+@import "posts";

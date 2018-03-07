@@ -1,9 +1,7 @@
 @extends('layouts.site')
 
 @section('content')
-	ALL POSTS
-
 	@foreach ($posts as $post)
-		{{ $post['title'] }}
+		@include('site._partials.post', ['post' => $post])
 	@endforeach
 @endsection

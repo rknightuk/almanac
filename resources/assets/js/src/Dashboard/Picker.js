@@ -42,7 +42,7 @@ const Picker = () => (
 		/>
 		<Block
 			name="music"
-			icon="music"
+			icon="headphones"
 			title="Music"
 		/>
 		<Block

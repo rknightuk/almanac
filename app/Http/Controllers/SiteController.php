@@ -9,6 +9,7 @@ class SiteController extends Controller
 	public function index(string $type = null, int $year = null, int $month = null, int $day = null, string $path = null)
 	{
 		$query = Post::with('tags')
+			->where('published', true)
 			->orderBy('date_completed', 'desc');
 
 		if ($type) $query->where('type', $type);
