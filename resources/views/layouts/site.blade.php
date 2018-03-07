@@ -19,6 +19,10 @@
 			<div class="almn-posts">
 				@yield('content')
 			</div>
+
+			<div class="almn-footer">
+				Powered by <a href="https://github.com/rmlewisuk/almanac">Almanac</a> | <a href="https://robblewis.me">Robb Lewis</a>
+			</div>
 		</div>
 
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
