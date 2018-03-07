@@ -40,7 +40,6 @@ class PostController extends Controller
 	    $data['date_completed'] = $data['date_completed'] ? new Carbon($data['date_completed']) : new Carbon();
 	    $data['path'] = $this->pathGenerator->getValidPath(
 	    	$data['path'],
-		    $data['type'],
 		    $data['date_completed']
 	    );
 
@@ -61,7 +60,6 @@ class PostController extends Controller
 	    $data['date_completed'] = $data['date_completed'] ? new Carbon($data['date_completed']) : new Carbon();
 	    $data['path'] = $this->pathGenerator->getValidPath(
 	    	$data['path'],
-		    $data['type'],
 		    $data['date_completed'],
 		    $id
 	    );

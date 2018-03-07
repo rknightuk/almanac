@@ -7,9 +7,9 @@ use Illuminate\Support\Collection;
 
 class PathGenerator {
 
-	public function getValidPath(string $path, string $type, Carbon $date, int $ignoreId = null): string
+	public function getValidPath(string $path, Carbon $date, int $ignoreId = null): string
 	{
-		$posts = $this->getSimilarPosts($path, $type, $date, $ignoreId);
+		$posts = $this->getSimilarPosts($path, $date, $ignoreId);
 
 		if ($posts->count() === 0) return $path;
 
@@ -26,10 +26,9 @@ class PathGenerator {
 		return $path;
 	}
 
-	private function getSimilarPosts(string $path, string $type, Carbon $date, int $ignoreId = null): Collection
+	private function getSimilarPosts(string $path, Carbon $date, int $ignoreId = null): Collection
 	{
-		$query = Post::where('type', $type)
-			->whereYear('date_completed', $date->year)
+		$query = Post::whereYear('date_completed', $date->year)
 			->whereMonth('date_completed', $date->month)
 			->whereDay('date_completed', $date->day)
 			->where('path', 'like', "$path%");

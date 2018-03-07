@@ -6,13 +6,12 @@ use Almanac\Posts\Post;
 
 class SiteController extends Controller
 {
-	public function index(string $type = null, int $year = null, int $month = null, int $day = null, string $path = null)
+	public function index(int $year = null, int $month = null, int $day = null, string $path = null)
 	{
 		$query = Post::with('tags')
 			->where('published', true)
 			->orderBy('date_completed', 'desc');
 
-		if ($type) $query->where('type', $type);
 		if ($year) $query->whereYear('date_completed', $year);
 		if ($month) $query->whereMonth('date_completed', $month);
 		if ($day) $query->whereDay('date_completed', $day);

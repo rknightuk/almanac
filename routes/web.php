@@ -14,4 +14,4 @@ Route::group(['prefix' => '/app', 'middleware' => 'auth'], function()
 	})->where('path', '.*');
 });
 
-Route::get('/{type?}/{year?}/{month?}/{day?}/{path?}', 'SiteController@index');
+Route::get('/{year?}/{month?}/{day?}/{path?}', 'SiteController@index');

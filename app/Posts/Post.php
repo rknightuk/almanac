@@ -57,8 +57,7 @@ class Post extends Model
 	protected function getPermalinkAttribute(): string
 	{
 		return sprintf(
-			'/%s/%s/%s',
-			$this->type,
+			'/%s/%s',
 			$this->date_completed->format('Y/m/d'),
 			$this->path
 		);
