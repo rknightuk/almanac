@@ -9,10 +9,18 @@
 		<div class="almn-post--titles--main">
 			<a href="{{ $post->permalink }}">
 				{{ $post->title }}
-				@if ($post->year)
-					<span class="almn-post--titles--main__meta">{{ $post->year }}</span>
-				@endif
 			</a>
+			@if ($post->year || $post->platform)
+				<span class="almn-post--titles--main__meta">
+					@if ($post->year && $post->platform)
+						{{ $post->year }} | {{ $post->platform }}
+					@elseif ($post->year)
+						{{ $post->year }}
+					@else
+						{{ $post->platform }}
+					@endif
+				</span>
+			@endif
 		</div>
 		@if ($post->subtitle || $post->season)
 			<div class="almn-post--titles--sub">
