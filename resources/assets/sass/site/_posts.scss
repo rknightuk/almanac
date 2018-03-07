@@ -69,6 +69,9 @@ $spoiler-color: #383838;
 			&__meta {
 				color: $lighter-text-color;
 				font-size: 18px;
+				& a {
+					color: $lighter-text-color;
+				}
 			}
 		}
 		&--sub {
