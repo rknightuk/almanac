@@ -1,0 +1,11 @@
+.pagination {
+	max-width: 250px;
+	margin: 0 auto;
+	display: flex;
+	padding-left: 0;
+	list-style: none;
+}
+
+.page-item {
+	flex: 1;
+}

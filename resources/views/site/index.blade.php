@@ -4,4 +4,6 @@
 	@foreach ($posts as $post)
 		@include('site._partials.post', ['post' => $post])
 	@endforeach
+
+	{{ $posts->links() }}
 @endsection
