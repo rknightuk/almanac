@@ -5,6 +5,7 @@ namespace Almanac\Posts;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use MediaEmbed\MediaEmbed;
 use Spatie\Tags\HasTags;
 
 class Post extends Model
@@ -42,6 +43,21 @@ class Post extends Model
     {
     	$markdown = Markdown::convertToHtml($this->content);
     	$content = $this->wrapSpoilers($markdown);
+
+	    if ($this->type === 'video' && $this->link) {
+		    $embed = (new MediaEmbed())->parseUrl($this->link);
+
+		    if ($embed) {
+		    	$embedCode = $embed->setAttribute([
+				    'type' => null,
+				    'class' => 'iframe-class',
+				    'data-html5-parameter' => true,
+				    'width' => 600,
+			    ])->getEmbedCode();
+
+		    	$content =  $embedCode . "\n" . $content;
+		    }
+	    }
 
     	return $content;
     }
