@@ -25,6 +25,8 @@ class ContentManager {
 			$id
 		);
 
+		$embed_src .= '&theme=white';
+
 		return sprintf(
 			'<iframe src="%s" width="%d" height="%d" frameborder="0" allowTransparency="true"></iframe>',
 			$embed_src,
