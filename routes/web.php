@@ -3,6 +3,8 @@
 
 Auth::routes();
 
+Route::resource('/api/posts', 'PostController')->middleware('auth');
+
 Route::group(['prefix' => '/app', 'middleware' => 'auth'], function()
 {
 	Route::get('/', 'AppController@index');
