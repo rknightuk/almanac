@@ -1,0 +1,16 @@
+.almn-input-addon {
+	font-family: monospace;
+}
+
+.almn-linkicon {
+	margin-left: 5px;
+	&--spotify {
+		color: #00BA5D;
+	}
+	&--youtube {
+		color: red;
+	}
+	&--vimeo {
+		color: #4DABE9;
+	}
+}

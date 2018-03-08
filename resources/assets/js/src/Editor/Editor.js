@@ -104,6 +104,11 @@ class Editor extends Component<Props, State> {
 						)}
 					/>
 
+					<Rating
+						value={post.rating}
+						onChange={v => this.updatePost('rating', v)}
+					/>
+
 					<ReactMde
 						visibility={{
 							previewHelp: false,
@@ -131,7 +136,26 @@ class Editor extends Component<Props, State> {
 					/>
 
 					<FormRow
-						label="Link"
+						label={(
+							<span>
+								Link
+								{this.linkIncludes('youtube') && (
+									<span className="almn-linkicon almn-linkicon--youtube">
+										<i className="fab fa-youtube" />
+									</span>
+								)}
+								{this.linkIncludes('spotify') && (
+									<span className="almn-linkicon almn-linkicon--spotify">
+										<i className="fab fa-spotify" />
+									</span>
+								)}
+								{this.linkIncludes('vimeo') && (
+									<span className="almn-linkicon almn-linkicon--vimeo">
+										<i className="fab fa-vimeo" />
+									</span>
+								)}
+							</span>
+						)}
 						inputKey="post-link"
 						input={(
 							<TextInput
@@ -139,11 +163,6 @@ class Editor extends Component<Props, State> {
 								onChange={v => this.updatePost('link', v)}
 							/>
 						)}
-					/>
-
-					<Rating
-						value={post.rating}
-						onChange={v => this.updatePost('rating', v)}
 					/>
 
 					<FormRow
@@ -332,6 +351,10 @@ class Editor extends Component<Props, State> {
 		const day = this.state.post.date_completed.format('DD')
 
 		return `/${year}/${month}/${day}/`
+	}
+
+	linkIncludes = (search: string) => {
+		return this.state.post.link.includes(search)
 	}
 
 	handleTitleChange = (title: string) => {
