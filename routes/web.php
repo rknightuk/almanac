@@ -5,13 +5,9 @@ Auth::routes();
 
 Route::group(['prefix' => '/app', 'middleware' => 'auth'], function()
 {
-	Route::get('/', function () {
-		return view('admin');
-	});
+	Route::get('/', 'AppController@index');
 
-	Route::get( '/{path?}', function() {
-		return view( 'admin' );
-	})->where('path', '.*');
+	Route::get( '/{path?}', 'AppController@index')->where('path', '.*');
 });
 
 Route::get('/category/{type}', 'SiteController@category');

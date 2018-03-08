@@ -74,7 +74,9 @@
         @yield('content')
     </div>
 
-    <!-- Scripts -->
+    <script>
+        var AlmanacTags = <?= json_encode($tags) ?>
+    </script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </body>
