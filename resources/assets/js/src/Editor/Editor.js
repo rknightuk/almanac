@@ -278,6 +278,22 @@ class Editor extends Component<Props, State> {
 						)}
 					/>
 
+					{this.state.post.id && (
+						<button
+							type="button"
+							className="btn btn-danger"
+							style={{ marginRight: '10px' }}
+							onClick={this.handleDelete}
+							disabled={this.state.deleting || this.props.saving}
+						>
+							{this.state.deleting ? (
+								<span>
+								<i className="fas fa-spinner fa-spin" data-fa-transform="grow-6" /> Deleting
+							</span>
+							) : 'Delete'}
+						</button>
+					)}
+
 					<button
 						type="button"
 						className="btn btn-success"
@@ -290,21 +306,6 @@ class Editor extends Component<Props, State> {
 							</span>
 						) : 'Save'}
 					</button>
-
-					{this.state.post.id && (
-						<button
-							type="button"
-							className="btn btn-danger"
-							onClick={this.handleDelete}
-							disabled={this.state.deleting || this.props.saving}
-						>
-							{this.state.deleting ? (
-								<span>
-								<i className="fas fa-spinner fa-spin" data-fa-transform="grow-6" /> Deleting
-							</span>
-							) : 'Delete'}
-						</button>
-					)}
 				</form>
 			</div>
 		)
