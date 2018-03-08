@@ -40,5 +40,9 @@ a {
 	font-size: 14px;
 }
 
+iframe {
+	max-width: 100%;
+}
+
 @import "posts";
 @import "pagination";
