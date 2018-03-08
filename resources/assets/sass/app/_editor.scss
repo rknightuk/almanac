@@ -14,3 +14,17 @@
 		color: #4DABE9;
 	}
 }
+
+.alamac-mde {
+	margin: 25px 0;
+	position: relative;
+	&--toggle {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+
+		@media (max-width: 400px) {
+			top: -15px;
+		}
+	}
+}

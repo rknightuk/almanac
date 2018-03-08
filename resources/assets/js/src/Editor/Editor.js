@@ -38,6 +38,7 @@ type State = {
 	post: Post,
 	deleting: boolean,
 	pathManuallyChanged: boolean,
+	showPreview: boolean,
 }
 
 class Editor extends Component<Props, State> {
@@ -67,11 +68,12 @@ class Editor extends Component<Props, State> {
 		},
 		deleting: false,
 		pathManuallyChanged: false,
+		showPreview: false,
 	}
 
 	render() {
 
-		const { post } = this.state
+		const { post, showPreview } = this.state
 
 		return (
 			<div>
@@ -107,15 +109,23 @@ class Editor extends Component<Props, State> {
 						onChange={v => this.updatePost('rating', v)}
 					/>
 
-					<ReactMde
-						visibility={{
-							previewHelp: false,
-						}}
-						className="almanac-mde"
-						commands={ReactMdeCommands.getDefaultCommands()}
-						value={post.content}
-						onChange={v => this.updatePost('content', v)}
-					/>
+					<div className="alamac-mde">
+						<a
+							className="alamac-mde--toggle"
+							onClick={() => this.setState((s: State) => ({ showPreview: !s.showPreview }))}
+						>
+							{showPreview ? 'Hide' : 'Show'} Preview
+						</a>
+						<ReactMde
+							visibility={{
+								previewHelp: false,
+								preview: showPreview,
+							}}
+							commands={ReactMdeCommands.getDefaultCommands()}
+							value={post.content}
+							onChange={v => this.updatePost('content', v)}
+						/>
+					</div>
 
 					<FormRow
 						label="Slug"
