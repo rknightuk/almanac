@@ -21,7 +21,7 @@
 			</div>
 
 			<div class="almn-footer">
-				Powered by <a href="https://github.com/rmlewisuk/almanac">Almanac</a> | <a href="https://robblewis.me">Robb Lewis</a>
+				Powered by <a href="https://github.com/rmlewisuk/almanac">Almanac</a>@if (env('FOOTER_TITLE')) | <a href="{{ env('FOOTER_LINK') }}">{{ env('FOOTER_TITLE') }}</a> @endif
 			</div>
 		</div>
 
