@@ -16,4 +16,8 @@ Route::get('/category/{type}', 'SiteController@category');
 Route::get('/platform/{platform}', 'SiteController@platform');
 Route::get('/tag/{tag}', 'SiteController@tag');
 
-Route::get('/{year?}/{month?}/{day?}/{path?}', 'SiteController@index');
+Route::get('/{year?}/{month?}/{day?}/{path?}', 'SiteController@index')->where([
+	'year' => '[0-9]+',
+	'month' => '[0-9]+',
+	'date' => '[0-9]+'
+]);
