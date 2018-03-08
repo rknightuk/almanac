@@ -73,8 +73,6 @@ class Editor extends Component<Props, State> {
 
 		const { post } = this.state
 
-		console.log(moment())
-
 		return (
 			<div>
 				<h1>
