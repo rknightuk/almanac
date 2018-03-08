@@ -12,6 +12,7 @@ import Checkbox from '../ui/Checkbox'
 import Select from '../ui/Select'
 import TagInput from '../ui/TagInput'
 import Rating from '../ui/Rating'
+import Icon from '../ui/Icon'
 
 import DatePicker from 'react-day-picker/DayPickerInput'
 import { formatDate, parseDate } from 'react-day-picker/moment'
@@ -78,7 +79,9 @@ class Editor extends Component<Props, State> {
 		return (
 			<div>
 				<h1>
-					{this.props.post ? 'Edit Post' : `Add new ${post.type}`}
+					<Icon
+						type={this.props.post ? this.props.post.type : this.props.type}
+					/> {this.props.post ? 'Edit Post' : `Add new ${post.type}`}
 				</h1>
 
 				<form>
