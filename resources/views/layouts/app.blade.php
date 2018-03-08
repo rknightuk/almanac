@@ -75,7 +75,9 @@
     </div>
 
     <script>
-        var AlmanacTags = <?= json_encode($tags) ?>
+        @if (isset($tags))
+            var AlmanacTags = <?= json_encode($tags) ?>
+        @endif
     </script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
