@@ -43,49 +43,20 @@ class Post extends Model
 	    'platform',
     ];
 
-    protected function getHtmlAttribute()
+    public function isType(string $type): bool
     {
-	    $env = Environment::createCommonMarkEnvironment();
-	    $env->addExtension(new LinkifyExtension());
-
-	    $converter = new Converter(new DocParser($env), new HtmlRenderer($env));
-
-	    $markdown = $converter->convertToHtml($this->content);
-    	$content = $this->wrapSpoilers($markdown);
-
-	    if ($this->type === 'video' && $this->link) {
-		    $embed = (new MediaEmbed())->parseUrl($this->link);
-
-		    if ($embed) {
-		    	$embedCode = $embed->setAttribute([
-				    'type' => null,
-				    'class' => 'iframe-class',
-				    'data-html5-parameter' => true,
-				    'width' => 600,
-			    ])->getEmbedCode();
-
-		    	$content =  $embedCode . "\n" . $content;
-		    }
-	    }
-
-	    if ($this->type === 'music' && $this->link) {
-		    $cm = app(ContentManager::class);
-
-		    $mEmbed = $cm->getMusicEmbed($this->link);
-
-		    if ($mEmbed) $content =  $mEmbed . "\n" . $content;
-	    }
-
-    	return $content;
+    	return $this->type === $type;
     }
 
-    private function wrapSpoilers(string $content)
-    {
-    	$content = str_replace('[spoiler]', '<span class="almn-post--content__spoiler">', $content);
-	    $content = str_replace('[/spoiler]', '</span>', $content);
+	public function hasTags(): bool
+	{
+		return (bool) $this->tags->count();
+	}
 
-	    return $content;
-    }
+	protected function getHtmlAttribute()
+	{
+		return (app(ContentManager::class))->convertToHtml($this);
+	}
 
 	protected function getPermalinkAttribute(): string
 	{
@@ -95,11 +66,6 @@ class Post extends Model
 			$this->path
 		);
 	}
-
-    public function hasTags(): bool
-    {
-	    return (bool) $this->tags->count();
-    }
 
     public function getRatingStringAttribute()
     {
