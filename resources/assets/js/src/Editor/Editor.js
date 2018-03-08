@@ -73,6 +73,8 @@ class Editor extends Component<Props, State> {
 
 		const { post } = this.state
 
+		console.log(moment())
+
 		return (
 			<div>
 				<h1>
@@ -113,13 +115,18 @@ class Editor extends Component<Props, State> {
 					/>
 
 					<FormRow
-						label="Path"
+						label="Slug"
 						inputKey="post-path"
 						input={(
-							<TextInput
-								value={post.path}
-								onChange={v => this.updatePost('path', v)}
-							/>
+							<div className="input-group">
+								<span className="input-group-addon almn-input-addon" id="basic-addon3">
+									{this.generateStaticPath()}
+								</span>
+								<TextInput
+									value={post.path}
+									onChange={v => this.updatePost('path', v)}
+								/>
+							</div>
 						)}
 					/>
 
@@ -297,7 +304,7 @@ class Editor extends Component<Props, State> {
 		}
 
 		if (!post.path || post.path === '') {
-			errors.path = 'Path is required'
+			errors.path = 'Slug is required'
 		}
 
 		return errors
@@ -317,6 +324,14 @@ class Editor extends Component<Props, State> {
 
 	shouldGeneratePath = () => {
 		return !this.props.post && !this.state.pathManuallyChanged
+	}
+
+	generateStaticPath = () => {
+		const year = this.state.post.date_completed.format('YYYY')
+		const month = this.state.post.date_completed.format('MM')
+		const day = this.state.post.date_completed.format('DD')
+
+		return `/${year}/${month}/${day}/`
 	}
 
 	handleTitleChange = (title: string) => {
