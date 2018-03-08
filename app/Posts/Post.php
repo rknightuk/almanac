@@ -2,9 +2,13 @@
 
 namespace Almanac\Posts;
 
-use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Jonnybarnes\CommonmarkLinkify\LinkifyExtension;
+use League\CommonMark\Converter;
+use League\CommonMark\DocParser;
+use League\CommonMark\Environment;
+use League\CommonMark\HtmlRenderer;
 use MediaEmbed\MediaEmbed;
 use Spatie\Tags\HasTags;
 
@@ -41,7 +45,12 @@ class Post extends Model
 
     protected function getHtmlAttribute()
     {
-    	$markdown = Markdown::convertToHtml($this->content);
+	    $env = Environment::createCommonMarkEnvironment();
+	    $env->addExtension(new LinkifyExtension());
+
+	    $converter = new Converter(new DocParser($env), new HtmlRenderer($env));
+
+	    $markdown = $converter->convertToHtml($this->content);
     	$content = $this->wrapSpoilers($markdown);
 
 	    if ($this->type === 'video' && $this->link) {
