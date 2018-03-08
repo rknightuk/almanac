@@ -12,7 +12,7 @@ type Props = {
 }
 
 const Pagination = ({ currentPage, totalPages, changePage }: Props) => (
-	<nav aria-label="Post navigation">
+	<nav aria-label="Post navigation" className="pagination-wrapper">
 		<ul className="pagination">
 			<li className={currentPage === 1 ? 'page-item disabled' : 'page-item'}>
 				<a
@@ -20,7 +20,7 @@ const Pagination = ({ currentPage, totalPages, changePage }: Props) => (
 					className="page-link"
 					onClick={() => changePage(currentPage - 1)}
 				>
-					Previous
+					Older
 				</a>
 			</li>
 			{Array.from((new Array(totalPages))).map((p, i) => (
@@ -43,7 +43,7 @@ const Pagination = ({ currentPage, totalPages, changePage }: Props) => (
 					className="page-link"
 					onClick={() => changePage(currentPage + 1)}
 				>
-					Next
+					Newer
 				</a>
 			</li>
 		</ul>
