@@ -68,6 +68,14 @@ class Post extends Model
 		    }
 	    }
 
+	    if ($this->type === 'music' && $this->link) {
+		    $cm = app(ContentManager::class);
+
+		    $mEmbed = $cm->getMusicEmbed($this->link);
+
+		    if ($mEmbed) $content =  $mEmbed . "\n" . $content;
+	    }
+
     	return $content;
     }
 
