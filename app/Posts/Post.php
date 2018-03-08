@@ -18,6 +18,10 @@ class Post extends Model
 
 	protected $table = 'posts';
 
+	protected $appends = [
+		'icon',
+	];
+
 	protected $dates = [
 		'date_completed',
 		'created_at',

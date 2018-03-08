@@ -5,6 +5,10 @@
 	border: 1px solid #d3e1e9;
 	background: white;
 	border-radius: 4px;
+
+	@media (max-width: 600px) {
+		flex-wrap: wrap;
+	}
 }
 
 .block {
@@ -14,6 +18,9 @@
 	flex-direction: column;
 	align-items: center;
 	padding: 20px 10px 10px 10px;
+	@media (max-width: 600px) {
+		min-width: 26%;
+	}
 }
 
 .block:first-child {
@@ -25,65 +32,8 @@
 	cursor: pointer;
 }
 
-.icon {
-	margin-right: 0;
-}
-
-.icon__movie {
-	color: #EC644B;
-}
-
-.icon__tv {
-	color: #87D37C;
-}
-
-.icon__game {
-	color: #947CB0;
-}
-
-.icon__music {
-	color: #52B3D9;
-}
-
-.icon__podcast {
-	color: #EC8436;
-}
-
-.icon__book {
-	color: #6C7A89;
-}
-
-.icon__comic {
-	color: #F7CA18;
-}
-
-.icon__video {
-	color: #EC644B;
-}
-
-.icon__text {
-	color: #95A5A6;
-}
-
 .name {
 	color: black;
 	margin-top: 5px;
 	margin-left: 0;
-}
-
-@media (max-width: 460px) {
-	.picker {
-		flex-direction: column;
-	}
-
-	.block {
-		flex-direction: row;
-		padding: 10px;
-		border-left: none !important;
-	}
-
-	.name {
-		margin-left: 25px;
-		margin-bottom: 5px;
-	}
 }

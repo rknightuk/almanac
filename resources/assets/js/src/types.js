@@ -17,6 +17,7 @@ export type Post = {
 	platform: string,
 	published: boolean,
 	tags: string[],
+	icon: string,
 }
 
 export type PostTypes =
