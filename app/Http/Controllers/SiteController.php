@@ -4,6 +4,7 @@ namespace Almanac\Http\Controllers;
 
 use Almanac\Posts\Post;
 use Illuminate\Database\Eloquent\Builder;
+use Spatie\Tags\Tag;
 
 class SiteController extends Controller
 {
@@ -41,6 +42,19 @@ class SiteController extends Controller
 	public function platform(string $platform)
 	{
 		return $this->byKey('platform', $platform);
+	}
+
+	public function tags()
+	{
+		$tags = Tag::all()->sortBy('name');
+
+		$tags = $tags->map(function(Tag $tag) {
+			return $tag->name;
+		})->values()->toArray();
+
+		return view('site.tags', [
+			'tags' => $tags,
+		]);
 	}
 
 	public function tag(string $tag)

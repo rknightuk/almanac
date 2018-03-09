@@ -14,6 +14,7 @@ Route::group(['prefix' => '/app', 'middleware' => 'auth'], function()
 
 Route::get('/category/{type}', 'SiteController@category');
 Route::get('/platform/{platform}', 'SiteController@platform');
+Route::get('/tags', 'SiteController@tags');
 Route::get('/tags/{tag}', 'SiteController@tag');
 
 Route::get('/{year?}/{month?}/{day?}/{path?}', 'SiteController@index')->where([
