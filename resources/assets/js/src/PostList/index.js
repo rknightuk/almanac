@@ -53,8 +53,8 @@ class PostList extends Component<*, State> {
 		return (
 			<div>
 				<ul className="list-group">
-					{this.state.posts.map((p: Post, i: number) => (
-						<Item key={i} post={p} />
+					{this.state.posts.map((p: Post) => (
+						<Item key={p.id} post={p} />
 					))}
 				</ul>
 				<Pagination
