@@ -20,6 +20,10 @@ $spoiler-color: #383838;
 		margin-bottom: 0;
 	}
 
+	&__default {
+		border-left-color: $text-color;
+	}
+
 	&__bad {
 		border-left-color: $bad-color;
 	}
@@ -45,6 +49,10 @@ $spoiler-color: #383838;
 		justify-content: center;
 		align-items: center;
 		border: 2px solid;
+		&__default {
+			border-color: $text-color;
+			color: $text-color;
+		}
 		&__bad {
 			border-color: $bad-color;
 			color: $bad-color;
