@@ -366,6 +366,8 @@ class Editor extends Component<Props, State> {
 	}
 
 	linkIncludes = (search: string) => {
+		if (!this.state.post.link) return false
+
 		return this.state.post.link.includes(search)
 	}
 
