@@ -99,11 +99,9 @@ class Post extends Model
     {
     	if (!$this->season) return '';
 
-    	$name = 'Season';
+    	if ($this->type === 'comic') return $this->season;
 
-    	if ($this->type === 'comic') $name = 'Series';
-
-    	return $name . ' ' . $this->season;
+    	return 'Season' . ' ' . $this->season;
     }
 
 }
