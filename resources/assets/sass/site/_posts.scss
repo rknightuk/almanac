@@ -1,14 +1,10 @@
 $post-top-padding: 15px;
 $spoiler-color: #383838;
 
-.almn-posts {
-	margin-top: -35px;
-}
-
 .almn-post {
 	position: relative;
 	padding: $post-top-padding 25px;
-	background: white;
+	background: $background-post;
 	color: $text-color;
 	border: 1px solid $border-color;
 	border-left: 2px solid;
@@ -17,7 +13,7 @@ $spoiler-color: #383838;
 	margin-bottom: 25px;
 
 	@media (max-width: 600px) {
-		margin-left: 15px;
+		margin-left: 25px;
 	}
 
 	&:last-child {

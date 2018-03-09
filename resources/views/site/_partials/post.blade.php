@@ -44,7 +44,7 @@
 	@if ($post->hasTags())
 		<div class="almn-post--tags">
 			@foreach ($post->tags as $tag)
-				<a class="almn-post--tags--tag" href="/tag/{{ $tag->name }}">{{ $tag->name }}</a>
+				<a class="almn-post--tags--tag" href="/tags/{{ $tag->name }}">{{ $tag->name }}</a>
 			@endforeach
 		</div>
 	@endif
