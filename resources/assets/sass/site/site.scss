@@ -33,7 +33,7 @@ a {
 	max-width: 1200px;
 	margin: 0 auto;
 
-	@media (max-width: 600px) {
+	@media (max-width: $sidebar-breakpoint) {
 		flex-direction: column;
 	}
 }
@@ -42,8 +42,10 @@ a {
 	margin-top: 120px;
 	margin-right: 10px;
 	flex: 1;
-	@media (max-width: 600px) {
+	@media (max-width: $sidebar-breakpoint) {
+		margin: 0 auto;
 		margin-top: 35px;
+		padding-right: 10px;
 	}
 }
 
@@ -52,6 +54,7 @@ a {
 }
 
 .almn-sidebar-wrap {
+	position: relative;
 	margin-top: 120px;
 	flex: 1;
 	width: auto;
@@ -61,22 +64,33 @@ a {
 		max-width: 200px;
 	}
 
-	@media (max-width: 600px) {
-		max-width: 100%;
+	@media (max-width: $sidebar-breakpoint) {
+		max-width: 600px;
+		margin: 0 auto;
+		margin-top: 120px;
+		padding-left: 25px;
+		padding-right: 10px;
 	}
 }
 
 .almn-sidebar {
 	position: fixed;
 	padding: 15px 25px;
+	max-width: 350px;
 
-	@media (max-width: 600px) {
+	@media (max-width: 1130px) {
+		max-width: 175px;
+	}
+
+	@media (max-width: $sidebar-breakpoint) {
 		position: relative;
 		text-align: center;
 		background: $background-post;
-		margin: $top-offset 10px 10px 27px;
+		margin-top: -35px;
 		border: 1px solid $border-color;
 		padding-top: 0;
+		margin-bottom: 25px;
+		max-width: 100%;
 	}
 
 	& h1 {
@@ -94,11 +108,17 @@ a {
 	&--browse {
 		font-size: 14px;
 		color: $light-text-color;
+		&__links {
+			display: flex;
+			&--icon {
+				flex: 1;
+			}
+		}
 		&__list {
 			list-style-type: none;
 			margin-left: -40px;
 			& li {
-				@media (max-width: 600px) {
+				@media (max-width: $sidebar-breakpoint) {
 					&:after {
 						content: ' | ';
 					}

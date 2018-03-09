@@ -12,7 +12,7 @@ $spoiler-color: #383838;
 	margin: 0 auto;
 	margin-bottom: 25px;
 
-	@media (max-width: 600px) {
+	@media (max-width: $sidebar-breakpoint) {
 		margin-left: 25px;
 	}
 

@@ -21,7 +21,39 @@
 					<h1>{{ env('SITE_TITLE', 'Almanac') }}</h1>
 					@if (env('SITE_SUBTITLE')) <h2>{{ env('SITE_SUBTITLE') }}</h2> @endif
 
+					@if (env('SITE_DESCRIPTION')) <p>{{ env('SITE_DESCRIPTION') }}</p> @endif
+
 					<div class="almn-sidebar--browse">
+						<div class="almn-sidebar--browse__links">
+							@if (env('TWITTER'))
+								<div class="almn-sidebar--browse__links--icon">
+									<a href="https://twitter.com/{{ env('TWITTER') }}">
+										<i class="fab fa-twitter" data-fa-transform="grow-8"></i>
+									</a>
+								</div>
+							@endif
+							@if (env('INSTAGRAM'))
+								<div class="almn-sidebar--browse__links--icon">
+									<a href="https://instagram.com/{{ env('INSTAGRAM') }}">
+										<i class="fab fa-instagram" data-fa-transform="grow-8"></i>
+									</a>
+								</div>
+							@endif
+							@if (env('FACEBOOK'))
+								<div class="almn-sidebar--browse__links--icon">
+									<a href="https://facebook.com/{{ env('FACEBOOK') }}">
+										<i class="fab fa-facebook" data-fa-transform="grow-8"></i>
+									</a>
+								</div>
+							@endif
+							@if (env('WEBSITE'))
+								<div class="almn-sidebar--browse__links--icon">
+									<a href="{{ env('WEBSITE') }}">
+										<i class="fas fa-globe" data-fa-transform="grow-8"></i>
+									</a>
+								</div>
+							@endif
+						</div>
 						<ul class="almn-sidebar--browse__list">
 							<li><a href="/category/movie">Movies</a></li>
 							<li><a href="/category/tv">TV</a></li>
@@ -42,7 +74,7 @@
 					@yield('content')
 				</div>
 				<div class="almn-footer">
-					Powered by <a href="https://github.com/rmlewisuk/almanac">Almanac</a>@if (env('FOOTER_TITLE')) | <a href="{{ env('FOOTER_LINK') }}">{{ env('FOOTER_TITLE') }}</a> @endif
+					Powered by <a href="https://github.com/rmlewisuk/almanac">Almanac</a>@if (env('WEBSITE')) | <a href="{{ env('WEBSITE') }}">{{ env('WEBSITE_TITLE', env('WEBSITE')) }}</a> @endif
 				</div>
 			</div>
 		</div>
