@@ -18,7 +18,7 @@
 		<div class="almn-page">
 			<div class="almn-sidebar-wrap">
 				<div class="almn-sidebar">
-					<h1>{{ env('SITE_TITLE', 'Almanac') }}</h1>
+					<h1><a href="/">{{ env('SITE_TITLE', 'Almanac') }}</a></h1>
 					@if (env('SITE_SUBTITLE')) <h2>{{ env('SITE_SUBTITLE') }}</h2> @endif
 
 					@if (env('SITE_DESCRIPTION')) <p>{{ env('SITE_DESCRIPTION') }}</p> @endif

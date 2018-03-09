@@ -46,11 +46,14 @@ a {
 		margin: 0 auto;
 		margin-top: 35px;
 		padding-right: 10px;
+		width: 100%;
+		max-width: 600px;
 	}
 }
 
 .almn-posts {
 	margin-top: $top-offset;
+	margin-right: 10px;
 }
 
 .almn-sidebar-wrap {
@@ -96,6 +99,9 @@ a {
 	& h1 {
 		font-weight: normal;
 		margin-bottom: 0;
+		a {
+			color: $text-color;
+		}
 	}
 
 	& h2 {
