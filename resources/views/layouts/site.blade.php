@@ -21,8 +21,6 @@
 					<h1><a href="/">{{ env('SITE_TITLE', 'Almanac') }}</a></h1>
 					@if (env('SITE_SUBTITLE')) <h2>{{ env('SITE_SUBTITLE') }}</h2> @endif
 
-					@if (env('SITE_DESCRIPTION')) <p>{{ env('SITE_DESCRIPTION') }}</p> @endif
-
 					<div class="almn-sidebar--browse">
 						<div class="almn-sidebar--browse__links">
 							@if (env('TWITTER'))
@@ -54,6 +52,9 @@
 								</div>
 							@endif
 						</div>
+
+						@if (env('SITE_DESCRIPTION')) <p>{{ env('SITE_DESCRIPTION') }}</p> @endif
+
 						<ul class="almn-sidebar--browse__list">
 							<li><a href="/category/movie">Movies</a></li>
 							<li><a href="/category/tv">TV</a></li>

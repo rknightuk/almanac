@@ -116,6 +116,9 @@ a {
 		color: $light-text-color;
 		&__links {
 			display: flex;
+			max-width: 200px;
+			margin: 0 auto;
+			padding: 0 10px;
 			&--icon {
 				flex: 1;
 			}
