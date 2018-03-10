@@ -22,6 +22,10 @@ class SiteController extends Controller
 		if ($path) {
 			$post = $query->first();
 
+			if (!$post) return view('errors.404', [
+				'message' => 'This post might have been moved or deleted',
+			]);
+
 			return view('site.show', [
 				'post' => $post,
 			]);
