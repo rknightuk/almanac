@@ -25,6 +25,7 @@ type State = {
 	loading: boolean,
 	post: Post,
 	saving: boolean,
+	notFound: boolean,
 }
 
 class Update extends Component<Props, State> {
@@ -35,6 +36,7 @@ class Update extends Component<Props, State> {
 		loading: true,
 		post: {},
 		saving: false,
+		notFound: false,
 	}
 
 	componentDidMount() {
@@ -43,6 +45,14 @@ class Update extends Component<Props, State> {
 
 	fetchPost = async () => {
 		const response = await axios.get(`/api/posts/${this.props.match.params.id}`)
+		
+		if (response.data === '') {
+			this.setState({
+				notFound: true,
+				loading: false,
+			})
+			return
+		}
 
 		this.setState({
 			post: {
@@ -64,6 +74,12 @@ class Update extends Component<Props, State> {
 				<Loader
 					text="Loading Post"
 				/>
+			)
+		}
+
+		if (this.state.notFound) {
+			return (
+				<div>Post not found</div>
 			)
 		}
 
