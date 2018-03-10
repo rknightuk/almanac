@@ -50,6 +50,16 @@ class PostList extends Component<*, State> {
 
 		if (this.state.loading) return <Loader text="Loading Posts" />
 
+		if (this.state.posts.length === 0) {
+			return (
+				<div style={{ textAlign: 'center' }}>
+					<i className="fas fa-chevron-up" data-fa-transform="grow-10" />
+					
+					<p>No posts yet — create one by selecting a type from above.</p>
+				</div>
+			)
+		}
+
 		return (
 			<div>
 				<ul className="list-group">
