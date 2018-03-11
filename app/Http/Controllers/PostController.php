@@ -22,8 +22,19 @@ class PostController extends Controller
 
     public function index()
     {
-	    return Post::orderBy('date_completed', 'desc')
-		    ->paginate(10);
+    	$input = request()->input();
+
+	    $query = Post::orderBy('date_completed', 'desc');
+
+	    if ($search = $input['search'] ?? null) {
+	    	$query->where('title', 'like', "%$search%");
+	    }
+
+	    if ($type = $input['type'] ?? null) {
+		    $query->where('type', 'like', "%$type%");
+	    }
+
+	    return $query->paginate(10);
     }
 
 	public function show($id)

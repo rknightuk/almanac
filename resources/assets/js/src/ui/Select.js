@@ -7,7 +7,7 @@ type Props = {
 		value: string,
 		label: string,
 	}[],
-	withBlank?: string,
+	withBlank?: boolean,
 }
 
 const Select = ({ value, onChange, options, withBlank }: Props) => (

@@ -21,3 +21,12 @@ body {
 .pagination-wrapper {
 	text-align: center;
 }
+
+.almn-search-bar {
+	display: flex;
+	margin: 10px 0;
+
+	& .form-control:first-child {
+		margin-right: 5px;
+	}
+}
