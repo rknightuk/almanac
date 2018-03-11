@@ -121,12 +121,14 @@ $spoiler-color: #383838;
 			color: $spoiler-color;
 			box-shadow: 0 0 5px 2px $spoiler-color;
 			border-radius: 1px;
-			&:hover {
-				transition: all 1s;
+			&--show {
+				transition: all 0.7s;
 				background: transparent;
 				color: inherit;
-				cursor: pointer;
 				box-shadow: none;
+			}
+			&:hover {
+				cursor: pointer;
 			}
 			&::selection {
 				background: $spoiler-color;

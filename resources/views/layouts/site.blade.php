@@ -81,6 +81,18 @@
 		</div>
 
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+		<script>
+			(function() {
+				var spoilers = document.getElementsByClassName("almn-post--content__spoiler");
+
+				for (var i = 0; i < spoilers.length; i++) {
+					var spoiler = spoilers[i]
+					spoiler.addEventListener('click', function(e) {
+						spoiler.className += ' almn-post--content__spoiler--show'
+					}, false);
+				}
+			})();
+		</script>
 	</body>
 
 </html>
