@@ -37,6 +37,13 @@
 									</a>
 								</div>
 							@endif
+							@if (env('SPOTIFY'))
+								<div class="almn-sidebar--browse__links--icon">
+									<a href="https://open.spotify.com/user/{{ env('SPOTIFY') }}">
+										<i class="fab fa-spotify" data-fa-transform="grow-8"></i>
+									</a>
+								</div>
+							@endif
 							@if (env('FACEBOOK'))
 								<div class="almn-sidebar--browse__links--icon">
 									<a href="https://facebook.com/{{ env('FACEBOOK') }}">
