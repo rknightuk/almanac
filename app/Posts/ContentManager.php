@@ -99,6 +99,7 @@ class ContentManager {
 			'class' => 'iframe-class',
 			'data-html5-parameter' => true,
 			'width' => 600,
+			'height' => 340,
 		])->getEmbedCode();
 	}
 
