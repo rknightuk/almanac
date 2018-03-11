@@ -35,7 +35,7 @@
 		@endif
 	</div>
 
-	@if ($post->content)
+	@if ($post->html)
 		<div class="almn-post--content">
 			{!! $post->html !!}
 		</div>
