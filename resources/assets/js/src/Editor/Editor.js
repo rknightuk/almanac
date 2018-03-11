@@ -372,7 +372,7 @@ class Editor extends Component<Props, State> {
 	}
 
 	handleTitleChange = (title: string) => {
-		const path = this.shouldGeneratePath() ? slugify(title) : this.state.post.path
+		const path = this.shouldGeneratePath() ? slugify(title).toLowerCase() : this.state.post.path
 
 		this.setState((s: State) => ({
 			post: {
