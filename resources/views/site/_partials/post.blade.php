@@ -52,7 +52,7 @@
 	<footer class="almn-post--footer">
 		<div class="almn-post--footer--date">
 			<a href="{{ $post->permalink }}">
-				{{ $post->date_completed->format('l jS F') }}
+				{{ $post->date_completed->format('l jS F Y') }}
 			</a>
 		</div>
 		@if ($post->link)
