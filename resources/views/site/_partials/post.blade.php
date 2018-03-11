@@ -6,6 +6,11 @@
 		<i class="fas fa-{{ $post->icon }}"></i>
 	</a>
 	<div class="almn-post--titles">
+		@if (Auth::user())
+			<div class="almn-post--titles--edit">
+				<a href="/app/posts/{{ $post->id }}">Edit</a>
+			</div>
+		@endif
 		<div class="almn-post--titles--main">
 			<a href="{{ $post->permalink }}">
 				{{ $post->title }}
