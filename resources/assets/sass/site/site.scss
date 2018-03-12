@@ -107,7 +107,28 @@ a {
 		font-weight: normal;
 		margin-top: 0;
 		font-size: 16px;
-		color: $light-text-color;
+		color: $border-color;
+	}
+
+	&--search {
+		position: relative;
+		max-width: 150px;
+		margin: 0 auto;
+		&--icon {
+			position: absolute;
+			left: 0;
+			top: 5px;
+		}
+		&--input {
+			font-size: 16px;
+			padding: 5px 5px 5px 20px;
+			margin: 0 auto;
+			width: 150px;
+			background: none;
+			box-shadow: none;
+			border: none;
+			border-bottom: 1px solid $text-color;
+		}
 	}
 
 	&--browse {

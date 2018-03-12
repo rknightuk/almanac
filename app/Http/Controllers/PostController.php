@@ -31,7 +31,7 @@ class PostController extends Controller
 	    }
 
 	    if ($type = $input['type'] ?? null) {
-		    $query->where('type', 'like', "%$type%");
+		    $query->where('type', $type);
 	    }
 
 	    return $query->paginate(10);

@@ -64,6 +64,19 @@
 
 						@if (env('SITE_DESCRIPTION')) <p>{{ env('SITE_DESCRIPTION') }}</p> @endif
 
+						<div class="almn-sidebar--search">
+							<form>
+								<div class="almn-sidebar--search--icon"><i class="fas fa-search"></i></div>
+								<input
+									type="text"
+									class="almn-sidebar--search--input"
+									name="search"
+									placeholder="search"
+									value="{{ isset($search) && $search ? $search : '' }}"
+								>
+							</form>
+						</div>
+
 						<ul class="almn-sidebar--browse__list">
 							<li><a href="/category/movie">Movies</a></li>
 							<li><a href="/category/tv">TV</a></li>

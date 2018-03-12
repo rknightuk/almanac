@@ -30,10 +30,15 @@ class SiteController extends Controller
 				'post' => $post,
 			]);
 		} else {
+			if ($search = request()->input('search')) {
+				$query->where('title', 'like', "%$search%");
+			}
+
 			$posts = $query->paginate(self::PER_PAGE);
 
 			return view('site.index', [
 				'posts' => $posts,
+				'search' => $search,
 			]);
 		}
 	}
