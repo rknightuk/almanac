@@ -245,7 +245,7 @@ class Editor extends Component<Props, State> {
 
 					{this.showSeason() && (
 						<FormRow
-							label={post.type === 'comic' ? 'Series' : 'Season'}
+							label={post.type === 'book' ? 'Series' : 'Season'}
 							inputKey="post-season"
 							input={(
 								<TextInput
@@ -321,7 +321,7 @@ class Editor extends Component<Props, State> {
 
 	showPlatform = () => this.state.post.type === 'game'
 	showCreator = () => ['book', 'music'].includes(this.state.post.type)
-	showSeason = () => ['tv', 'comic'].includes(this.state.post.type)
+	showSeason = () => ['tv', 'book'].includes(this.state.post.type)
 
 	isValid = () => Object.keys(this.getErrors()).length === 0
 

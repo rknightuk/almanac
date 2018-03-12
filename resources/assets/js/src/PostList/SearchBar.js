@@ -29,7 +29,6 @@ const SearchBar = ({ search, type, onChangeQuery, onChangeType }: Props) => (
 				{ value: 'music', label: 'Music' },
 				{ value: 'podcast', label: 'Podcast' },
 				{ value: 'book', label: 'Book' },
-				{ value: 'comic', label: 'Comic' },
 				{ value: 'video', label: 'Video' },
 				{ value: 'text', label: 'Text' },
 			]}

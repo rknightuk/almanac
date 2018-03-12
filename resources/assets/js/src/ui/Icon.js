@@ -18,7 +18,6 @@ const ICONS = {
 	'podcast': 'podcast',
 	'video': 'video',
 	'text': 'file-alt',
-	'comic': 'bolt',
 }
 
 const Icon = ({ type, grow, style }: Props) => (

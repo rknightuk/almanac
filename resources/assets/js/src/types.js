@@ -29,4 +29,3 @@ export type PostTypes =
 	| 'podcast'
 	| 'video'
 	| 'text'
-	| 'comic'

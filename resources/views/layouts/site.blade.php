@@ -83,7 +83,6 @@
 							<li><a href="/category/game">Games</a></li>
 							<li><a href="/category/music">Music</a></li>
 							<li><a href="/category/book">Books</a></li>
-							<li><a href="/category/comic">Comics</a></li>
 							<li><a href="/category/podcast">Podcasts</a></li>
 							<li><a href="/category/video">Videos</a></li>
 							<li><a href="/category/text">Text Posts</a></li>

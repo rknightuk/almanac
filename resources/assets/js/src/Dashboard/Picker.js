@@ -51,10 +51,6 @@ const Picker = () => (
 			title="Book"
 		/>
 		<Block
-			name="comic"
-			title="Comic"
-		/>
-		<Block
 			name="video"
 			title="Video"
 		/>

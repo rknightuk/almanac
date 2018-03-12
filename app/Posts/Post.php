@@ -91,7 +91,6 @@ class Post extends Model
 		    case 'podcast': return 'podcast';
 		    case 'video': return 'video';
 		    case 'text': return 'file-alt';
-		    case 'comic': return 'bolt';
 	    }
     }
 
@@ -99,7 +98,7 @@ class Post extends Model
     {
     	if (!$this->season) return '';
 
-    	if ($this->type === 'comic') return $this->season;
+    	if ($this->type === 'book') return $this->season;
 
     	return 'Season' . ' ' . $this->season;
     }

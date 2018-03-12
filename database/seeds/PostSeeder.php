@@ -158,24 +158,6 @@ class PostSeeder extends Seeder
 			    'platform' => null,
 			    'published' => true,
 		    ],
-		    [
-			    'type' => 'comic',
-			    'path' => 'path-to-post',
-			    'title' => 'Back to the Future',
-			    'content' => 'some content',
-			    'link' => 'https://www.youtube.com/watch?v=R9OHn5ZF4Uo',
-			    'rating' => \Almanac\Posts\PostRating::RECOMMENDED,
-			    'year' => 2017,
-			    'date_completed' => $now,
-			    'creator' => 'CGP GREY',
-			    'subtitle' => null,
-			    'spoilers' => false,
-			    'season' => 'Back to the Future (IDW)',
-			    'created_at' => $now,
-			    'updated_at' => $now,
-			    'platform' => null,
-			    'published' => true,
-		    ],
 	    ]);
     }
 }
