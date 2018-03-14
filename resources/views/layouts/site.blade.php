@@ -65,7 +65,7 @@
 						@if (env('SITE_DESCRIPTION')) <p>{{ env('SITE_DESCRIPTION') }}</p> @endif
 
 						<div class="almn-sidebar--search">
-							<form>
+							<form action="/">
 								<div class="almn-sidebar--search--icon"><i class="fas fa-search"></i></div>
 								<input
 									type="text"
