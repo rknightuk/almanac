@@ -3,7 +3,7 @@ $spoiler-color: #383838;
 
 .almn-post {
 	position: relative;
-	padding: $post-top-padding 25px;
+	padding: 25px;
 	background: $background-post;
 	color: $text-color;
 	border: 1px solid $border-color;
@@ -38,47 +38,22 @@ $spoiler-color: #383838;
 
 	&--icon {
 		position: absolute;
-		height: $post-top-padding;
-		width: $post-top-padding;
+		width: 12px;
+		height: 12px;
 		background: white;
-		padding: 10px;
-		border-radius: 25px;
-		top: 10px;
-		left: -21px;
+		padding: 7px;
+		top: 25px;
+		right: 25px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		border: 2px solid;
-		&__default {
-			border-color: $text-color;
-			color: $text-color;
-		}
-		&__bad {
-			border-color: $bad-color;
-			color: $bad-color;
-		}
-
-		&__fine {
-			border-color: $fine-color;
-			color: $fine-color;
-		}
-
-		&__good {
-			border-color: $good-color;
-			color: $good-color;
-		}
-		&:hover {
-			color: inherit;
-		}
+		border: 2px solid #d8d8d8;
+		color: #d8d8d8;
+		font-size: 14px;
 	}
 
 	&--titles {
-		&--edit {
-			position: absolute;
-			top: 10px;
-			right: 10px;
-			font-size: 12px;
-		}
+		margin-right: 30px;
 		&--main {
 			font-size: 25px;
 			& a {
@@ -163,8 +138,9 @@ $spoiler-color: #383838;
 	&--footer {
 		display: flex;
 		color: $lighter-text-color;
-		font-size: 13px;
+		font-size: 12px;
 		margin-top: 10px;
+		font-weight: bold;
 
 		&--date {
 			flex: 1;

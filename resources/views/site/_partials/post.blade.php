@@ -1,16 +1,11 @@
 <div class="almn-post almn-post__{{ $post->rating_string }}">
 	<a
 			href="/category/{{ $post->type }}"
-			class="almn-post--icon almn-post--icon__{{ $post->rating_string }}"
+			class="almn-post--icon"
 	>
-		<i class="fas fa-{{ $post->icon }}"></i>
+		<i class="fas fa-{{ $post->icon }}" @if(in_array($post->icon, ['tv', 'book'])) data-fa-transform="shrink-3" @endif></i>
 	</a>
 	<div class="almn-post--titles">
-		@if (Auth::user())
-			<div class="almn-post--titles--edit">
-				<a href="/app/posts/{{ $post->id }}">Edit</a>
-			</div>
-		@endif
 		<div class="almn-post--titles--main">
 			<a href="{{ $post->permalink }}">
 				{{ $post->title }}
