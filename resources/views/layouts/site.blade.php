@@ -96,7 +96,7 @@
 					@yield('content')
 				</div>
 				<div class="almn-footer">
-					Powered by <a href="https://github.com/rmlewisuk/almanac">Almanac</a>@if (env('WEBSITE')) | <a href="{{ env('WEBSITE') }}">{{ env('WEBSITE_TITLE', env('WEBSITE')) }}</a> @endif
+					Powered by <a href="https://code.robblewis.me/almanac">Almanac</a>@if (env('WEBSITE')) | <a href="{{ env('WEBSITE') }}">{{ env('WEBSITE_TITLE', env('WEBSITE')) }}</a> @endif
 				</div>
 			</div>
 		</div>
