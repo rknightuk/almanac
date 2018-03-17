@@ -1,7 +1,7 @@
 <div class="almn-post almn-post__{{ $post->rating_string }}">
 	<a
 			href="/category/{{ $post->type }}"
-			class="almn-post--icon"
+			class="almn-post--icon almn-post--icon__{{ $post->rating_string }}"
 	>
 		<i class="fas fa-{{ $post->icon }}" @if(in_array($post->icon, ['tv', 'book'])) data-fa-transform="shrink-3" @endif></i>
 	</a>

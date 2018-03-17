@@ -45,6 +45,28 @@ $spoiler-color: #383838;
 		border: 2px solid #d8d8d8;
 		color: #d8d8d8;
 		font-size: 14px;
+		&__default {
+			border-color: $text-color;
+			color: $text-color;
+		}
+		&__bad {
+			border-color: $bad-color;
+			color: $bad-color;
+		}
+
+		&__fine {
+			border-color: $fine-color;
+			color: $fine-color;
+		}
+
+		&__good {
+			border-color: $good-color;
+			color: $good-color;
+		}
+		&:hover {
+			color: $primary-color;
+			border-color: $primary-color;
+		}
 	}
 
 	&--titles {
