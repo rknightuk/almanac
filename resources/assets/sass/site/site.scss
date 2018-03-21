@@ -23,9 +23,9 @@ a {
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 120px;
-	background-color: $background-post;
-	background-image: $background-pattern;
+	height: 250px;
+	background: url('/neon-bg.jpg') center center;
+	background-size: cover;
 }
 
 .almn-page {
@@ -38,41 +38,31 @@ a {
 	margin-left: 10px;
 	width: 600px;
 	float: right;
-	margin-top: 120px;
+	margin-top: 250px;
 	& .almn-posts {
 		margin-top: $top-offset;
-		@media (max-width: $breakpoint-med) {
+		@media (max-width: $breakpoint) {
 			margin-top: 0;
+			max-width: calc(100% - 20px);
 		}
 	}
-	@media (max-width: $breakpoint-med) {
-		clear: both;
+	@media (max-width: $breakpoint) {
+		width: 100%;
 		float: none;
-		width: auto;
-		margin-top: -25px;
+		margin-top: 25px;
 	}
 }
 
 .almn-sidebar-wrap {
 	position: relative;
-	margin-top: 120px;
+	margin-top: 260px;
 	width: 375px;
 	float: left;
 
-	@media (max-width: $breakpoint-large) {
-		width: 300px;
-	}
-
-	@media (max-width: $breakpoint-med) {
-		clear: both;
-		float: none;
+	@media (max-width: $breakpoint) {
 		width: 100%;
-		margin-top: -10px;
-		background-color: $background-post;
-		background-image: $background-pattern;
-		height: 100%;
-		padding-bottom: 50px;
-		padding-top: 25px;
+		float: none;
+		margin-top: 225px;
 	}
 }
 
@@ -81,15 +71,16 @@ a {
 	padding: 25px;
 	box-sizing: border-box;
 	width: inherit;
+	background: $background-post;
+	border: 1px solid $border-color;
 
-	@media (max-width: $breakpoint-med) {
+	@media (max-width: $breakpoint) {
+		margin: 0 auto;
 		border: 1px solid $border-color;
 		background: $background-post;
 		position: relative;
-		padding-bottom: 25px;
 		text-align: center;
 		width: calc(100% - 20px);
-		margin: 10px 10px 0 10px;
 	}
 
 	& h1 {
@@ -146,7 +137,7 @@ a {
 				color: $light-text-color;
 			}
 			& li {
-				@media (max-width: $breakpoint-med) {
+				@media (max-width: $breakpoint) {
 					&:after {
 						content: ' | ';
 					}
