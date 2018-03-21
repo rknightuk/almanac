@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
-class AlamnacSetup extends Command
+class AlmanacSetup extends Command
 {
     /**
      * The name and signature of the console command.
