@@ -3,6 +3,8 @@
 namespace Almanac\Http\Controllers;
 
 use Almanac\Posts\Post;
+use Almanac\Posts\PostQuery;
+use Almanac\Posts\PostRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Spatie\Tags\Tag;
@@ -10,60 +12,43 @@ use Spatie\Tags\Tag;
 class SiteController extends Controller
 {
 	const PER_PAGE = 25;
+	/**
+	 * @var PostRepository
+	 */
+	private $postRepository;
+
+	public function __construct(PostRepository $postRepository)
+	{
+		$this->postRepository = $postRepository;
+	}
 
 	public function index(int $year = null, int $month = null, int $day = null, string $path = null)
 	{
-		$query = $this->query();
+		$query = (new PostQuery())
+			->withRelated();
 
-		if ($year) $query->whereYear('date_completed', $year);
-		if ($month) $query->whereMonth('date_completed', $month);
-		if ($day) $query->whereDay('date_completed', $day);
-		if ($path) $query->where('path', $path);
+		if ($year) $query->year($year);
+		if ($month) $query->month($month);
+		if ($day) $query->day($day);
+		if ($path) $query->path($path);
 
 		if ($path) {
-			$post = $query->first();
+			$post = $this->postRepository->one($query);
 
 			if (!$post) return view('errors.404', [
 				'message' => 'This post might have been moved or deleted',
 			]);
-
-			if ($post->type !== 'text') {
-				/** @var Collection $related */
-				$related = Post::where('title', $post->title)->get();
-
-				$post->relatedPosts = $related
-					->where('title', $post->title)
-					->where('type', $post->type)
-					->where('season', $post->season);
-			}
 
 			return view('site.show', [
 				'post' => $post,
 			]);
 		} else {
 			if ($search = request()->input('search')) {
-				if (request()->input('exact') === 'true') {
-					$query->where('title', $search);
-				} else {
-					$query->where('title', 'like', "%$search%");
-				}
+				$query->search($search);
+				if (request()->input('exact') === 'true') $query->exact(true);
 			}
 
-			$posts = $query->paginate(self::PER_PAGE);
-
-			$titles = collect($posts->items())->pluck('title');
-
-			/** @var Collection $related */
-			$related = Post::whereIn('title', $titles)->get();
-
-			$posts->map(function(Post $post) use ($related) {
-				if ($post->type === 'text') return $post;
-				$post->relatedPosts = $related
-					->where('title', $post->title)
-					->where('type', $post->type)
-					->where('season', $post->season);
-				return $post;
-			});
+			$posts = $this->postRepository->paginate($query);
 
 			return view('site.index', [
 				'posts' => $posts,
@@ -97,9 +82,10 @@ class SiteController extends Controller
 
 	public function tag(string $tag)
 	{
-		$posts = $this->query()
-			->withAnyTags([$tag])
-			->paginate(self::PER_PAGE);
+		$query = (new PostQuery())
+			->tags([$tag]);
+
+		$posts = $this->postRepository->paginate($query);
 
 		return view('site.index', [
 			'posts' => $posts,

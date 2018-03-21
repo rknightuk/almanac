@@ -6,6 +6,8 @@ use Almanac\Http\Requests\CreatePost;
 use Almanac\Http\Requests\UpdatePost;
 use Almanac\Posts\PathGenerator;
 use Almanac\Posts\Post;
+use Almanac\Posts\PostQuery;
+use Almanac\Posts\PostRepository;
 use Carbon\Carbon;
 
 class PostController extends Controller
@@ -14,33 +16,32 @@ class PostController extends Controller
 	 * @var PathGenerator
 	 */
 	private $pathGenerator;
+	/**
+	 * @var PostRepository
+	 */
+	private $postRepository;
 
-	public function __construct(PathGenerator $pathGenerator)
+	public function __construct(PathGenerator $pathGenerator, PostRepository $postRepository)
 	{
 		$this->pathGenerator = $pathGenerator;
+		$this->postRepository = $postRepository;
 	}
 
     public function index()
     {
     	$input = request()->input();
 
-	    $query = Post::orderBy('date_completed', 'desc');
+	    $query = (new PostQuery())
+	        ->search($input['search'] ?? null)
+            ->type($input['type'] ?? null)
+        ;
 
-	    if ($search = $input['search'] ?? null) {
-	    	$query->where('title', 'like', "%$search%");
-	    }
-
-	    if ($type = $input['type'] ?? null) {
-		    $query->where('type', $type);
-	    }
-
-	    return $query->paginate(10);
+    	return $this->postRepository->paginate($query);
     }
 
 	public function show($id)
 	{
-		return Post::with('tags')->where('id', $id)
-			->first();
+		return $this->postRepository->one((new PostQuery())->id($id));
 	}
 
     public function store(CreatePost $request)
@@ -65,7 +66,7 @@ class PostController extends Controller
     {
 	    $data = $request->input();
 
-	    $post = Post::find($id);
+	    $post = $this->postRepository->one($id);
 
 	    unset($data['id']);
 	    $data['date_completed'] = $data['date_completed'] ? new Carbon($data['date_completed']) : new Carbon();
