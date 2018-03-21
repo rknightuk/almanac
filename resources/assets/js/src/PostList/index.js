@@ -42,7 +42,7 @@ class PostList extends Component<*, State> {
 		const params = new URLSearchParams()
 		params.append('page', this.state.page.toString())
 		if (this.state.search !== null && this.state.search !== undefined) params.append('search', this.state.search)
-		if (this.state.type !== null && this.state.type !== undefined) params.append('type', this.state.type)
+		if (this.state.type !== null && this.state.type !== undefined) params.append('category', this.state.type)
 
 		const data = (await axios.get(`/api/posts`, { params })).data
 

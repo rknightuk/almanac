@@ -2,6 +2,8 @@
 
 namespace Almanac\Posts;
 
+use Illuminate\Http\Request;
+
 class PostQuery {
 
 	public $id;
@@ -16,7 +18,31 @@ class PostQuery {
 	public $withRelated = false;
 	public $tags;
 	public $platform;
-	public $category;
+
+	public function fromRequest(Request $request)
+	{
+		$tags = $request->input('tags');
+		if ($tags && is_array($tags)) $this->tags($tags);
+
+		if ($platform = $request->input('platform')) $this->platform($platform);
+		if ($category = $request->input('category')) $this->type($category);
+
+		if ($search = $request->input('search')) {
+			$this->search($search);
+			if ($request->input('exact') === 'true') $this->exact(true);
+		}
+
+		return $this;
+	}
+
+	public function applyDates(int $year = null, int $month = null, int $day = null)
+	{
+		if ($year) $this->year($year);
+		if ($month) $this->month($month);
+		if ($day) $this->day($day);
+
+		return $this;
+	}
 
 	public function id(int $id)
 	{
@@ -87,12 +113,6 @@ class PostQuery {
 	public function platform(string $platform)
 	{
 		$this->platform = $platform;
-		return $this;
-	}
-
-	public function category(string $category)
-	{
-		$this->category = $category;
 		return $this;
 	}
 

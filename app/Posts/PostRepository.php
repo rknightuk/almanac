@@ -17,25 +17,19 @@ class PostRepository {
 		$db = $this->baseQuery();
 
 		if ($query->search) $this->applySearch($query, $db);
-
 		if ($query->type) $db->where('type', $query->type);
 		if ($query->tags) $db->withAnyTags($query->tags);
 		if ($query->platform) $db->where('platform', $query->platform);
-		if ($query->category) $db->where('type', $query->category);
 
 		$posts = $db->paginate(self::PER_PAGE);
 
 		if ($query->withRelated) {
-			/** @var Collection $related */
 			$related = Post::whereIn('title', collect($posts->items())->pluck('title'))
 				->get();
 
 			$posts->map(function(Post $post) use ($related) {
 				if ($post->type === 'text') return $post;
-				$post->relatedPosts = $related
-					->where('title', $post->title)
-					->where('type', $post->type)
-					->where('season', $post->season);
+				$this->applyRelatedPosts($related, $post);
 				return $post;
 			});
 		}
@@ -56,16 +50,19 @@ class PostRepository {
 		$post = $db->first();
 
 		if ($post && $post->type !== 'text') {
-			/** @var Collection $related */
 			$related = Post::where('title', $post->title)->get();
-
-			$post->relatedPosts = $related
-				->where('title', $post->title)
-				->where('type', $post->type)
-				->where('season', $post->season);
+			$this->applyRelatedPosts($related, $post);
 		}
 
 		return $post;
+	}
+
+	private function applyRelatedPosts(Collection $related, Post $post)
+	{
+		$post->relatedPosts = $related
+			->where('title', $post->title)
+			->where('type', $post->type)
+			->where('season', $post->season);
 	}
 
 	private function applySearch(PostQuery $query, Builder $db): Builder

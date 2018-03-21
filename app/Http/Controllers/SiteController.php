@@ -21,42 +21,40 @@ class SiteController extends Controller
 	public function index(int $year = null, int $month = null, int $day = null, string $path = null)
 	{
 		$query = (new PostQuery())
-			->withRelated();
+			->withRelated()
+			->applyDates($year, $month, $day)
+		;
 
-		if ($year) $query->year($year);
-		if ($month) $query->month($month);
-		if ($day) $query->day($day);
-		if ($path) $query->path($path);
+		if ($path) return $this->post($query, $path);
 
-		if ($path) {
-			$post = $this->postRepository->one($query);
+		return $this->posts($query);
+	}
 
-			if (!$post) return view('errors.404', [
-				'message' => 'This post might have been moved or deleted',
-			]);
+	private function post(PostQuery $query, string $path)
+	{
+		$query->path($path);
 
-			return view('site.show', [
-				'post' => $post,
-			]);
-		} else {
-			$tags = request()->input('tags');
-			if ($tags && is_array($tags)) $query->tags($tags);
+		$post = $this->postRepository->one($query);
 
-			if ($platform = request()->input('platform')) $query->platform($platform);
-			if ($category = request()->input('category')) $query->category($category);
+		if (!$post) return view('errors.404', [
+			'message' => 'This post might have been moved or deleted',
+		]);
 
-			if ($search = request()->input('search')) {
-				$query->search($search);
-				if (request()->input('exact') === 'true') $query->exact(true);
-			}
+		return view('site.show', [
+			'post' => $post,
+		]);
+	}
 
-			$posts = $this->postRepository->paginate($query);
+	private function posts(PostQuery $query)
+	{
+		$query->fromRequest(request());
 
-			return view('site.index', [
-				'posts' => $posts,
-				'search' => $search,
-			]);
-		}
+		$posts = $this->postRepository->paginate($query);
+
+		return view('site.index', [
+			'posts' => $posts,
+			'search' => request()->input('search'),
+		]);
 	}
 
 	public function tags()

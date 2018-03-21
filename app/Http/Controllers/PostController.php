@@ -29,12 +29,7 @@ class PostController extends Controller
 
     public function index()
     {
-    	$input = request()->input();
-
-	    $query = (new PostQuery())
-	        ->search($input['search'] ?? null)
-            ->type($input['type'] ?? null)
-        ;
+	    $query = (new PostQuery())->fromRequest(request());
 
     	return $this->postRepository->paginate($query);
     }
