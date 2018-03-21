@@ -23,7 +23,7 @@ class AlamnacSetup extends Command
      *
      * @var string
      */
-    protected $description = 'Setup Alamanc Database and User';
+    protected $description = 'Setup Almanac User';
 
     /**
      * Create a new command instance.
@@ -42,8 +42,6 @@ class AlamnacSetup extends Command
      */
 	public function handle()
 	{
-		$this->setupDatabase();
-
 		if (User::first()) {
 			$this->warn('User account already created, aborting.');
 			return;
@@ -55,25 +53,6 @@ class AlamnacSetup extends Command
 		}
 
 		$this->info('Setup successfully completed!');
-	}
-
-	private function setupDatabase()
-	{
-		if (Schema::hasTable('migrations'))
-		{
-			$this->warn('`migrate:install` already run, skipping');
-		} else {
-			$this->info('Running migration install');
-			Artisan::call('migrate:install');
-		}
-
-		if (Schema::hasTable('tweets'))
-		{
-			$this->warn('`migrate` already run, skipping');
-		} else {
-			$this->info('Running table migrations');
-			Artisan::call('migrate', ['--force' => true]);
-		}
 	}
 
 	private function createUser()
