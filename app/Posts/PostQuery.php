@@ -15,6 +15,8 @@ class PostQuery {
 	public $path;
 	public $withRelated = false;
 	public $tags;
+	public $platform;
+	public $category;
 
 	public function id(int $id)
 	{
@@ -79,6 +81,18 @@ class PostQuery {
 	public function tags(array $tags)
 	{
 		$this->tags = $tags;
+		return $this;
+	}
+
+	public function platform(string $platform)
+	{
+		$this->platform = $platform;
+		return $this;
+	}
+
+	public function category(string $category)
+	{
+		$this->category = $category;
 		return $this;
 	}
 

@@ -1,6 +1,6 @@
 <div class="almn-post almn-post__{{ $post->rating_string }}">
 	<a
-			href="/category/{{ $post->type }}"
+			href="/?category={{ strtolower($post->type) }}"
 			class="almn-post--icon almn-post--icon__{{ $post->rating_string }}"
 	>
 		<i class="fas fa-{{ $post->icon }}" @if(in_array($post->icon, ['tv', 'book'])) data-fa-transform="shrink-3" @endif></i>
@@ -13,11 +13,11 @@
 			@if ($post->year || $post->platform)
 				<span class="almn-post--titles--main__meta">
 					@if ($post->year && $post->platform)
-						{{ $post->year }} | <a href="/platform/{{ $post->platform }}">{{ $post->platform }}</a>
+						{{ $post->year }} | <a href="/?platform={{ strtolower($post->platform) }}">{{ $post->platform }}</a>
 					@elseif ($post->year)
 						{{ $post->year }}
 					@else
-						<a href="/platform/{{ $post->platform }}">{{ $post->platform }}</a>
+						<a href="/?platform={{ strtolower($post->platform) }}">{{ $post->platform }}</a>
 					@endif
 				</span>
 			@endif
@@ -44,7 +44,7 @@
 	@if ($post->hasTags())
 		<div class="almn-post--tags">
 			@foreach ($post->tags as $tag)
-				<a class="almn-post--tags--tag" href="/tags/{{ $tag->name }}">{{ $tag->name }}</a>
+				<a class="almn-post--tags--tag" href="/?tags[]={{ $tag->name }}">{{ $tag->name }}</a>
 			@endforeach
 		</div>
 	@endif

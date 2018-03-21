@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 
 class PostRepository {
 
+	const PER_PAGE = 25;
 
 	public function paginate(PostQuery $query = null): LengthAwarePaginator
 	{
@@ -19,8 +20,10 @@ class PostRepository {
 
 		if ($query->type) $db->where('type', $query->type);
 		if ($query->tags) $db->withAnyTags($query->tags);
+		if ($query->platform) $db->where('platform', $query->platform);
+		if ($query->category) $db->where('type', $query->category);
 
-		$posts = $db->paginate(25);
+		$posts = $db->paginate(self::PER_PAGE);
 
 		if ($query->withRelated) {
 			/** @var Collection $related */
