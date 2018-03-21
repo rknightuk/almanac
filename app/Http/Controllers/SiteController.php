@@ -4,6 +4,7 @@ namespace Almanac\Http\Controllers;
 
 use Almanac\Posts\Post;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Spatie\Tags\Tag;
 
 class SiteController extends Controller
@@ -26,15 +27,43 @@ class SiteController extends Controller
 				'message' => 'This post might have been moved or deleted',
 			]);
 
+			if ($post->type !== 'text') {
+				/** @var Collection $related */
+				$related = Post::where('title', $post->title)->get();
+
+				$post->relatedPosts = $related
+					->where('title', $post->title)
+					->where('type', $post->type)
+					->where('season', $post->season);
+			}
+
 			return view('site.show', [
 				'post' => $post,
 			]);
 		} else {
 			if ($search = request()->input('search')) {
-				$query->where('title', 'like', "%$search%");
+				if (request()->input('exact') === 'true') {
+					$query->where('title', $search);
+				} else {
+					$query->where('title', 'like', "%$search%");
+				}
 			}
 
 			$posts = $query->paginate(self::PER_PAGE);
+
+			$titles = collect($posts->items())->pluck('title');
+
+			/** @var Collection $related */
+			$related = Post::whereIn('title', $titles)->get();
+
+			$posts->map(function(Post $post) use ($related) {
+				if ($post->type === 'text') return $post;
+				$post->relatedPosts = $related
+					->where('title', $post->title)
+					->where('type', $post->type)
+					->where('season', $post->season);
+				return $post;
+			});
 
 			return view('site.index', [
 				'posts' => $posts,

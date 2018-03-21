@@ -53,6 +53,11 @@
 		<div class="almn-post--footer--date">
 			<a href="{{ $post->permalink }}">
 				{{ $post->date_completed->format('l jS F Y') }}
+				@if ($post->related_count > 1)
+					<a href="/?search={{ $post->title }}&exact=true">
+						| {{ ucfirst($post->verb) }} {{ $post->related_count === 2 ? 'twice' : $post->related_count . ' times' }}
+					</a>
+				@endif
 			</a>
 		</div>
 		@if ($post->link)

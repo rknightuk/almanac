@@ -94,13 +94,34 @@ class Post extends Model
 	    }
     }
 
-    public function getSeasonStringAttribute()
-    {
-    	if (!$this->season) return '';
+	public function getVerbAttribute()
+	{
+		switch ($this->type) {
+			case 'movie':
+			case 'tv':
+			case 'video':
+				return 'watched';
+			case 'game': return 'played';
+			case 'music':
+			case 'podcast':
+				return 'listened to';
+			case 'book': return 'read';
+			case 'text': return '';
+		}
+	}
 
-    	if ($this->type === 'book') return $this->season;
+	public function getSeasonStringAttribute()
+	{
+		if (!$this->season) return '';
 
-    	return 'Season' . ' ' . $this->season;
-    }
+		if ($this->type === 'book') return $this->season;
+
+		return 'Season' . ' ' . $this->season;
+	}
+
+	public function getRelatedCountAttribute()
+	{
+		return $this->relatedPosts ? $this->relatedPosts->count() : 0;
+	}
 
 }
