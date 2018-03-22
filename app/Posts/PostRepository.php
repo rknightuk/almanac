@@ -59,10 +59,12 @@ class PostRepository {
 
 	private function applyRelatedPosts(Collection $related, Post $post)
 	{
-		$post->relatedPosts = $related
+		$posts = $related
 			->where('title', $post->title)
 			->where('type', $post->type)
 			->where('season', $post->season);
+
+		$post->setRelation('relatedPosts', $posts);
 	}
 
 	private function applySearch(PostQuery $query, Builder $db): Builder
