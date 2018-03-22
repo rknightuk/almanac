@@ -61,7 +61,7 @@ class PostController extends Controller
     {
 	    $data = $request->input();
 
-	    $post = $this->postRepository->one($id);
+	    $post = $this->postRepository->one((new PostQuery())->id($id));
 
 	    unset($data['id']);
 	    $data['date_completed'] = $data['date_completed'] ? new Carbon($data['date_completed']) : new Carbon();

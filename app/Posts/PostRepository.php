@@ -49,7 +49,7 @@ class PostRepository {
 
 		$post = $db->first();
 
-		if ($post && $post->type !== 'text') {
+		if ($query->withRelated && $post && $post->type !== 'text') {
 			$related = Post::where('title', $post->title)->get();
 			$this->applyRelatedPosts($related, $post);
 		}
