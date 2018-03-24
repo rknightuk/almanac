@@ -43,7 +43,7 @@
 
 	@if ($post->hasTags())
 		<div class="almn-post--tags">
-			@foreach ($post->tags as $tag)
+			@foreach ($post->tags->sortBy('name') as $tag)
 				<a class="almn-post--tags--tag" href="/?tags[]={{ $tag->name }}">{{ $tag->name }}</a>
 			@endforeach
 		</div>
