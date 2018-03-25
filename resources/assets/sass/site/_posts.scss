@@ -95,6 +95,10 @@ $spoiler-color: #383838;
 		margin-bottom: 15px;
 		margin-top: 10px;
 
+		& blockquote {
+			font-style: italic;
+		}
+
 		& img {
 			max-width: 100%;
 		}
