@@ -319,9 +319,9 @@ class Editor extends Component<Props, State> {
 		})
 	}
 
-	showPlatform = () => ['game', 'text'].includes(this.state.post.type)
-	showCreator = () => ['book', 'music', 'text'].includes(this.state.post.type)
-	showSeason = () => ['tv', 'book', 'text'].includes(this.state.post.type)
+	showPlatform = () => ['game', 'quote'].includes(this.state.post.type)
+	showCreator = () => ['book', 'music', 'quote'].includes(this.state.post.type)
+	showSeason = () => ['tv', 'book', 'quote'].includes(this.state.post.type)
 
 	isValid = () => Object.keys(this.getErrors()).length === 0
 

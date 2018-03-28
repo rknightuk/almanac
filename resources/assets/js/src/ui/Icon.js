@@ -17,7 +17,7 @@ const ICONS = {
 	'book': 'book',
 	'podcast': 'podcast',
 	'video': 'video',
-	'text': 'file-alt',
+	'quote': 'quote-left',
 }
 
 const Icon = ({ type, grow, style }: Props) => (

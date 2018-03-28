@@ -57,6 +57,11 @@ class Post extends Model
 		return (bool) $this->tags->count();
 	}
 
+	public function isQuote(): bool
+	{
+		return $this->type === 'quote';
+	}
+
 	protected function getHtmlAttribute()
 	{
 		return (app(ContentManager::class))->convertToHtml($this);
@@ -90,7 +95,7 @@ class Post extends Model
 		    case 'book': return 'book';
 		    case 'podcast': return 'podcast';
 		    case 'video': return 'video';
-		    case 'text': return 'file-alt';
+		    case 'quote': return 'quote-left';
 	    }
     }
 
@@ -106,7 +111,7 @@ class Post extends Model
 			case 'podcast':
 				return 'listened to';
 			case 'book': return 'read';
-			case 'text': return '';
+			case 'quote': return '';
 		}
 	}
 

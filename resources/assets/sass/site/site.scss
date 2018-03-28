@@ -161,5 +161,9 @@ iframe {
 	max-width: 100%;
 }
 
+blockquote {
+	font-style: italic;
+}
+
 @import "posts";
 @import "pagination";

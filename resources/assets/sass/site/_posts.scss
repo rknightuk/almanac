@@ -76,6 +76,12 @@ $spoiler-color: #383838;
 			& a {
 				color: $text-color;
 			}
+			&__quote {
+				font-size: 20px;
+				margin-top: -10px;
+				margin-left: -15px;
+				color: $lighter-text-color;
+			}
 			&__meta {
 				color: $lighter-text-color;
 				font-size: 18px;
@@ -94,10 +100,6 @@ $spoiler-color: #383838;
 		color: $light-text-color;
 		margin-bottom: 15px;
 		margin-top: 10px;
-
-		& blockquote {
-			font-style: italic;
-		}
 
 		& img {
 			max-width: 100%;

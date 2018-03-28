@@ -7,8 +7,13 @@
 	</a>
 	<div class="almn-post--titles">
 		<div class="almn-post--titles--main">
+			@if ($post->isQuote())
+				<div class="almn-post--titles--main__quote">
+					{!! $post->html !!}
+				</div>
+			@endif
 			<a href="{{ $post->permalink }}">
-				{{ $post->title }}
+				@if ($post->isQuote()) — @endif{{ $post->title }}
 			</a>
 			@if ($post->year || $post->platform)
 				<span class="almn-post--titles--main__meta">
@@ -35,7 +40,7 @@
 		@endif
 	</div>
 
-	@if ($post->html)
+	@if ($post->html && !$post->isQuote())
 		<div class="almn-post--content">
 			{!! $post->html !!}
 		</div>

@@ -28,4 +28,4 @@ export type PostTypes =
 	| 'book'
 	| 'podcast'
 	| 'video'
-	| 'text'
+	| 'quote'

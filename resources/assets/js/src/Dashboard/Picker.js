@@ -55,8 +55,8 @@ const Picker = () => (
 			title="Video"
 		/>
 		<Block
-			name="text"
-			title="Text"
+			name="quote"
+			title="Quote"
 		/>
 	</div>
 )
