@@ -64,6 +64,11 @@ class PostRepository {
 			->where('type', $post->type)
 			->where('season', $post->season);
 
+		if ($post->type === 'video') {
+			$posts = $posts
+				->where('link', $post->link);
+		}
+
 		$post->setRelation('relatedPosts', $posts);
 	}
 

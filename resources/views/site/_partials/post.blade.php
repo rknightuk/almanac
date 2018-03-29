@@ -1,3 +1,10 @@
+@if (isset($showRelated) && $showRelated)
+	@include('site._partials.related', [
+		'related' => $post->getFuturePosts(),
+		'type' => 'future',
+	])
+@endif
+
 <div class="almn-post almn-post__{{ $post->rating_string }}">
 	<a
 			href="/?category={{ strtolower($post->type) }}"
@@ -57,13 +64,11 @@
 	<footer class="almn-post--footer">
 		<div class="almn-post--footer--date">
 			<a href="{{ $post->permalink }}">
-				{{ $post->date_completed->format('l jS F Y') }}
-				@if ($post->related_count > 1)
-					<a href="/?search={{ $post->title }}&exact=true">
-						| {{ ucfirst($post->verb) }} {{ $post->related_count === 2 ? 'twice' : $post->related_count . ' times' }}
-					</a>
-				@endif
+				{{ $post->date_completed->format('jS F Y') }}
 			</a>
+			@if ($post->related_count > 1 || isset($asSinglePost) && $asSinglePost && $post->shouldShowCount())
+				| {{ $post->single_post_data }}
+			@endif
 		</div>
 		@if ($post->link)
 			<div class="almn-post--footer--link">
@@ -72,3 +77,10 @@
 		@endif
 	</footer>
 </div>
+
+@if (isset($showRelated) && $showRelated)
+	@include('site._partials.related', [
+		'related' => $post->getPreviousPosts(),
+		'type' => 'previous',
+	])
+@endif

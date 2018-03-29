@@ -5,12 +5,19 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>@if (isset($title) && $title) {{ $title }} - @endif{{ env('SITE_TITLE', 'Almanac') }}</title>
+		<title>@if (isset($singlePost)) {{ $singlePost->title }} - @endif{{ env('SITE_TITLE', 'Almanac') }}</title>
 
 		<!-- Styles -->
 		<link href="{{ asset('css/site.css') }}" rel="stylesheet">
 
 		<link rel="apple-touch-icon" type="image/png" sizes="114x114" href="{{ asset('apple-touch-icon.png') }}">
+
+		@if (isset($singlePost))
+			<meta name="twitter:card" content="summary">
+			<meta name="twitter:site" content="@rmlewisuk">
+			<meta name="twitter:title" content="{{ $singlePost->title }}">
+			<meta name="twitter:description" content="{{ $singlePost->twitter_preview }}">
+		@endif
 	</head>
 	<body>
 

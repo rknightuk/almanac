@@ -2,6 +2,7 @@
 
 namespace Almanac\Posts;
 
+use Almanac\NumberToAdjective;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Jonnybarnes\CommonmarkLinkify\LinkifyExtension;
@@ -57,9 +58,19 @@ class Post extends Model
 		return (bool) $this->tags->count();
 	}
 
+	public function shouldShowCount(): bool
+	{
+		return !$this->isQuote() && !$this->isMusic();
+	}
+
 	public function isQuote(): bool
 	{
 		return $this->type === 'quote';
+	}
+
+	public function isMusic(): bool
+	{
+		return $this->type === 'music';
 	}
 
 	protected function getHtmlAttribute()
@@ -109,7 +120,7 @@ class Post extends Model
 			case 'game': return 'played';
 			case 'music':
 			case 'podcast':
-				return 'listened to';
+				return 'listened';
 			case 'book': return 'read';
 			case 'quote': return '';
 		}
@@ -127,6 +138,43 @@ class Post extends Model
 	public function getRelatedCountAttribute()
 	{
 		return $this->relatedPosts ? $this->relatedPosts->count() : 0;
+	}
+
+	public function getFuturePosts()
+	{
+		$date = $this->date_completed;
+		return $this->relatedPosts->filter(function(Post $r) use ($date) {
+			return $date->lt($r->date_completed);
+		});
+	}
+
+	public function getPreviousPosts()
+	{
+		$date = $this->date_completed;
+		return $this->relatedPosts->filter(function(Post $r) use ($date) {
+			return $date->gt($r->date_completed);
+		});
+	}
+
+	public function getTimeViewedAttribute()
+	{
+		return $this->getPreviousPosts()->count() + 1;
+	}
+
+	public function getTwitterPreviewAttribute()
+	{
+		$date = $this->date_completed->format('l jS F Y');
+
+		if ($this->isQuote()) return $date;
+
+		return ucfirst($this->verb) . ' on ' . $date . ' for the ' . NumberToAdjective::convert($this->time_viewed) . ' time';
+	}
+
+	public function getSinglePostDataAttribute()
+	{
+		if ($this->shouldShowCount()) return '';
+
+		return ucfirst($this->verb) . ' for the ' . NumberToAdjective::convert($this->time_viewed) . ' time';
 	}
 
 }

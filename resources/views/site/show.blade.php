@@ -1,5 +1,9 @@
-@extends('layouts.site', ['title' => $post->title])
+@extends('layouts.site', ['singlePost' => $post])
 
 @section('content')
-	@include('site._partials.post', ['post' => $post])
+	@include('site._partials.post', [
+		'post' => $post,
+		'showRelated' => true,
+		'asSinglePost' => true,
+	])
 @endsection
