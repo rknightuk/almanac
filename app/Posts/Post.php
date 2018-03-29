@@ -172,7 +172,7 @@ class Post extends Model
 
 	public function getSinglePostDataAttribute()
 	{
-		if ($this->shouldShowCount()) return '';
+		if (!$this->shouldShowCount()) return '';
 
 		return ucfirst($this->verb) . ' for the ' . NumberToAdjective::convert($this->time_viewed) . ' time';
 	}
