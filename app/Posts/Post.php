@@ -145,7 +145,7 @@ class Post extends Model
 		$date = $this->date_completed;
 		return $this->relatedPosts->filter(function(Post $r) use ($date) {
 			return $date->lt($r->date_completed);
-		});
+		})->sortByDesc('date_completed');
 	}
 
 	public function getPreviousPosts()
@@ -153,7 +153,7 @@ class Post extends Model
 		$date = $this->date_completed;
 		return $this->relatedPosts->filter(function(Post $r) use ($date) {
 			return $date->gt($r->date_completed);
-		});
+		})->sortByDesc('date_completed');
 	}
 
 	public function getTimeViewedAttribute()
