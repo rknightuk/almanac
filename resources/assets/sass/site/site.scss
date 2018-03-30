@@ -34,22 +34,14 @@ a {
 }
 
 .almn-posts-wrap {
-	margin-right: 10px;
-	margin-left: 10px;
-	width: 600px;
 	float: right;
-	margin-top: 250px;
-	& .almn-posts {
-		margin-top: $top-offset;
-		@media (max-width: $breakpoint) {
-			margin-top: 0;
-			max-width: calc(100% - 20px);
-		}
-	}
+	margin-top: 225px;
+	max-width: 600px;
+	box-sizing: border-box;
 	@media (max-width: $breakpoint) {
-		width: 100%;
+		margin: 25px 10px 10px 10px;
 		float: none;
-		margin-top: 25px;
+		max-width: 100%;
 	}
 }
 
