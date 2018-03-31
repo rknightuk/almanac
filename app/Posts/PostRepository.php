@@ -20,6 +20,9 @@ class PostRepository {
 		if ($query->type) $db->where('type', $query->type);
 		if ($query->tags) $db->withAnyTags($query->tags);
 		if ($query->platform) $db->where('platform', $query->platform);
+		if ($query->year) $db->whereYear('date_completed', $query->year);
+		if ($query->month) $db->whereMonth('date_completed', $query->month);
+		if ($query->day) $db->whereDay('date_completed', $query->day);
 
 		$posts = $db->paginate(self::PER_PAGE);
 
