@@ -36,12 +36,12 @@ a {
 .almn-posts-wrap {
 	float: right;
 	margin-top: 225px;
-	max-width: 600px;
+	width: 600px;
 	box-sizing: border-box;
 	@media (max-width: $breakpoint) {
 		margin: 25px 10px 10px 10px;
 		float: none;
-		max-width: 100%;
+		width: auto;
 	}
 }
 
