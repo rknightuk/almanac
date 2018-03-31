@@ -66,7 +66,7 @@
 			<a href="{{ $post->permalink }}">
 				{{ $post->date_completed->format('jS F Y') }}
 			</a>
-			@if ($post->related_count > 1 || isset($asSinglePost) && $asSinglePost && $post->shouldShowCount())
+			@if ($post->related_count > 1 && $post->shouldShowCount())
 				| {{ $post->single_post_data }}
 			@endif
 		</div>

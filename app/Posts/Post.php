@@ -60,7 +60,7 @@ class Post extends Model
 
 	public function shouldShowCount(): bool
 	{
-		return !$this->isQuote() && !$this->isMusic();
+		return !$this->isQuote() && !$this->isMusic() && $this->time_viewed > 1;
 	}
 
 	public function isQuote(): bool
