@@ -50,10 +50,14 @@ class SiteController extends Controller
 		$query->fromRequest(request());
 
 		$posts = $this->postRepository->paginate($query);
+		$category = request()->input('category');
 
 		return view('site.index', [
 			'posts' => $posts,
 			'search' => request()->input('search'),
+			'tags' => request()->input('tags'),
+			'category' => $category === 'tv' ? 'TV' : ucfirst($category),
+			'platform' => request()->input('platform'),
 		]);
 	}
 

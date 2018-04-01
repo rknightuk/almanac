@@ -1,12 +1,41 @@
 @extends('layouts.site')
 
 @section('content')
-	@if (isset($search) && $search && $posts->count() !== 0)
-		@include('site._partials.fakepost', [
-			'title' => "Results for $search",
-			'content' => $posts->count() . ' post' . ($posts->count() === 1 ? '' : 's') . ' found',
-			'icon' => 'search',
-		])
+	@if ($posts->count() !== 0)
+
+		@php ($content = $posts->count() . ' post' . ($posts->count() === 1 ? '' : 's') . ' found')
+
+		@if (isset($search) && $search)
+			@include('site._partials.fakepost', [
+				'title' => "Results for \"$search\"",
+				'content' => $content,
+				'icon' => 'search',
+			])
+		@endif
+
+		@if (isset($tags) && is_array($tags) && $tags)
+			@include('site._partials.fakepost', [
+				'title' => "Posts tagged with \"" . implode(', ', $tags) . "\"",
+				'content' => $content,
+				'icon' => 'tag',
+			])
+		@endif
+
+		@if (isset($category) && $category)
+			@include('site._partials.fakepost', [
+				'title' => $category . " posts",
+				'content' => $content,
+				'icon' => 'search',
+			])
+		@endif
+
+		@if (isset($platform) && $platform)
+			@include('site._partials.fakepost', [
+				'title' => $posts->first()->platform . " games",
+				'content' => $content,
+				'icon' => 'gamepad',
+			])
+		@endif
 	@endif
 
 	@forelse ($posts as $post)
