@@ -36,6 +36,14 @@
 				'icon' => 'gamepad',
 			])
 		@endif
+
+		@if (isset($year) && $year)
+			@include('site._partials.fakepost', [
+				'title' => $year . (isset($month) && $month ? '/' . sprintf("%02d", $month) : '') . (isset($day) && $day ? '/' . sprintf("%02d", $day) : ''),
+				'content' => $content,
+				'icon' => 'calendar-alt',
+			])
+		@endif
 	@endif
 
 	@forelse ($posts as $post)

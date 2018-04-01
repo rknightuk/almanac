@@ -58,6 +58,9 @@ class SiteController extends Controller
 			'tags' => request()->input('tags'),
 			'category' => $category === 'tv' ? 'TV' : ucfirst($category),
 			'platform' => request()->input('platform'),
+			'year' => $query->year,
+			'month' => $query->month,
+			'day' => $query->day,
 		]);
 	}
 
