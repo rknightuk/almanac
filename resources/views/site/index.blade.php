@@ -1,9 +1,9 @@
 @extends('layouts.site')
 
 @section('content')
-	@if ($posts->count() !== 0)
+	@if ($posts->total() !== 0)
 
-		@php ($content = $posts->count() . ' post' . ($posts->count() === 1 ? '' : 's') . ' found')
+		@php ($content = $posts->total() . ' post' . ($posts->total() === 1 ? '' : 's') . ' found')
 
 		@if (isset($search) && $search)
 			@include('site._partials.fakepost', [
