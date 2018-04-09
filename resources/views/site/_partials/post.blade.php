@@ -76,6 +76,34 @@
 			</div>
 		@endif
 	</footer>
+
+	@if (Auth::user())
+		<div class="almn-post--manage">
+			<div class="almn-post--manage--buttons">
+				<a
+					class="almn-post--manage--buttons--button"
+					href="/app/posts/{{$post->id}}"
+					target="_blank"
+				>
+					<i class="fas fa-edit"></i>
+				</a>
+				<a
+					class="almn-post--manage--buttons--button"
+					href="/app/posts/new/{{$post->type}}/{{$post->id}}"
+					target="_blank"
+				>
+					<i class="fas fa-retweet"></i>
+				</a>
+				<a
+					class="almn-post--manage--buttons--button"
+					href="https://twitter.com/intent/tweet?url={{env('APP_URL') . $post->permalink}}&text={{$post->title}}"
+					target="_blank"
+				>
+					<i class="fab fa-twitter"></i>
+				</a>
+			</div>
+		</div>
+	@endif
 </div>
 
 @if (isset($showRelated) && $showRelated)

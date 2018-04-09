@@ -188,4 +188,21 @@ $spoiler-color: #383838;
 			text-align: right;
 		}
 	}
+
+	&--manage {
+		margin: 10px -25px -25px -25px;
+		color: $lighter-text-color;
+		background: $background-post;
+		&--buttons {
+			display: flex;
+			&--button {
+				flex: 1;
+				text-align: center;
+				padding: 15px 10px;
+				&:hover {
+					background: $border-color;
+				}
+			}
+		}
+	}
 }
