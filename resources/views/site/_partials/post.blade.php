@@ -61,49 +61,45 @@
 		</div>
 	@endif
 
-	<footer class="almn-post--footer">
+	<footer class="almn-post--footer @if (Auth::user()) almn-post--footer--manage @endif">
 		<div class="almn-post--footer--date">
 			<a href="{{ $post->permalink }}">
 				{{ $post->date_completed->format('jS F Y') }}
 			</a>
 			@if ($post->related_count > 1 && $post->shouldShowCount())
-				| {{ $post->single_post_data }}
+				<br> {{ $post->single_post_data }}
 			@endif
 		</div>
-		@if ($post->link)
-			<div class="almn-post--footer--link">
-				<a href="{{ $post->link }}">source</a>
+		@if ($post->link || Auth::user())
+			<div class="almn-post--footer--links @if (Auth::user()) almn-post--footer--manage--links @endif">
+				@if (Auth::user())
+					<a
+							href="/app/posts/{{$post->id}}"
+							target="_blank"
+					>
+						<i class="fas fa-edit"></i>
+					</a>
+					<a
+						href="/app/new/{{$post->type}}/{{$post->id}}"
+						target="_blank"
+					>
+						<i class="fas fa-retweet"></i>
+					</a>
+					<a
+						href="https://twitter.com/intent/tweet?url={{env('APP_URL') . $post->permalink}}&text={{$post->title}}"
+						target="_blank"
+					>
+						<i class="fab fa-twitter"></i>
+					</a>
+				@endif
+				@if ($post->link)
+					<a href="{{ $post->link }}">
+						<i class="fas fa-link"></i>
+					</a>
+				@endif
 			</div>
 		@endif
 	</footer>
-
-	@if (Auth::user())
-		<div class="almn-post--manage">
-			<div class="almn-post--manage--buttons">
-				<a
-					class="almn-post--manage--buttons--button"
-					href="/app/posts/{{$post->id}}"
-					target="_blank"
-				>
-					<i class="fas fa-edit"></i>
-				</a>
-				<a
-					class="almn-post--manage--buttons--button"
-					href="/app/new/{{$post->type}}/{{$post->id}}"
-					target="_blank"
-				>
-					<i class="fas fa-retweet"></i>
-				</a>
-				<a
-					class="almn-post--manage--buttons--button"
-					href="https://twitter.com/intent/tweet?url={{env('APP_URL') . $post->permalink}}&text={{$post->title}}"
-					target="_blank"
-				>
-					<i class="fab fa-twitter"></i>
-				</a>
-			</div>
-		</div>
-	@endif
 </div>
 
 @if (isset($showRelated) && $showRelated)
