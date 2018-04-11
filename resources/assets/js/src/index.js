@@ -14,7 +14,7 @@ const App = () => (
 			<div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 20px' }}>
 				<Route exact path="/app" component={Dashboard}/>
 				<Route exact path="/app/new" component={Create}/>
-				<Route exact path="/app/new/:type" component={Create}/>
+				<Route exact path="/app/new/:type/:id?" component={Create}/>
 				<Route exact path="/app/posts/:id" component={Update}/>
 			</div>
 

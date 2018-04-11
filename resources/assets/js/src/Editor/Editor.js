@@ -33,6 +33,7 @@ type Props = {
 	post?: Post,
 	saving: boolean,
 	history: any,
+	isNew?: boolean,
 }
 
 type State = {
@@ -81,7 +82,7 @@ class Editor extends Component<Props, State> {
 				<h1>
 					<Icon
 						type={this.props.post ? this.props.post.type : this.props.type}
-					/> {this.props.post ? 'Edit Post' : `Add new ${post.type}`}
+					/> {this.props.isNew ? `Add new ${post.type}` : 'Edit Post'}
 				</h1>
 
 				<form>

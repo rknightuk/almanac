@@ -89,7 +89,7 @@
 				</a>
 				<a
 					class="almn-post--manage--buttons--button"
-					href="/app/posts/new/{{$post->type}}/{{$post->id}}"
+					href="/app/new/{{$post->type}}/{{$post->id}}"
 					target="_blank"
 				>
 					<i class="fas fa-retweet"></i>
