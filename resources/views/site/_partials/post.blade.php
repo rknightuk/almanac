@@ -22,27 +22,15 @@
 			<a href="{{ $post->permalink }}">
 				@if ($post->isQuote()) — @endif{{ $post->title }}
 			</a>
-			@if ($post->year || $post->platform)
+			@if ($post->year)
 				<span class="almn-post--titles--main__meta">
-					@if ($post->year && $post->platform)
-						{{ $post->year }} | <a href="/?platform={{ strtolower($post->platform) }}">{{ $post->platform }}</a>
-					@elseif ($post->year)
-						{{ $post->year }}
-					@else
-						<a href="/?platform={{ strtolower($post->platform) }}">{{ $post->platform }}</a>
-					@endif
+					{{ $post->year }}
 				</span>
 			@endif
 		</div>
-		@if ($post->subtitle || $post->season)
+		@if ($post->subtitle_output)
 			<div class="almn-post--titles--sub">
-				@if ($post->season && $post->subtitle)
-					{{ $post->season_string }} | {{ $post->subtitle }}
-				@elseif ($post->season)
-					{{ $post->season_string }}
-				@else
-					{{ $post->subtitle }}
-				@endif
+				{!! $post->subtitle_output !!}
 			</div>
 		@endif
 	</div>
@@ -65,10 +53,12 @@
 		<div class="almn-post--footer--date">
 			<a href="{{ $post->permalink }}">
 				{{ $post->date_completed->format('jS F Y') }}
+				@if ($post->related_count > 1 && $post->shouldShowCount())
+					<span class="almn-post--footer--date--rewatched">
+						<i class="fas fa-sync"></i>
+					</span>
+				@endif
 			</a>
-			@if ($post->related_count > 1 && $post->shouldShowCount())
-				<br> {{ $post->single_post_data }}
-			@endif
 		</div>
 		@if ($post->link || Auth::user())
 			<div class="almn-post--footer--links @if (Auth::user()) almn-post--footer--manage--links @endif">
@@ -76,24 +66,27 @@
 					<a
 							href="/app/posts/{{$post->id}}"
 							target="_blank"
+							title="Edit Post"
 					>
 						<i class="fas fa-edit"></i>
 					</a>
 					<a
 						href="/app/new/{{$post->type}}/{{$post->id}}"
 						target="_blank"
+						title="Rewatch"
 					>
-						<i class="fas fa-retweet"></i>
+						<i class="fas fa-sync"></i>
 					</a>
 					<a
 						href="https://twitter.com/intent/tweet?url={{env('APP_URL') . $post->permalink}}&text={{$post->title}}"
 						target="_blank"
+						title="Share to Twitter"
 					>
 						<i class="fab fa-twitter"></i>
 					</a>
 				@endif
 				@if ($post->link)
-					<a href="{{ $post->link }}">
+					<a href="{{ $post->link }}" title="Post Source">
 						<i class="fas fa-link"></i>
 					</a>
 				@endif

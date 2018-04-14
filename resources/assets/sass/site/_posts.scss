@@ -182,12 +182,17 @@ $spoiler-color: #383838;
 		font-weight: bold;
 		&--date {
 			flex: 1;
+			&--rewatched {
+				font-size: 14px;
+				margin-left: 5px;
+				color: #d8d8d8;
+			}
 		}
 		&--links {
 			flex: 1;
 			max-width: 120px;
 			text-align: right;
-			font-size: 15px;
+			font-size: 14px;
 			display: flex;
 			& a {
 				flex: 1;

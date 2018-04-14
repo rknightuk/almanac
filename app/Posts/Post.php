@@ -140,6 +140,19 @@ class Post extends Model
 		return $this->relatedPosts ? $this->relatedPosts->count() : 0;
 	}
 
+	public function getSubtitleOutputAttribute()
+	{
+		if (!$this->subtitle && !$this->season && !$this->platform) return null;
+
+		$parts = [];
+
+		if ($this->subtitle) $parts[] = $this->subtitle;
+		if ($this->platform) $parts[] = sprintf('<a href="/?platform=%s">%s</a>', strtolower($this->platform), $this->platform);
+		if ($this->season) $parts[] = $this->season_string;
+
+		return implode(' | ', $parts);
+	}
+
 	public function getFuturePosts()
 	{
 		$date = $this->date_completed;
@@ -168,13 +181,6 @@ class Post extends Model
 		if ($this->isQuote()) return $date;
 
 		return ucfirst($this->verb) . ' on ' . $date . ' for the ' . NumberToAdjective::convert($this->time_viewed) . ' time';
-	}
-
-	public function getSinglePostDataAttribute()
-	{
-		if (!$this->shouldShowCount()) return '';
-
-		return ucfirst($this->verb) . ' for the ' . NumberToAdjective::convert($this->time_viewed) . ' time';
 	}
 
 }
