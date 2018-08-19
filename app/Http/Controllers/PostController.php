@@ -9,6 +9,7 @@ use Almanac\Posts\Post;
 use Almanac\Posts\PostQuery;
 use Almanac\Posts\PostRepository;
 use Carbon\Carbon;
+use Roumen\Feed\Feed;
 
 class PostController extends Controller
 {
@@ -54,6 +55,9 @@ class PostController extends Controller
 
         $post->attachTags($data['tags']);
 
+	    $feed = new Feed();
+	    $feed->setCache(0, FeedController::FEED_KEY);
+
         return $post;
     }
 
@@ -74,6 +78,9 @@ class PostController extends Controller
 	    $post->update($data);
 
 	    $post->syncTags($data['tags']);
+
+	    $feed = new Feed();
+	    $feed->setCache(0, FeedController::FEED_KEY);
 
 	    return $post;
     }

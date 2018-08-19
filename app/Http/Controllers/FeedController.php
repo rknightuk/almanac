@@ -8,11 +8,13 @@ use Roumen\Feed\Feed;
 
 class FeedController extends Controller
 {
+	const FEED_KEY = 'main-feed-cache';
+
     public function index()
     {
     	$feed = new Feed();
 
-	    $feed->setCache(5, 'main-feed');
+	    $feed->setCache(60, self::FEED_KEY);
 
 	    if (!$feed->isCached()) {
 		    $posts = Post::latest()->get();
