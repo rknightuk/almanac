@@ -19,3 +19,6 @@ Route::get('/{year?}/{month?}/{day?}/{path?}', 'SiteController@index')->where([
 	'month' => '[0-9]+',
 	'date' => '[0-9]+'
 ]);
+
+
+Route::get('feed', 'FeedController@index');
