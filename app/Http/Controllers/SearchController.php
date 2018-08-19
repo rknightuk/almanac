@@ -18,11 +18,18 @@ class SearchController extends Controller
 
 	public function movie()
     {
+    	return; // temp
+    	if (!request('query')) return [];
+
     	return $this->movieDBClient->findMovie(request('query'));
     }
 
 	public function tv()
 	{
+		return; // temp
+		
+		if (!request('query')) return [];
+
 		return $this->movieDBClient->findTV(request('query'));
 	}
 }
