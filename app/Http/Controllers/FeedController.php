@@ -12,7 +12,7 @@ class FeedController extends Controller
     {
     	$feed = new Feed();
 
-	    $feed->setCache(60, 'main-feed');
+	    $feed->setCache(5, 'main-feed');
 
 	    if (!$feed->isCached()) {
 		    $posts = Post::latest()->get();
