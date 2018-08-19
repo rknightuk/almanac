@@ -13,6 +13,7 @@ import Select from '../ui/Select'
 import TagInput from '../ui/TagInput'
 import Rating from '../ui/Rating'
 import Icon from '../ui/Icon'
+import RemoteSearch from './RemoteSearch'
 
 import DatePicker from 'react-day-picker/DayPickerInput'
 import { formatDate, parseDate } from 'react-day-picker/moment'
@@ -41,6 +42,7 @@ type State = {
 	deleting: boolean,
 	pathManuallyChanged: boolean,
 	showPreview: boolean,
+	showSearch: boolean,
 }
 
 class Editor extends Component<Props, State> {
@@ -71,11 +73,12 @@ class Editor extends Component<Props, State> {
 		deleting: false,
 		pathManuallyChanged: false,
 		showPreview: false,
+		showSearch: this.props.isNew && !this.props.post,
 	}
 
 	render() {
 
-		const { post, showPreview } = this.state
+		const { post, showPreview, showSearch  } = this.state
 
 		return (
 			<div>
@@ -86,6 +89,15 @@ class Editor extends Component<Props, State> {
 				</h1>
 
 				<form>
+					{showSearch && (
+						<FormRow
+							label="Title"
+							inputKey="post-title"
+							input={(
+								<RemoteSearch />
+							)}
+						/>
+					)}
 					<FormRow
 						label="Title"
 						inputKey="post-title"
