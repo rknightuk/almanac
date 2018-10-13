@@ -77,7 +77,8 @@
 
     <script>
         @if (isset($tags))
-            var AlmanacTags = <?= json_encode($tags) ?>
+            var AlmanacTags = <?= json_encode($tags) ?>;
+            var AlmanacSearch = <?= json_encode($searchConfig) ?>;
         @endif
     </script>
     <script src="{{ asset('js/app.js') }}"></script>

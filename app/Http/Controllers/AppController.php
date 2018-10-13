@@ -14,6 +14,11 @@ class AppController extends Controller
 		    return $tag->name;
 	    })->values()->toArray();
 
-	    return view('admin')->with(['tags' => $tags]);
+	    return view('admin')->with([
+	    	'tags' => $tags,
+		    'searchConfig' => [
+		    	'movieAndTv' => (bool) env('THEMOVIEDB_API_KEY'),
+		    ],
+	    ]);
     }
 }
