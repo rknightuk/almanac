@@ -113,9 +113,9 @@ class Editor extends Component<Props, State> {
 						onChange={v => this.updatePost('rating', v)}
 					/>
 
-					<div className="alamac-mde">
+					<div className="almanac-mde">
 						<a
-							className="alamac-mde--toggle"
+							className="almanac-mde--toggle"
 							onClick={() => this.setState((s: State) => ({ showPreview: !s.showPreview }))}
 						>
 							{showPreview ? 'Hide' : 'Show'} Preview
