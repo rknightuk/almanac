@@ -10,7 +10,6 @@ import Editor from './Editor'
 import Loader from '../ui/Loader'
 import type { Post, PostTypes } from '../types'
 import moment from 'moment/moment'
-import SearchModal from '../SearchModal'
 
 type Props = {
 	match: {
@@ -26,7 +25,6 @@ type State = {
 	saving: boolean,
 	post: any,
 	loading: boolean,
-	showSearch: boolean,
 }
 
 class Create extends Component<Props, State> {
@@ -37,26 +35,10 @@ class Create extends Component<Props, State> {
 		saving: false,
 		post: null,
 		loading: true,
-		showSearch: false,
 	}
 
 	componentDidMount() {
 		this.fetchPost()
-		this.showSearch()
-	}
-
-	showSearch = () => {
-		if (!this.props.match.params.id && window.AlmanacSearch[this.props.match.params.type]) {
-			this.setState({
-				showSearch: true,
-			})
-		}
-	}
-
-	hideSearch = () => {
-		this.setState({
-			showSearch: false,
-		})
 	}
 
 	fetchPost = async () => {
@@ -96,22 +78,13 @@ class Create extends Component<Props, State> {
 		}
 
 		return (
-			<React.Fragment>
-				{this.state.showSearch && (
-					<SearchModal
-						type={this.props.match.params.type}
-						onClose={this.hideSearch}
-					/>
-				)}
-				<Editor
-					onSave={this.handleSave}
-					type={this.props.match.params.type}
-					saving={this.state.saving}
-					post={this.state.post}
-					isNew
-					showSearch={this.showSearch}
-				/>
-			</React.Fragment>
+			<Editor
+				onSave={this.handleSave}
+				type={this.props.match.params.type}
+				saving={this.state.saving}
+				post={this.state.post}
+				isNew
+			/>
 		)
 	}
 

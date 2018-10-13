@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Cache;
 
 class TheMovieDBClient {
 
+	const IMAGE_PATH = 'https://image.tmdb.org/t/p/w780';
+
 	/**
 	 * @var Client
 	 */
@@ -39,8 +41,8 @@ class TheMovieDBClient {
 				return [
 					'title' => $r->title,
 					'year' => $r->release_date ? (Carbon::createFromFormat('Y-m-d', $r->release_date))->year : null,
-					'poster' => $r->poster_path,
-					'backdrop' => $r->backdrop_path,
+					'poster' => self::IMAGE_PATH . $r->poster_path,
+					'backdrop' => self::IMAGE_PATH . $r->backdrop_path,
 				];
 			}, $results);
 		});
@@ -55,8 +57,8 @@ class TheMovieDBClient {
 				return [
 					'title' => $r->name,
 					'year' => $r->first_air_date ? (Carbon::createFromFormat('Y-m-d', $r->first_air_date))->year : null,
-					'poster' => $r->poster_path,
-					'backdrop' => $r->backdrop_path,
+					'poster' => self::IMAGE_PATH . $r->poster_path,
+					'backdrop' => self::IMAGE_PATH . $r->backdrop_path,
 				];
 			}, $results);
 		});

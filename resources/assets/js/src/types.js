@@ -29,3 +29,10 @@ export type PostTypes =
 	| 'podcast'
 	| 'video'
 	| 'quote'
+
+export type SearchResult = {
+	title: string,
+	year: number,
+	poster: ?string,
+	backdrop: ?string,
+}

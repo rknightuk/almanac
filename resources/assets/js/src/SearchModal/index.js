@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import Modal from 'react-modal'
-import type { PostTypes } from '../types'
+import type { PostTypes, SearchResult } from '../types'
 import TextInput from '../ui/TextInput'
 import { debounce } from 'lodash'
 import axios from 'axios'
@@ -10,7 +10,7 @@ import axios from 'axios'
 type Props = {
 	type: PostTypes,
 	onClose: () => void,
-	selected: () => void,
+	onSelected: (result: SearchResult) => void,
 }
 
 type State = {
@@ -37,7 +37,7 @@ const MODAL_STYLES = {
 
 Modal.setAppElement('#admin')
 
-class SearchModal extends Component<Props> {
+class SearchModal extends Component<Props, State> {
 
 	props: Props
 
@@ -71,10 +71,10 @@ class SearchModal extends Component<Props> {
 					<div
 						key={i}
 						style={{
-							backgroundImage: r.backdrop || r.poster ? `url("https://image.tmdb.org/t/p/w780${r.backdrop || r.poster}")` : '',
+							backgroundImage: r.backdrop || r.poster ? `url("${r.backdrop || r.poster}")` : '',
 						}}
 						className="almn-search--result"
-						onClick={() => this.props.selected(r)}
+						onClick={() => this.props.onSelected(r)}
 					>
 						<div className="almn-search--result--title">{r.title} - {r.year}</div>
 					</div>

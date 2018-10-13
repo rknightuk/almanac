@@ -13,6 +13,7 @@ import Select from '../ui/Select'
 import TagInput from '../ui/TagInput'
 import Rating from '../ui/Rating'
 import Icon from '../ui/Icon'
+import SearchModal from '../SearchModal'
 
 import DatePicker from 'react-day-picker/DayPickerInput'
 import { formatDate, parseDate } from 'react-day-picker/moment'
@@ -21,7 +22,7 @@ import 'react-day-picker/lib/style.css'
 import { PLATFORMS } from '../constants'
 
 import moment from 'moment'
-import type { Post, PostTypes } from '../types'
+import type { Post, PostTypes, SearchResult } from '../types'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import slugify from 'slug'
@@ -42,6 +43,7 @@ type State = {
 	deleting: boolean,
 	pathManuallyChanged: boolean,
 	showPreview: boolean,
+	showSearch: boolean,
 }
 
 class Editor extends Component<Props, State> {
@@ -72,6 +74,7 @@ class Editor extends Component<Props, State> {
 		deleting: false,
 		pathManuallyChanged: false,
 		showPreview: false,
+		showSearch: false,
 	}
 
 	render() {
@@ -80,6 +83,14 @@ class Editor extends Component<Props, State> {
 
 		return (
 			<div>
+				{this.state.showSearch && (
+					<SearchModal
+						type={this.props.type}
+						onClose={this.hideSearch}
+						onSelected={this.handleSelected}
+					/>
+				)}
+
 				<h1>
 					<Icon
 						type={this.props.post ? this.props.post.type : this.props.type}
@@ -324,6 +335,38 @@ class Editor extends Component<Props, State> {
 		)
 	}
 
+	componentDidMount() {
+		this.showSearch()
+	}
+
+	showSearch = () => {
+		if (!this.props.post && window.AlmanacSearch[this.props.type]) {
+			this.setState({
+				showSearch: true,
+			})
+		}
+	}
+
+	hideSearch = () => {
+		this.setState({
+			showSearch: false,
+		})
+	}
+
+	handleSelected = (result: SearchResult) => {
+		this.setState(state => ({
+			post: {
+				...state.post,
+				title: result.title,
+				year: result.year,
+				poster: result.poster,
+				backdrop: result.backdrop,
+				path: this.slugifyTitle(result.title),
+			},
+			showSearch: false,
+		}))
+	}
+
 	handleSave = () => {
 		this.props.onSave({
 			...this.state.post,
@@ -385,7 +428,7 @@ class Editor extends Component<Props, State> {
 	}
 
 	handleTitleChange = (title: string) => {
-		const path = this.shouldGeneratePath() ? slugify(title).toLowerCase() : this.state.post.path
+		const path = this.shouldGeneratePath() ? this.slugifyTitle(title) : this.state.post.path
 
 		this.setState((s: State) => ({
 			post: {
@@ -394,6 +437,10 @@ class Editor extends Component<Props, State> {
 				path,
 			}
 		}))
+	}
+
+	slugifyTitle = (title: string) => {
+		return slugify(title).toLowerCase()
 	}
 
 	handleDelete = async () => {
