@@ -116,7 +116,7 @@
 				for (var i = 0; i < spoilers.length; i++) {
 					var spoiler = spoilers[i]
 					spoiler.addEventListener('click', function(e) {
-						spoiler.className += ' almn-post--content__spoiler--show'
+						e.currentTarget.className += ' almn-post--content__spoiler--show'
 					}, false);
 				}
 			})();
