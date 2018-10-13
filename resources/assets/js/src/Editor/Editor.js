@@ -342,7 +342,6 @@ class Editor extends Component<Props, State> {
 	}
 
 	showSearch = () => {
-		console.log("EHRE")
 		if (!this.props.post && window.AlmanacSearch[this.props.type]) {
 			this.setState({
 				showSearch: true,
