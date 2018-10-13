@@ -109,6 +109,7 @@ class Create extends Component<Props, State> {
 					saving={this.state.saving}
 					post={this.state.post}
 					isNew
+					showSearch={this.showSearch}
 				/>
 			</React.Fragment>
 		)

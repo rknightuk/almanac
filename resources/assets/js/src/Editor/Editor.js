@@ -34,6 +34,7 @@ type Props = {
 	saving: boolean,
 	history: any,
 	isNew?: boolean,
+	showSearch?: () => any,
 }
 
 type State = {
@@ -90,10 +91,21 @@ class Editor extends Component<Props, State> {
 						label="Title"
 						inputKey="post-title"
 						input={(
-							<TextInput
-								value={post.title}
-								onChange={v => this.handleTitleChange(v)}
-							/>
+							<div className={this.props.showSearch ? 'input-group' : ''}>
+								<TextInput
+									value={post.title}
+									onChange={v => this.handleTitleChange(v)}
+								/>
+								{this.props.showSearch && (
+									<a
+										className="input-group-addon almn-input-addon"
+										id="basic-addon3"
+										onClick={this.props.showSearch ? this.props.showSearch : () => false}
+									>
+										<i className={'fas fa-search'} />
+									</a>
+								)}
+							</div>
 						)}
 					/>
 
