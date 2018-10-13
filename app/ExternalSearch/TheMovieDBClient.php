@@ -4,6 +4,7 @@ namespace Almanac\ExternalSearch;
 
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Cache;
 
 class TheMovieDBClient {
 
@@ -31,30 +32,34 @@ class TheMovieDBClient {
 
 	public function findMovie(string $query)
 	{
-		$results = $this->get('movie', $query);
+		return Cache::remember($query, 15, function () use ($query) {
+			$results = $this->get('movie', $query);
 
-		return array_map(function($r) {
-			return [
-				'title' => $r->title,
-				'year' => $r->release_date ? (Carbon::createFromFormat('Y-m-d', $r->release_date))->year : null,
-				'poster' => $r->poster_path,
-				'backdrop' => $r->backdrop_path,
-			];
-		}, $results);
+			return array_map(function($r) {
+				return [
+					'title' => $r->title,
+					'year' => $r->release_date ? (Carbon::createFromFormat('Y-m-d', $r->release_date))->year : null,
+					'poster' => $r->poster_path,
+					'backdrop' => $r->backdrop_path,
+				];
+			}, $results);
+		});
 	}
 
 	public function findTV(string $query)
 	{
-		$results = $this->get('tv', $query);
+		return Cache::remember($query, 15, function () use ($query) {
+			$results = $this->get('tv', $query);
 
-		return array_map(function($r) {
-			return [
-				'title' => $r->name,
-				'year' => $r->first_air_date ? (Carbon::createFromFormat('Y-m-d', $r->first_air_date))->year : null,
-				'poster' => $r->poster_path,
-				'backdrop' => $r->backdrop_path,
-			];
-		}, $results);
+			return array_map(function ($r) {
+				return [
+					'title' => $r->name,
+					'year' => $r->first_air_date ? (Carbon::createFromFormat('Y-m-d', $r->first_air_date))->year : null,
+					'poster' => $r->poster_path,
+					'backdrop' => $r->backdrop_path,
+				];
+			}, $results);
+		});
 	}
 
 	private function get(string $type, string $query)
