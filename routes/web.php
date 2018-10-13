@@ -22,3 +22,6 @@ Route::get('/{year?}/{month?}/{day?}/{path?}', 'SiteController@index')->where([
 
 
 Route::get('feed', 'FeedController@index');
+
+Route::get('/api/search/movie', 'SearchController@movie');
+Route::get('/api/search/tv', 'SearchController@tv');
