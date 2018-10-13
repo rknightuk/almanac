@@ -17,7 +17,8 @@ class AppController extends Controller
 	    return view('admin')->with([
 	    	'tags' => $tags,
 		    'searchConfig' => [
-		    	'movieAndTv' => (bool) env('THEMOVIEDB_API_KEY'),
+		    	'movie' => (bool) env('THEMOVIEDB_API_KEY'),
+			    'tv' => (bool) env('THEMOVIEDB_API_KEY'),
 		    ],
 	    ]);
     }

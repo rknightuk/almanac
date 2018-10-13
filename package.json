@@ -45,6 +45,7 @@
     "react-autosuggest": "^9.3.4",
     "react-day-picker": "^7.0.7",
     "react-mde": "^3.1.0",
+    "react-modal": "^3.6.1",
     "react-router-dom": "^4.2.2",
     "react-select": "^1.2.0",
     "react-tagsinput": "^3.19.0",
