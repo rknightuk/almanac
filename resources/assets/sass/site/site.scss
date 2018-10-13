@@ -18,6 +18,16 @@ a {
 	}
 }
 
+.almn-admin {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	z-index: 1;
+	background: white;
+	padding: 10px;
+	border: 1px solid $border-color;
+}
+
 .almn-header {
 	position: fixed;
 	top: 0;

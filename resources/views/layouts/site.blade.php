@@ -21,6 +21,14 @@
 	</head>
 	<body>
 
+		@if (Auth::user())
+			<div class="almn-admin">
+				<a href="/app" target="_blank">
+					Admin <i class="fas fa-cog"></i>
+				</a>
+			</div>
+		@endif
+
 		<div class="almn-header">
 		</div>
 
