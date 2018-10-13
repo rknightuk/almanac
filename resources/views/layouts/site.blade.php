@@ -116,7 +116,7 @@
 			</div>
 		</div>
 
-		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+		<script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js"></script>
 		<script>
 			(function() {
 				var spoilers = document.getElementsByClassName("almn-post--content__spoiler");
