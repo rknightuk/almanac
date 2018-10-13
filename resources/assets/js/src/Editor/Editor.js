@@ -70,6 +70,8 @@ class Editor extends Component<Props, State> {
 			platform: '',
 			published: true,
 			tags: [],
+			poster: null,
+			backdrop: null,
 		},
 		deleting: false,
 		pathManuallyChanged: false,
@@ -102,16 +104,16 @@ class Editor extends Component<Props, State> {
 						label="Title"
 						inputKey="post-title"
 						input={(
-							<div className={this.props.showSearch ? 'input-group' : ''}>
+							<div className={!this.props.post ? 'input-group' : ''}>
 								<TextInput
 									value={post.title}
 									onChange={v => this.handleTitleChange(v)}
 								/>
-								{this.props.showSearch && (
+								{!this.props.post && (
 									<a
 										className="input-group-addon almn-input-addon"
 										id="basic-addon3"
-										onClick={this.props.showSearch ? this.props.showSearch : () => false}
+										onClick={!this.props.post ? this.showSearch : () => false}
 									>
 										<i className={'fas fa-search'} />
 									</a>
@@ -340,6 +342,7 @@ class Editor extends Component<Props, State> {
 	}
 
 	showSearch = () => {
+		console.log("EHRE")
 		if (!this.props.post && window.AlmanacSearch[this.props.type]) {
 			this.setState({
 				showSearch: true,

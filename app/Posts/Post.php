@@ -46,6 +46,8 @@ class Post extends Model
 	    'creator',
 	    'season',
 	    'platform',
+	    'poster',
+	    'backdrop',
     ];
 
     public function isType(string $type): bool
