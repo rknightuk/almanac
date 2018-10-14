@@ -5,7 +5,27 @@
 	])
 @endif
 
-<div class="almn-post almn-post__{{ $post->rating_string }}">
+<style>
+	.almn-post-{{$post->id}} {
+		position: relative;
+		z-index: 1;
+	}
+
+	.almn-post-{{$post->id}}:after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: .1;
+		z-index: -1;
+		background: url('{{ $post->backdrop ? $post->backdrop : $post->poster }}');
+		background-size: cover;
+	}
+</style>
+
+<div class="almn-post almn-post__{{ $post->rating_string }} almn-post-{{ $post->id }}">
 	<a
 			href="/?category={{ strtolower($post->type) }}"
 			class="almn-post--icon almn-post--icon__{{ $post->rating_string }}"
