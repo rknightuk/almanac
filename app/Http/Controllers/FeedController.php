@@ -29,7 +29,7 @@ class FeedController extends Controller
 
 		    foreach ($posts as $post)
 		    {
-			    $feed->add($post->title, 'Robb Lewis', URL::to($post->permalink), $post->created_at, $post->content, $post->content);
+			    $feed->add($post->title, 'Robb Knight', URL::to($post->permalink), $post->created_at, $post->content, $post->content);
 		    }
 	    }
 
