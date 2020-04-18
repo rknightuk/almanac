@@ -76,7 +76,7 @@ class SearchModal extends Component<Props, State> {
 						className="almn-search--result"
 						onClick={() => this.props.onSelected(r)}
 					>
-						<div className="almn-search--result--title">{r.title} - {r.year}</div>
+						<div className="almn-search--result--title">{r.title} - {r.year}{r.meta ? ` - (${r.meta})` : ''}</div>
 					</div>
 				))}
 

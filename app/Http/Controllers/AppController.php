@@ -19,6 +19,7 @@ class AppController extends Controller
 		    'searchConfig' => [
 		    	'movie' => (bool) env('THEMOVIEDB_API_KEY'),
 			    'tv' => (bool) env('THEMOVIEDB_API_KEY'),
+                'game' => (bool) env('GIANTBOMB_API_KEY'),
 		    ],
 	    ]);
     }
