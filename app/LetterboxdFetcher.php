@@ -70,7 +70,7 @@ class LetterboxdFetcher {
 
         $date = Carbon::createFromFormat(Carbon::RFC1123,  $item->pubDate)->setTimezone('Europe/London');
 
-        if ($date->lt(new Carbon('2020-04-20 00:00'))) {
+        if ($date->lt(new Carbon('2020-04-20 23:59'))) {
             return; // ignoring for existing movies
         }
 
