@@ -69,6 +69,11 @@ class LetterboxdFetcher {
         }
 
         $date = Carbon::createFromFormat(Carbon::RFC1123,  $item->pubDate)->setTimezone('Europe/London');
+
+        if ($date->lt(new Carbon('2020-04-20 00:00'))) {
+            return; // ignoring for existing movies
+        }
+
         $title = $item->title;
 
         $hasSpoilers = strpos($title, ' (contains spoilers)') !== false;
