@@ -64,7 +64,7 @@ class LetterboxdFetcher {
     {
         $remoteId = (string) $item->guid;
 
-        if (Post::where('remote_id', $remoteId)) {
+        if (Post::where('remote_id', $remoteId)->first()) {
             return;
         }
 
