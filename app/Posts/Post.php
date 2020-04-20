@@ -32,6 +32,7 @@ class Post extends Model
 
     protected $fillable = [
 	    'id',
+        'remote_id',
 	    'type',
 	    'path',
 	    'title',

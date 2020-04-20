@@ -62,6 +62,12 @@ class LetterboxdFetcher {
 
     private function createPost(SimpleXMLElement $item)
     {
+        $remoteId = (string) $item->guid;
+
+        if (Post::where('remote_id', $remoteId)) {
+            return;
+        }
+
         $date = Carbon::createFromFormat(Carbon::RFC1123,  $item->pubDate)->setTimezone('Europe/London');
         $title = $item->title;
 
@@ -90,8 +96,8 @@ class LetterboxdFetcher {
             'spoilers' => $hasSpoilers,
             'published' => true,
             'created_at' => $date,
-            'remote_id' => (string) $item->guid,
             'date_completed' => $date,
+            'remote_id' => $remoteId,
         ]);
     }
 
