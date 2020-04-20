@@ -1,22 +1,22 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d9f4d13592dab5ca4f265164c1991364",
+    "content-hash": "e7ee939738e74725df72f7121ce06428",
     "packages": [
         {
             "name": "dereuromark/media-embed",
             "version": "0.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/dereuromark/MediaEmbed.git",
+                "url": "https://github.com/dereuromark/media-embed.git",
                 "reference": "c6a062b853d83bfe9e8239575f1c8eacf8895b50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dereuromark/MediaEmbed/zipball/c6a062b853d83bfe9e8239575f1c8eacf8895b50",
+                "url": "https://api.github.com/repos/dereuromark/media-embed/zipball/c6a062b853d83bfe9e8239575f1c8eacf8895b50",
                 "reference": "c6a062b853d83bfe9e8239575f1c8eacf8895b50",
                 "shasum": ""
             },
@@ -54,6 +54,49 @@
                 "video"
             ],
             "time": "2018-03-07T00:49:03+00:00"
+        },
+        {
+            "name": "dg/rss-php",
+            "version": "v1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dg/rss-php.git",
+                "reference": "4d018b27b0a4d7b13dde34a402f0efe90024c40a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dg/rss-php/zipball/4d018b27b0a4d7b13dde34a402f0efe90024c40a",
+                "reference": "4d018b27b0a4d7b13dde34a402f0efe90024c40a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                }
+            ],
+            "description": "RSS & Atom Feeds for PHP is a very small and easy-to-use library for consuming an RSS and Atom feed",
+            "homepage": "https://github.com/dg/rss-php",
+            "keywords": [
+                "atom",
+                "feed",
+                "rss"
+            ],
+            "time": "2019-09-29T08:57:45+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -596,6 +639,43 @@
             "time": "2017-03-20T17:10:46+00:00"
         },
         {
+            "name": "html2text/html2text",
+            "version": "4.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mtibben/html2text.git",
+                "reference": "61ad68e934066a6f8df29a3d23a6460536d0855c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mtibben/html2text/zipball/61ad68e934066a6f8df29a3d23a6460536d0855c",
+                "reference": "61ad68e934066a6f8df29a3d23a6460536d0855c",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance",
+                "symfony/polyfill-mbstring": "If you can't install ext-mbstring"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Html2Text\\": [
+                        "src/",
+                        "test/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Converts HTML to formatted plain text",
+            "time": "2020-04-16T23:44:31+00:00"
+        },
+        {
             "name": "jakub-onderka/php-console-color",
             "version": "0.1",
             "source": {
@@ -636,6 +716,7 @@
                     "homepage": "http://www.acci.cz"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2014-04-08T15:00:19+00:00"
         },
         {
@@ -680,6 +761,7 @@
                     "homepage": "http://www.acci.cz/"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2015-04-20T18:58:01+00:00"
         },
         {
@@ -780,6 +862,7 @@
                 "extension",
                 "markdown"
             ],
+            "abandoned": true,
             "time": "2018-01-11T10:38:16+00:00"
         },
         {
@@ -3986,6 +4069,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2018-02-15T05:27:38+00:00"
         },
         {
@@ -4765,7 +4849,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.0.0"
+        "php": ">=7.1.0",
+        "ext-simplexml": "*"
     },
     "platform-dev": []
 }
