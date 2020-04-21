@@ -96,7 +96,7 @@ class LetterboxdFetcher {
             'title' => $title,
             'content' => $this->extractReview((string) $item->description),
             'link' => (string) $item->link,
-            'rating' => self::RATINGS[$rating] ?? null,
+            'rating' => self::RATINGS[$rating] ?? 2,
             'year' => $year,
             'spoilers' => $hasSpoilers,
             'published' => true,
