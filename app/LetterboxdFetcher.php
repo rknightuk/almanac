@@ -62,32 +62,25 @@ class LetterboxdFetcher {
 
     private function createPost(SimpleXMLElement $item)
     {
-        $remoteId = (string) $item->guid;
-
-        if (Post::where('remote_id', $remoteId)->first()) {
+        if (!$this->shouldCreate($item)) {
             return;
         }
 
-        $date = Carbon::createFromFormat(Carbon::RFC1123,  $item->pubDate)->setTimezone('Europe/London');
+        $hasSpoilers = $this->doesHaveSpoilers((string) $item->title);
 
-        if ($date->lt(new Carbon('2020-04-21 23:59'))) {
-            return; // ignoring for existing movies
+        $date = Carbon::createFromFormat('Y-m-d',  $item->{'letterboxd:watchedDate'})->setTimezone('Europe/London');
+
+        $rawRating = (int) $item->{'letterboxd:memberRating'};
+        if ($rawRating === 5) {
+            $rating = 2;
+        }
+        else if ($rawRating > 3 && $rawRating < 5) {
+            $rating = 1;
+        } else {
+            $rating = 0;
         }
 
-        $title = $item->title;
-
-        $hasSpoilers = strpos($title, ' (contains spoilers)') !== false;
-        if ($hasSpoilers) {
-            $title = str_replace(' (contains spoilers)', '', $title);
-        }
-
-        list($title, $year, $rating) = $this->extractDataFromTitle($title);
-
-        $post = new Post();
-        $post->type = PostType::MOVIE;
-        $post->title = $title;
-        $post->year = $year;
-
+        $title = (string) $item->{'letterboxd:filmTitle'};
         $path = $this->makePath($title, $date);
 
         Post::create([
@@ -95,28 +88,15 @@ class LetterboxdFetcher {
             'path' => $path,
             'title' => $title,
             'content' => $this->extractReview((string) $item->description),
-            'link' => (string) $item->link,
+            'link' => $link = (string) $item->link,
             'rating' => self::RATINGS[$rating] ?? 2,
-            'year' => $year,
+            'year' => (string) $item->{'letterboxd:filmYear'},
             'spoilers' => $hasSpoilers,
             'published' => true,
-            'created_at' => $date,
+            'created_at' => Carbon::now(),
             'date_completed' => $date,
-            'remote_id' => $remoteId,
+            'remote_id' => $remoteId = (string) $item->guid,
         ]);
-    }
-
-    private function extractDataFromTitle(string $rawTitle): array
-    {
-        $hyphenPosition = strrpos($rawTitle, '-', 0);
-        $titleAndYear = $hyphenPosition ? substr($rawTitle, 0, $hyphenPosition) : $rawTitle;
-        $rating = $hyphenPosition ? substr($rawTitle, $hyphenPosition + 2) : null;
-
-        $lastComma = strrpos($titleAndYear, ',', 0);
-        $title = substr($titleAndYear, 0, $lastComma);
-        $year = substr($titleAndYear, $lastComma + 2);
-
-        return [$title, $year, $rating];
     }
 
     private function extractReview(string $rawReview): ?string
@@ -146,6 +126,30 @@ class LetterboxdFetcher {
         );
 
         return $this->pathGenerator->getValidPath($path, $date);
+    }
+
+    private function doesHaveSpoilers(string $rawTitle): bool
+    {
+        return strpos($rawTitle, ' (contains spoilers)') !== false;
+    }
+
+    private function shouldCreate(SimpleXMLElement $item): bool
+    {
+        if (strpos((string) $item->link, '/list/')) {
+            return false;
+        }
+
+        if (Post::where('remote_id', (string) $item->guid)->first()) {
+            return false;
+        }
+
+        $publishedDate = Carbon::createFromFormat(Carbon::RFC1123,  $item->pubDate)->setTimezone('Europe/London');
+
+        if ($publishedDate->lt(new Carbon('2020-04-21 23:59'))) {
+            return false; // ignoring for existing movies
+        }
+
+        return true;
     }
 
 }
