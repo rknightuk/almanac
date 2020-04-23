@@ -27,20 +27,49 @@ blockquote {
 }
 
 .almn-page {
-	max-width: 1000px;
+	max-width: 600px;
 	margin: 0 auto;
 }
 
-.almn-posts-wrap {
-	float: right;
-	margin-top: 225px;
-	width: 600px;
-	box-sizing: border-box;
-	@media (max-width: $breakpoint) {
-		margin: 25px 10px 10px 10px;
-		float: none;
-		width: auto;
-	}
+.almn-header {
+    text-align: center;
+    &--main {
+        margin-bottom: 0;
+    }
+    &--subtitle {
+        margin-top: 0;
+    }
+    a {
+        color: $text-color;
+        &:hover {
+            color: $primary-color;
+        }
+    }
+}
+
+.almn-nav {
+    font-size: 1.5em;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    &--link {
+        padding: 10px;
+        a {
+            color: $light-text-color;
+            &:hover {
+                color: $primary-color;
+            }
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.almn-posts {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .almn-footer {

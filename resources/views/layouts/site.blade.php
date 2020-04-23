@@ -20,16 +20,48 @@
 		@endif
 	</head>
 	<body>
-		<div class="almn-page">
-			<div class="almn-posts-wrap">
-				<div class="almn-posts">
-					@yield('content')
-				</div>
-				<div class="almn-footer">
-					Powered by <a href="https://code.robblewis.me/almanac">Almanac</a>@if (env('WEBSITE')) | <a href="{{ env('WEBSITE') }}">{{ env('WEBSITE_TITLE', env('WEBSITE')) }}</a> @endif
-				</div>
-			</div>
-		</div>
+        <div class="almn-page">
+            <header class="almn-header">
+                <h1 class="almn-header--main"><a href="/">{{ env('SITE_TITLE', 'Almanac') }}</a></h1>
+                @if (env('SITE_SUBTITLE'))
+                    @if (env('WEBSITE'))<a href="{{ env('WEBSITE') }}">@endif
+                        <p class="almn-header--subtitle">{{ env('SITE_SUBTITLE') }}</p>
+                    @if (env('WEBSITE'))</a>@endif
+                @endif
+            </header>
+            <nav class="almn-nav">
+                <div class="almn-nav--link">
+                    <a href="/?category=movie"><i class="fas fa-film"></i></a>
+                </div>
+                <div class="almn-nav--link">
+                    <a href="/?category=tv"><i class="fas fa-tv" data-fa-transform="shrink-3"></i></a>
+                </div>
+                <div class="almn-nav--link">
+                    <a href="/?category=game"><i class="fas fa-gamepad"></i></a>
+                </div>
+                <div class="almn-nav--link">
+                    <a href="/?category=music"><i class="fas fa-headphones"></i></a>
+                </div>
+                <div class="almn-nav--link">
+                    <a href="/?category=book"><i class="fas fa-book" data-fa-transform="shrink-3"></i></a>
+                </div>
+                <div class="almn-nav--link">
+                    <a href="/?category=podcast"><i class="fas fa-podcast"></i></a>
+                </div>
+                <div class="almn-nav--link">
+                    <a href="/?category=video"><i class="fas fa-video"></i></a>
+                </div>
+                <div class="almn-nav--link">
+                    <a href="/?category=quote"><i class="fas fa-quote-left"></i></a>
+                </div>
+            </nav>
+            <div class="alm-posts">
+                @yield('content')
+            </div>
+            <div class="almn-footer">
+                Powered by <a href="https://code.rknight.me/almanac">Almanac</a>@if (env('WEBSITE')) | <a href="{{ env('WEBSITE') }}">{{ env('WEBSITE_TITLE', env('WEBSITE')) }}</a> @endif
+            </div>
+        </div>
 
 		<script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js"></script>
 		<script>
