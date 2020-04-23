@@ -62,7 +62,7 @@
             @if ($post->link)
                 <p class="almn-post--footer--link">
                     <a href="{{ $post->link }}" title="Post Source" target="_blank">
-                        <i class="fas fa-link" data-fa-transform="shrink-2"></i> {{ str_replace('www.', '', parse_url( $post->link )['host']) }}
+                        <i class="fas fa-link" data-fa-transform="shrink-2"></i> {{ str_replace('www.', '', parse_url($post->link)['host'] ?? $post->link) }}
                     </a>
                 </p>
             @endif
