@@ -18,14 +18,12 @@ a {
 	}
 }
 
-.almn-admin {
-	position: absolute;
-	top: 15px;
-	right: 15px;
-	z-index: 1;
-	background: white;
-	padding: 10px;
-	border: 1px solid $border-color;
+iframe {
+    max-width: 100%;
+}
+
+blockquote {
+    font-style: italic;
 }
 
 .almn-page {
@@ -147,14 +145,6 @@ a {
 	padding: 25px;
 	text-align: center;
 	font-size: 14px;
-}
-
-iframe {
-	max-width: 100%;
-}
-
-blockquote {
-	font-style: italic;
 }
 
 @import "posts";

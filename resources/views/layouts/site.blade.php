@@ -20,15 +20,6 @@
 		@endif
 	</head>
 	<body>
-
-		@if (Auth::user())
-			<div class="almn-admin">
-				<a href="/app" target="_blank">
-					Admin <i class="fas fa-cog"></i>
-				</a>
-			</div>
-		@endif
-
 		<div class="almn-page">
 			<div class="almn-sidebar-wrap">
 				<div class="almn-sidebar">
