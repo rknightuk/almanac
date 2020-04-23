@@ -13,19 +13,6 @@ class LetterboxdFetcher {
 
     const FEED = 'https://letterboxd.com/rknightuk/rss/';
 
-    const RATINGS = [
-        '½' => 0,
-        '★' => 0,
-        '★½' => 0,
-        '★★' => 0,
-        '★★½' => 0,
-        '★★★' => 1,
-        '★★★½' => 2,
-        '★★★★' => 2,
-        '★★★★½' => 2,
-        '★★★★★' => 2,
-    ];
-
     /**
      * @var PathGenerator
      */
@@ -89,7 +76,7 @@ class LetterboxdFetcher {
             'title' => $title,
             'content' => $this->extractReview((string) $item->description),
             'link' => $link = (string) $item->link,
-            'rating' => self::RATINGS[$rating] ?? 2,
+            'rating' => $rating,
             'year' => (string) $item->{'letterboxd:filmYear'},
             'spoilers' => $hasSpoilers,
             'published' => true,
