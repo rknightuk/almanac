@@ -17,10 +17,15 @@ class LetterboxdFetcher {
      * @var PathGenerator
      */
     private $pathGenerator;
+    /**
+     * @var AutoTagger
+     */
+    private $autoTagger;
 
-    public function __construct(PathGenerator $pathGenerator)
+    public function __construct(PathGenerator $pathGenerator, AutoTagger $autoTagger)
     {
         $this->pathGenerator = $pathGenerator;
+        $this->autoTagger = $autoTagger;
     }
 
     public function run()
@@ -70,7 +75,7 @@ class LetterboxdFetcher {
         $title = (string) $item->{'letterboxd:filmTitle'};
         $path = $this->makePath($title, $date);
 
-        Post::create([
+        $post = Post::create([
             'type' => PostType::MOVIE,
             'path' => $path,
             'title' => $title,
@@ -84,6 +89,8 @@ class LetterboxdFetcher {
             'date_completed' => $date,
             'remote_id' => $remoteId = (string) $item->guid,
         ]);
+
+        $this->autoTagger->tag($post);
     }
 
     private function extractReview(string $rawReview): ?string
