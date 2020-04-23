@@ -77,13 +77,6 @@
 					>
 						<i class="fas fa-sync"></i>
 					</a>
-					<a
-						href="https://twitter.com/intent/tweet?url={{env('APP_URL') . $post->permalink}}&text={{$post->title}}"
-						target="_blank"
-						title="Share to Twitter"
-					>
-						<i class="fab fa-twitter"></i>
-					</a>
 				@endif
 				@if ($post->link)
 					<a href="{{ $post->link }}" title="Post Source">

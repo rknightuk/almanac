@@ -51,6 +51,12 @@ class Post extends Model
 	    'backdrop',
     ];
 
+    const RATINGS = [
+        0 => '&#9733;&#9734;&#9734;',
+        1 => '&#9733;&#9733;&#9734;',
+        2 => '&#9733;&#9733;&#9733;'
+    ];
+
     public function isType(string $type): bool
     {
     	return $this->type === $type;
@@ -145,7 +151,11 @@ class Post extends Model
 
 	public function getSubtitleOutputAttribute()
 	{
-		if (!$this->subtitle && !$this->season && !$this->platform) return null;
+        $rating = self::RATINGS[$this->rating];
+
+		if (!$this->subtitle && !$this->season && !$this->platform) {
+		    return $rating;
+        }
 
 		$parts = [];
 
@@ -153,7 +163,7 @@ class Post extends Model
 		if ($this->platform) $parts[] = sprintf('<a href="/?platform=%s">%s</a>', strtolower($this->platform), $this->platform);
 		if ($this->season) $parts[] = $this->season_string;
 
-		return implode(' | ', $parts);
+		return count($parts) > 0 ? $rating . ' ' . implode(' | ', $parts) : $rating;
 	}
 
 	public function getFuturePosts()

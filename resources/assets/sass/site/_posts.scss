@@ -3,11 +3,9 @@ $spoiler-color: #383838;
 
 .almn-post {
 	position: relative;
-	padding: 25px;
+    padding: 15px 25px;
 	background: $background-post;
 	color: $text-color;
-	border: 1px solid $border-color;
-	border-left: 2px solid;
 	margin: 0 auto;
 	margin-bottom: 25px;
 
@@ -24,54 +22,20 @@ $spoiler-color: #383838;
 		margin-bottom: 0;
 	}
 
-	&__default {
-		border-left-color: $text-color;
-	}
-
-	&__bad {
-		border-left-color: $bad-color;
-	}
-
-	&__fine {
-		border-left-color: $fine-color;
-	}
-
-	&__good {
-		border-left-color: $good-color;
-	}
-
 	&--icon {
 		position: absolute;
 		width: 12px;
 		height: 12px;
 		background: white;
 		padding: 7px;
-		top: 25px;
-		right: 25px;
+		top: 10px;
+		right: 15px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		border: 2px solid #d8d8d8;
-		color: #d8d8d8;
+        color: $light-text-color;
+		//color: #d8d8d8;
 		font-size: 14px;
-		&__default {
-			border-color: $text-color;
-			color: $text-color;
-		}
-		&__bad {
-			border-color: $bad-color;
-			color: $bad-color;
-		}
-
-		&__fine {
-			border-color: $fine-color;
-			color: $fine-color;
-		}
-
-		&__good {
-			border-color: $good-color;
-			color: $good-color;
-		}
 		&:hover {
 			color: $primary-color;
 			border-color: $primary-color;
@@ -88,7 +52,6 @@ $spoiler-color: #383838;
 			&__quote {
 				font-size: 20px;
 				margin-top: -10px;
-				margin-left: -15px;
 				color: $lighter-text-color;
 			}
 			&__meta {
