@@ -14,7 +14,7 @@
 
 		@if (isset($singlePost))
 			<meta name="twitter:card" content="summary">
-			<meta name="twitter:site" content="@rmlewisuk">
+			<meta name="twitter:site" content="@rknightuk">
 			<meta name="twitter:title" content="{{ $singlePost->title }}">
 			<meta name="twitter:description" content="{{ $singlePost->twitter_preview }}">
 		@endif
@@ -28,9 +28,6 @@
 				</a>
 			</div>
 		@endif
-
-		<div class="almn-header">
-		</div>
 
 		<div class="almn-page">
 			<div class="almn-sidebar-wrap">
