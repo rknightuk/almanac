@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 
 class PostRepository {
 
-	const PER_PAGE = 25;
+	const PER_PAGE = 50;
 
 	public function paginate(PostQuery $query = null): LengthAwarePaginator
 	{

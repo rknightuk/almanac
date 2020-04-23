@@ -6,7 +6,7 @@ body {
 	background: $background;
 	font-family: "Montserrat", sans-serif;
 	padding: 0;
-	margin: 0;
+	margin: 0 5px;
 }
 
 a {
@@ -76,6 +76,20 @@ blockquote {
 	padding: 25px;
 	text-align: center;
 	font-size: 14px;
+}
+
+.almn-search {
+    max-width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    &--input {
+        font-size: 16px;
+        width: 250px;
+        background: none;
+        border: none;
+        border-bottom: 1px solid $border-color;
+        padding: 10px;
+    }
 }
 
 @import "posts";
