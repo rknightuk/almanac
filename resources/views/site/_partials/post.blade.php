@@ -67,7 +67,7 @@
                 </p>
             @endif
 		</div>
-		@if ($post->link || Auth::user())
+		@if (Auth::user())
 			<div class="almn-post--footer--links @if (Auth::user()) almn-post--footer--manage--links @endif">
 				@if (Auth::user())
 					<a
@@ -83,11 +83,6 @@
 						title="Rewatch"
 					>
 						<i class="fas fa-sync"></i>
-					</a>
-				@endif
-				@if ($post->link)
-					<a href="{{ $post->link }}" title="Post Source">
-						<i class="fas fa-link"></i>
 					</a>
 				@endif
 			</div>
