@@ -8,6 +8,7 @@ $spoiler-color: #383838;
 	color: $text-color;
 	margin: 0 auto;
 	margin-bottom: 25px;
+    border-left: 1px solid $primary-color;
 
 	&__related {
 		padding: 15px 25px;
@@ -141,16 +142,17 @@ $spoiler-color: #383838;
 		align-items: center;
 		color: $lighter-text-color;
 		font-size: 12px;
-		margin-top: 10px;
-		font-weight: bold;
+		margin-top: 5px;
 		&--date {
 			flex: 1;
 			&--rewatched {
-				font-size: 14px;
-				margin-left: 5px;
+				font-size: 12px;
 				color: #d8d8d8;
 			}
 		}
+        &--link {
+            margin-top: 5px;
+        }
 		&--links {
 			flex: 1;
 			max-width: 120px;
@@ -159,24 +161,6 @@ $spoiler-color: #383838;
 			display: flex;
 			& a {
 				flex: 1;
-			}
-		}
-		&--manage {
-			@media (max-width: 380px) {
-				flex-direction: column;
-				align-items: unset;
-			}
-			&--links {
-				@media (max-width: 380px) {
-					margin-top: 10px;
-					max-width: 100%;
-					width: 100%;
-				}
-				& a {
-					@media (max-width: 380px) {
-						text-align: center;
-					}
-				}
 			}
 		}
 	}

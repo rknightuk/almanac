@@ -52,13 +52,20 @@
 	<footer class="almn-post--footer @if (Auth::user()) almn-post--footer--manage @endif">
 		<div class="almn-post--footer--date">
 			<a href="{{ $post->permalink }}">
-				{{ $post->date_completed->format('jS F Y') }}
+                {{ $post->date_completed->format('jS F Y') }}
 				@if ($post->related_count > 1 && $post->shouldShowCount())
 					<span class="almn-post--footer--date--rewatched">
-						<i class="fas fa-sync"></i>
+						<i class="fas fa-sync" data-fa-transform="shrink-2"></i>
 					</span>
 				@endif
 			</a>
+            @if ($post->link)
+                <p class="almn-post--footer--link">
+                    <a href="{{ $post->link }}" title="Post Source" target="_blank">
+                        <i class="fas fa-link" data-fa-transform="shrink-2"></i> {{ str_replace('www.', '', parse_url( $post->link )['host']) }}
+                    </a>
+                </p>
+            @endif
 		</div>
 		@if ($post->link || Auth::user())
 			<div class="almn-post--footer--links @if (Auth::user()) almn-post--footer--manage--links @endif">
