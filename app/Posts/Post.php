@@ -83,10 +83,6 @@ class Post extends Model
 		return $this->type === 'music';
 	}
 
-    public function getDateCompletedAttribute($value) {
-        return Carbon::parse($value)->format('c');
-    }
-
 	protected function getHtmlAttribute()
 	{
 		return (app(ContentManager::class))->convertToHtml($this);
