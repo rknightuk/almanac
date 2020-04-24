@@ -3,6 +3,7 @@
 namespace Almanac\Posts;
 
 use Almanac\NumberToAdjective;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Jonnybarnes\CommonmarkLinkify\LinkifyExtension;
@@ -81,6 +82,10 @@ class Post extends Model
 	{
 		return $this->type === 'music';
 	}
+
+    public function getDateCompletedAttribute($value) {
+        return Carbon::parse($value)->format('c');
+    }
 
 	protected function getHtmlAttribute()
 	{

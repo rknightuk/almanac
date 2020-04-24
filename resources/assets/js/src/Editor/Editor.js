@@ -44,6 +44,7 @@ type State = {
 	pathManuallyChanged: boolean,
 	showPreview: boolean,
 	showSearch: boolean,
+    cachedDate: ?moment,
 }
 
 class Editor extends Component<Props, State> {
@@ -73,6 +74,7 @@ class Editor extends Component<Props, State> {
 			poster: null,
 			backdrop: null,
 		},
+        cachedDate: this.props.post ? this.props.post.date_completed : null,
 		deleting: false,
 		pathManuallyChanged: false,
 		showPreview: false,
@@ -234,7 +236,7 @@ class Editor extends Component<Props, State> {
 							<DatePicker
 								format="DD-MM-YYYY"
 								value={moment(post.date_completed).format('DD-MM-YYYY')}
-								onDayChange={v => this.updatePost('date_completed', moment(v))}
+								onDayChange={this.updateDate}
 								formatDate={formatDate}
 								parseDate={parseDate}
 							/>
@@ -410,6 +412,14 @@ class Editor extends Component<Props, State> {
 			pathManuallyChanged,
 		}))
 	}
+
+    updateDate = (date: moment) => {
+        const formattedDate = moment(date).format('YYYY/MM/DD')
+        const time = this.state.cachedDate ? this.state.cachedDate : moment.utc()
+        const datetime = formattedDate + ' ' + time.get('hour') + ':' + time.get('minute')
+        const format = 'YYYY/MM/DD HH:mm'
+	    this.updatePost('date_completed', moment.utc(datetime, format))
+    }
 
 	shouldGeneratePath = () => {
 		return !this.props.post && !this.state.pathManuallyChanged

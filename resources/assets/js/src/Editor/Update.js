@@ -45,7 +45,7 @@ class Update extends Component<Props, State> {
 
 	fetchPost = async () => {
 		const response = await axios.get(`/api/posts/${this.props.match.params.id}`)
-		
+
 		if (response.data === '') {
 			this.setState({
 				notFound: true,
@@ -60,7 +60,7 @@ class Update extends Component<Props, State> {
 				content: {
 					text: response.data.content,
 				},
-				date_completed: moment(response.data.date_completed),
+				date_completed: moment.utc(response.data.date_completed),
 				tags: response.data.tags.map(t => t.name.en),
 			},
 			loading: false,
