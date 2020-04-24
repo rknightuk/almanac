@@ -35,11 +35,16 @@
 		@endif
 	</div>
 
-	@if ($post->html && !$post->isQuote())
-		<div class="almn-post--content">
-			{!! $post->html !!}
-		</div>
-	@endif
+    <div class="almn-post--content">
+        @if ($post->html && !$post->isQuote())
+            {!! $post->html !!}
+        @endif
+        @if (count($post->attachments) > 0)
+            @foreach ($post->attachments as $index => $attachment)
+                <img src="{{ $attachment->filename }}" />
+            @endforeach
+        @endif
+    </div>
 
 	@if ($post->hasTags())
 		<div class="almn-post--tags">
