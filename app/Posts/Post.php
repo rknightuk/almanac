@@ -75,12 +75,12 @@ class Post extends Model
 
 	public function isQuote(): bool
 	{
-		return $this->type === 'quote';
+		return $this->type === PostType::QUOTE;
 	}
 
 	public function isMusic(): bool
 	{
-		return $this->type === 'music';
+		return $this->type === PostType::MUSIC;
 	}
 
 	protected function getHtmlAttribute()
@@ -97,52 +97,14 @@ class Post extends Model
 		);
 	}
 
-    public function getRatingStringAttribute()
-    {
-    	switch ($this->rating) {
-		    case 0: return 'bad';
-		    case 1: return 'fine';
-		    case 2: return 'good';
-	    }
-    }
-
     public function getIconAttribute()
     {
-	    switch ($this->type) {
-		    case 'movie': return 'film';
-		    case 'tv': return 'tv';
-		    case 'game': return 'gamepad';
-		    case 'music': return 'headphones';
-		    case 'book': return 'book';
-		    case 'podcast': return 'podcast';
-		    case 'video': return 'video';
-		    case 'quote': return 'quote-left';
-	    }
+        return PostType::ICONS[$this->type];
     }
 
 	public function getVerbAttribute()
 	{
-		switch ($this->type) {
-			case 'movie':
-			case 'tv':
-			case 'video':
-				return 'watched';
-			case 'game': return 'played';
-			case 'music':
-			case 'podcast':
-				return 'listened';
-			case 'book': return 'read';
-			case 'quote': return '';
-		}
-	}
-
-	public function getSeasonStringAttribute()
-	{
-		if (!$this->season) return '';
-
-		if ($this->type === 'book') return $this->season;
-
-		return 'Season' . ' ' . $this->season;
+        return PostType::VERBS[$this->type];
 	}
 
 	public function getRelatedCountAttribute()
@@ -162,7 +124,9 @@ class Post extends Model
 
 		if ($this->subtitle) $parts[] = $this->subtitle;
 		if ($this->platform) $parts[] = sprintf('<a href="/?platform=%s">%s</a>', strtolower($this->platform), $this->platform);
-		if ($this->season) $parts[] = $this->season_string;
+		if ($this->season && $this->season !== '') {
+		    $parts[] = $this->type === PostType::BOOK ? $this->season : 'Season' . ' ' . $this->season;
+        }
 
 		return count($parts) > 0 ? $rating . ' ' . implode(' | ', $parts) : $rating;
 	}

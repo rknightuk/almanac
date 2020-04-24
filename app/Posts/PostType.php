@@ -13,4 +13,35 @@ class PostType {
 	const VIDEO = 'video';
 	const QUOTE = 'quote';
 
+    const MOVIE_ICON = 'film';
+    const TV_ICON = 'tv';
+    const GAME_ICON = 'gamepad';
+    const MUSIC_ICON = 'headphones';
+    const BOOK_ICON = 'book';
+    const PODCAST_ICON = 'podcast';
+    const VIDEO_ICON = 'video';
+    const QUOTE_ICON = 'quote-left';
+
+	const ICONS = [
+        PostType::MOVIE => self::MOVIE_ICON,
+        PostType::TV => self::TV_ICON,
+        PostType::GAME => self::GAME_ICON,
+        PostType::MUSIC => self::MUSIC_ICON,
+        PostType::BOOK => self::BOOK_ICON,
+        PostType::PODCAST => self::PODCAST_ICON,
+        PostType::VIDEO => self::VIDEO_ICON,
+        PostType::QUOTE => self::QUOTE_ICON,
+    ];
+
+    const VERBS = [
+        PostType::MOVIE => 'watched',
+        PostType::TV => 'watched',
+        PostType::GAME => 'played',
+        PostType::MUSIC => 'listened',
+        PostType::BOOK => 'read',
+        PostType::PODCAST => 'listened',
+        PostType::VIDEO => 'watched',
+        PostType::QUOTE => '',
+    ];
+
 }

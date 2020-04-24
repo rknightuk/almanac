@@ -5,10 +5,10 @@
 	])
 @endif
 
-<div class="almn-post almn-post__{{ $post->rating_string }}">
+<div class="almn-post">
 	<a
 			href="/?category={{ strtolower($post->type) }}"
-			class="almn-post--icon almn-post--icon__{{ $post->rating_string }}"
+			class="almn-post--icon"
 	>
 		<i class="fas fa-{{ $post->icon }}" @if(in_array($post->icon, ['tv', 'book'])) data-fa-transform="shrink-3" @endif></i>
 	</a>
