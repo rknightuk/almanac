@@ -86,4 +86,13 @@ class PostRepository {
 	{
 		return Post::orderBy('date_completed', 'desc');
 	}
+
+    public function findExisting(Post $post): ?Post
+    {
+        return Post::where('title', $post->title)
+            ->where('type', $post->type)
+            ->where('year', $post->year)
+            ->where('id', '!=', $post->id)
+            ->first();
+    }
 }

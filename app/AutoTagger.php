@@ -3,6 +3,7 @@
 namespace Almanac;
 
 use Almanac\Posts\Post;
+use Almanac\Posts\PostRepository;
 
 class AutoTagger {
 
@@ -90,9 +91,25 @@ class AutoTagger {
             'tags' => ['Fast and Furious'],
         ],
     ];
+    /**
+     * @var PostRepository
+     */
+    private $posts;
+
+    public function __construct(PostRepository $posts)
+    {
+        $this->posts = $posts;
+    }
 
     public function tag(Post $post)
     {
+        $existing = $this->posts->findExisting($post);
+
+        if ($existing) {
+            $post->attachTags($existing->tags);
+            return;
+        }
+
         foreach (self::TITLES as $title) {
             if (in_array($post->title, $title['title'])) {
                 $post->attachTags($title['tags']);
