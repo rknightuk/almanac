@@ -2,16 +2,11 @@
 
 namespace Almanac\Posts;
 
+use Almanac\Attachment;
 use Almanac\NumberToAdjective;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Jonnybarnes\CommonmarkLinkify\LinkifyExtension;
-use League\CommonMark\Converter;
-use League\CommonMark\DocParser;
-use League\CommonMark\Environment;
-use League\CommonMark\HtmlRenderer;
-use MediaEmbed\MediaEmbed;
 use Spatie\Tags\HasTags;
 
 class Post extends Model
@@ -57,6 +52,11 @@ class Post extends Model
         1 => '&#9733;&#9733;&#9734;',
         2 => '&#9733;&#9733;&#9733;'
     ];
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(Attachment::class);
+    }
 
     public function isType(string $type): bool
     {

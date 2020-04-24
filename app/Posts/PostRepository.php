@@ -42,7 +42,7 @@ class PostRepository {
 
 	public function one(PostQuery $query): ?Post
 	{
-		$db = Post::with('tags');
+		$db = Post::with('tags', 'attachments');
 
 		if ($query->id) $db->where('id', $query->id);
 		if ($query->year) $db->whereYear('date_completed', $query->year);
@@ -84,7 +84,7 @@ class PostRepository {
 
 	private function baseQuery(): Builder
 	{
-		return Post::orderBy('date_completed', 'desc');
+		return Post::with('tags', 'attachments')->orderBy('date_completed', 'desc');
 	}
 
     public function findExisting(Post $post): ?Post
