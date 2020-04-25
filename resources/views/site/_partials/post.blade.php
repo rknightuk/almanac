@@ -35,67 +35,64 @@
 		@endif
 	</div>
 
-    <div class="almn-post--content">
-        @if ($post->html && !$post->isQuote())
-            {!! $post->html !!}
-        @endif
-        @if (count($post->attachments) > 0)
-            @foreach ($post->attachments as $index => $attachment)
-                <img src="{{ $attachment->filename }}" />
-            @endforeach
-        @endif
-    </div>
+    @if (($post->html && !$post->isQuote()) || count($post->attachments) > 0)
+        <div class="almn-post--content">
+            @if ($post->html && !$post->isQuote())
+                {!! $post->html !!}
+            @endif
+            @if (count($post->attachments) > 0)
+                @foreach ($post->attachments as $index => $attachment)
+                    <img src="{{ $attachment->filename }}" />
+                @endforeach
+            @endif
+        </div>
+    @endif
 
-	@if ($post->hasTags())
-		<div class="almn-post--tags">
-			@foreach ($post->tags->sortBy('name') as $tag)
-				<a class="almn-post--tags--tag" href="/?tags[]={{ $tag->name }}">{{ $tag->name }}</a>
-			@endforeach
-		</div>
-	@endif
-
-	<footer class="almn-post--footer @if (Auth::user()) almn-post--footer--manage @endif">
-		<div class="almn-post--footer--date">
-			<a href="{{ $post->permalink }}">
-                {{ $post->date_completed->format('jS F Y') }}
-				@if ($post->related_count > 1 && $post->shouldShowCount())
-					<span class="almn-post--footer--date--rewatched">
+	<footer class="almn-post--footer">
+        <div class="almn-post--footer--row">
+            <div class="almn-post--footer--date">
+                <a href="{{ $post->permalink }}">
+                    {{ $post->date_completed->format('jS F Y') }}
+                    @if ($post->related_count > 1 && $post->shouldShowCount())
+                        <span class="almn-post--footer--date--rewatched">
 						<i class="fas fa-sync" data-fa-transform="shrink-2"></i>
 					</span>
-				@endif
-			</a>
-            @if ($post->link)
-                <p class="almn-post--footer--link">
-                    <a href="{{ $post->link }}" title="Post Source" target="_blank">
-                        <i class="fas fa-link" data-fa-transform="shrink-2"></i> {{ str_replace('www.', '', parse_url($post->link)['host'] ?? $post->link) }}
+                    @endif
+                </a>
+            </div>
+            <div class="almn-post--footer--tags">
+                @if ($post->link)
+                    <a href="{{ $post->link }}" target="_blank">
+                        {{ str_replace('www.', '', parse_url($post->link)['host'] ?? $post->link) }}
                     </a>
-                </p>
-            @endif
-		</div>
-		@if (Auth::user())
-			<div class="almn-post--footer--links @if (Auth::user()) almn-post--footer--manage--links @endif">
-				@if (Auth::user())
-					<a
-							href="/app/posts/{{$post->id}}"
-							target="_blank"
-							title="Edit Post"
-					>
-						<i class="fas fa-edit"></i>
-					</a>
-					<a
-						href="/app/new/{{$post->type}}/{{$post->id}}"
-						target="_blank"
-						title="Rewatch"
-					>
-						<i class="fas fa-sync"></i>
-					</a>
-				@endif
-			</div>
-		@endif
+                @endif
+                @foreach ($post->tags->sortBy('name') as $tag)
+                    <a href="/?tags[]={{ $tag->name }}">#{{ str_replace(' ', '', $tag->name) }}</a>
+                @endforeach
+                @if (Auth::user())
+                    <div class="almn-post--footer--tags--admin">
+                        <a
+                            href="/app/posts/{{$post->id}}"
+                            target="_blank"
+                            title="Edit Post"
+                        >
+                            <i class="fas fa-edit" data-fa-transform="shrink-2"></i>
+                        </a>
+                        <a
+                            href="/app/new/{{$post->type}}/{{$post->id}}"
+                            target="_blank"
+                            title="Rewatch"
+                        >
+                            <i class="fas fa-sync" data-fa-transform="shrink-2"></i>
+                        </a>
+                    </div>
+                @endif
+            </div>
+        </div>
 	</footer>
 </div>
 
-@if (isset($showRelated) && $showRelated)
+@if (isset($singlePost) && $singlePost)
 	@include('site._partials.related', [
 		'related' => $post->getPreviousPosts(),
 		'type' => 'previous',

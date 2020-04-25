@@ -3,7 +3,7 @@ $spoiler-color: #383838;
 
 .almn-post {
 	position: relative;
-    padding: 15px 25px;
+    padding: 15px 20px;
 	background: $background-post;
 	color: $text-color;
 	margin: 0 auto;
@@ -11,7 +11,7 @@ $spoiler-color: #383838;
     border-left: 1px solid $primary-color;
 
 	&__related {
-		padding: 15px 25px;
+		padding: 15px 20px;
 		margin-bottom: 15px;
 
 		&--first-previous {
@@ -138,11 +138,17 @@ $spoiler-color: #383838;
 		}
 	}
 	&--footer {
-		display: flex;
+		//display: flex;
 		align-items: center;
 		color: $lighter-text-color;
 		font-size: 12px;
 		margin-top: 5px;
+        &--row {
+            display: flex;
+            @media (max-width: 555px) {
+                flex-direction: column;
+            }
+        }
 		&--date {
 			flex: 1;
 			&--rewatched {
@@ -150,18 +156,22 @@ $spoiler-color: #383838;
 				color: #d8d8d8;
 			}
 		}
-        &--link {
-            margin-top: 5px;
+        &--tags {
+            flex: 1;
+            text-align: right;
+            &--admin {
+                display: inline;
+                @media (max-width: 555px) {
+                    float: right;
+                }
+            }
+            @media (max-width: 555px) {
+                margin-top: 5px;
+                text-align: left;
+            }
         }
-		&--links {
-			flex: 1;
-            max-width: 70px;
-			text-align: right;
-			font-size: 14px;
-			display: flex;
-			& a {
-				flex: 1;
-			}
-		}
+        &--link {
+            flex: 1;
+        }
 	}
 }
