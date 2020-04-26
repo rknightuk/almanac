@@ -113,6 +113,32 @@ $spoiler-color: #383838;
 			}
 		}
 	}
+    &--attachments {
+        &--main {
+
+        }
+        &--grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            &--single {
+                box-sizing: border-box;
+                display: flex;
+                justify-content: center;
+                padding-right: 5px;
+                height: 130px;
+                margin-bottom: 5px;
+                & a {
+                    display: inline-flex;
+                }
+                & img {
+                    object-fit: cover;
+                }
+                &:nth-child(4n) {
+                    padding-right: 0;
+                }
+            }
+        }
+    }
 	&--tags {
 		padding: 10px 0;
 		display: flex;
@@ -138,7 +164,6 @@ $spoiler-color: #383838;
 		}
 	}
 	&--footer {
-		//display: flex;
 		align-items: center;
 		color: $lighter-text-color;
 		font-size: 12px;
