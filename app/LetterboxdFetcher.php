@@ -66,7 +66,7 @@ class LetterboxdFetcher {
         if ($rawRating === 5) {
             $rating = 2;
         }
-        else if ($rawRating > 3 && $rawRating < 5) {
+        else if ($rawRating >= 3 && $rawRating < 5) {
             $rating = 1;
         } else {
             $rating = 0;
