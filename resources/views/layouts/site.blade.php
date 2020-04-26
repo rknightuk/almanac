@@ -88,6 +88,19 @@
 						e.currentTarget.className += ' almn-post--content__spoiler--show'
 					}, false);
 				}
+
+				var images = document.getElementsByClassName('almn-post--attachments--grid--single--link');
+
+				for (var i = 0; i < images.length; i++) {
+					var image = images[i]
+					image.addEventListener('click', function(e) {
+						e.preventDefault()
+						var postId = e.currentTarget.dataset.postId
+						var imageLink = e.currentTarget.children[0].src
+						document.getElementById('gallery-' + postId).href = imageLink
+						document.getElementById('gallery-' + postId).children[0].src = imageLink
+					}, false);
+				}
 			})();
 		</script>
 	</body>

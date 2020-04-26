@@ -43,7 +43,7 @@
                 @if (count($post->attachments) > 0)
                     <div class="almn-post--attachments">
                         <div class="almn-post--attachments--main">
-                            <a href="{{ $post->attachments[0]->filename }}" target="_blank">
+                            <a href="{{ $post->attachments[0]->filename }}" target="_blank" id="gallery-{{ $post->id }}">
                                 <img src="{{ $post->attachments[0]->filename }}" />
                             </a>
                         </div>
@@ -51,7 +51,7 @@
                             <div class="almn-post--attachments--grid">
                                 @foreach ($post->attachments as $index => $attachment)
                                     <div class="almn-post--attachments--grid--single">
-                                        <a href="{{ $attachment->filename }}" target="_blank">
+                                        <a class="almn-post--attachments--grid--single--link" data-post-id="{{ $post->id }}" href="{{ $attachment->filename }}" target="_blank">
                                             <img src="{{ $attachment->filename }}" />
                                         </a>
                                     </div>
