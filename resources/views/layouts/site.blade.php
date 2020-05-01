@@ -5,6 +5,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <head>
+            <script src="https://kit.fontawesome.com/4faa09972b.js" crossorigin="anonymous"></script>
+        </head>
+
 		<title>@if (isset($singlePost)) {{ $singlePost->title }} - @endif{{ env('SITE_TITLE', 'Almanac') }}</title>
 
 		<!-- Styles -->
@@ -45,7 +49,7 @@
                     <a href="/?category=movie"><i class="fas fa-film"></i></a>
                 </div>
                 <div class="almn-nav--link">
-                    <a href="/?category=tv"><i class="fas fa-tv" data-fa-transform="shrink-3"></i></a>
+                    <a href="/?category=tv"><i class="fas fa-tv-retro" data-fa-transform="shrink-3"></i></a>
                 </div>
                 <div class="almn-nav--link">
                     <a href="/?category=game"><i class="fas fa-gamepad"></i></a>
@@ -77,7 +81,6 @@
             </div>
         </div>
 
-		<script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js"></script>
 		<script>
 			(function() {
 				var spoilers = document.getElementsByClassName("almn-post--content__spoiler");

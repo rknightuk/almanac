@@ -14,7 +14,7 @@ class PostType {
 	const QUOTE = 'quote';
 
     const MOVIE_ICON = 'film';
-    const TV_ICON = 'tv';
+    const TV_ICON = 'tv-retro';
     const GAME_ICON = 'gamepad';
     const MUSIC_ICON = 'headphones';
     const BOOK_ICON = 'book';

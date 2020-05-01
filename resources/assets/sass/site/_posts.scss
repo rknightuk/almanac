@@ -3,12 +3,21 @@ $spoiler-color: #383838;
 
 .almn-post {
 	position: relative;
-    padding: 15px 20px;
+    padding: 15px 20px 15px 25px;
 	background: $background-post;
 	color: $text-color;
 	margin: 0 auto;
     margin-bottom: 20px;
     border-left: 1px solid $primary-color;
+    &--movie { border-left-color: $type-movie; }
+    &--tv { border-left-color: $type-tv; }
+    &--game { border-left-color: $type-game; }
+    &--music { border-left-color: $type-music; }
+    &--podcast { border-left-color: $type-podcast; }
+    &--book { border-left-color: $type-book; }
+    &--video { border-left-color: $type-video; }
+    &--text { border-left-color: $type-text; }
+    &--quote { border-left-color: $type-quote; }
 
 	&__related {
 		padding: 15px 20px;
@@ -25,23 +34,33 @@ $spoiler-color: #383838;
 
 	&--icon {
 		position: absolute;
-		width: 12px;
-		height: 12px;
-		background: white;
+        width: 20px;
+        height: 20px;
 		padding: 7px;
-		top: 10px;
-		right: 15px;
+        top: 13px;
+        left: -17px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-        color: $light-text-color;
-		//color: #d8d8d8;
-		font-size: 14px;
+        font-size: 15px;
+        color: white;
+        border-radius: 36px;
+        background: $primary-color; // todo
 		&:hover {
-			color: $primary-color;
-			border-color: $primary-color;
+			color: white;
+			background: black;
 		}
-	}
+        &--movie { background: $type-movie; }
+        &--tv { background: $type-tv; }
+        &--game { background: $type-game; }
+        &--music { background: $type-music; }
+        &--podcast { background: $type-podcast; }
+        &--book { background: $type-book; }
+        &--video { background: $type-video; }
+        &--text { background: $type-text; }
+        &--quote { background: $type-quote; }
+
+    }
 
 	&--titles {
 		margin-right: 30px;

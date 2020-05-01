@@ -5,12 +5,12 @@
 	])
 @endif
 
-<div class="almn-post">
+<div class="almn-post almn-post--{{ strtolower($post->type) }}">
 	<a
 			href="/?category={{ strtolower($post->type) }}"
-			class="almn-post--icon"
+			class="almn-post--icon almn-post--icon--{{ strtolower($post->type) }}"
 	>
-		<i class="fas fa-{{ $post->icon }}" @if(in_array($post->icon, ['tv', 'book'])) data-fa-transform="shrink-3" @endif></i>
+		<i class="fas fa-{{ $post->icon }}" @if(in_array($post->icon, ['tv', 'book', 'video', 'quote'])) data-fa-transform="shrink-3" @endif></i>
 	</a>
 	<div class="almn-post--titles">
 		<div class="almn-post--titles--main">
