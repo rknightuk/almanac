@@ -6,13 +6,13 @@
         margin-right: 20px;
         &:hover {
             cursor: pointer;
-            color: #f7ca18;
+            color: $rating-color;
         }
         &--selected {
-            color: #f7ca18;
+            color: $rating-color;
         }
         &--unselected {
-            color: #acacac;
+            color: $rating-color-light;
         }
     }
 }

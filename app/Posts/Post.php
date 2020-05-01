@@ -47,10 +47,13 @@ class Post extends Model
 	    'backdrop',
     ];
 
+    const STAR_SELECTED = '<span class="almn-post--titles--sub--rating--selected">&#9733;</span>';
+    const STAR_UNSELECTED = '<span class="almn-post--titles--sub--rating">&#9733;</span>';
+
     const RATINGS = [
-        0 => '&#9733;&#9734;&#9734;',
-        1 => '&#9733;&#9733;&#9734;',
-        2 => '&#9733;&#9733;&#9733;'
+        1 => self::STAR_SELECTED . self::STAR_UNSELECTED . self::STAR_UNSELECTED,
+        2 => self::STAR_SELECTED . self::STAR_SELECTED . self::STAR_UNSELECTED,
+        3 => self::STAR_SELECTED . self::STAR_SELECTED . self::STAR_SELECTED,
     ];
 
     public function attachments(): HasMany

@@ -91,6 +91,12 @@ $spoiler-color: #383838;
 		&--sub {
 			color: $light-text-color;
 			font-size: 14px;
+            &--rating {
+                color: $rating-color-light;
+                &--selected {
+                    color: $rating-color;
+                }
+            }
 		}
 	}
 	&--content {
