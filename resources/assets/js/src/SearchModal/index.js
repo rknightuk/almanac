@@ -67,7 +67,7 @@ class SearchModal extends Component<Props, State> {
 					/>
 				</div>
 
-				{this.state.results.map((r, i) => (
+				{this.state.results.map((r: SearchResult, i) => (
 					<div
 						key={i}
 						style={{

@@ -37,4 +37,5 @@ export type SearchResult = {
 	year: number,
 	poster: ?string,
 	backdrop: ?string,
+    meta: ?string,
 }
