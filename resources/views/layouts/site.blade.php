@@ -5,9 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <head>
-            <script src="https://kit.fontawesome.com/4faa09972b.js" crossorigin="anonymous"></script>
-        </head>
+        <script src="https://kit.fontawesome.com/4faa09972b.js" crossorigin="anonymous"></script>
 
 		<title>@if (isset($singlePost)) {{ $singlePost->title }} - @endif{{ env('SITE_TITLE', 'Almanac') }}</title>
 

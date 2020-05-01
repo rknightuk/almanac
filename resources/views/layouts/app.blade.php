@@ -14,6 +14,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="{{ asset('apple-touch-icon.png') }}">
+
+    <script src="https://kit.fontawesome.com/4faa09972b.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="app">
@@ -82,6 +84,5 @@
         @endif
     </script>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js"></script>
 </body>
 </html>

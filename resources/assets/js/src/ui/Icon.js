@@ -11,7 +11,7 @@ type Props = {
 
 const ICONS = {
 	'movie': 'film',
-	'tv': 'tv',
+	'tv': 'tv-retro',
 	'game': 'gamepad',
 	'music': 'headphones',
 	'book': 'book',
