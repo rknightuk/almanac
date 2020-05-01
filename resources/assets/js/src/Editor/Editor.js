@@ -135,10 +135,16 @@ class Editor extends Component<Props, State> {
 						)}
 					/>
 
-					<Rating
-						value={post.rating}
-						onChange={this.updateRating}
-					/>
+					<FormRow
+                        label="Rating"
+                        inputKey="post-rating"
+                        input={(
+                            <Rating
+                                value={post.rating}
+                                onChange={this.updateRating}
+                            />
+                        )}
+                    />
 
 					<div className="almanac-mde">
 						<a

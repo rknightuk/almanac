@@ -7,31 +7,28 @@ type Props = {
 	onChange: (value: number) => any,
 }
 
+const Star = ({ selected }: { selected: boolean }) => (
+    <div className={`almanac-rating--star almanac-rating--star--${selected ? 'selected' : 'unselected'}`}>
+        <i className="fas fa-star" data-fa-transform="grow-10"/>
+    </div>
+)
+
 const Rating = ({ value, onChange }: Props) => (
 	<div className="almanac-rating">
 		<div
-			className={`almanac-block ${value === 1 ? 'active' : ''} bad`}
 			onClick={() => onChange(1)}
 		>
-			<div>
-				<i className="far fa-frown" data-fa-transform="grow-20" />
-			</div>
+			<Star selected={value >= 1} />
 		</div>
 		<div
-			className={`almanac-block ${value === 2 ? 'active' : ''} fine`}
 			onClick={() => onChange(2)}
 		>
-			<div>
-				<i className="far fa-meh" data-fa-transform="grow-20" />
-			</div>
+            <Star selected={value >= 2} />
 		</div>
 		<div
-			className={`almanac-block ${value === 3 ? 'active' : ''} good`}
 			onClick={() => onChange(3)}
 		>
-			<div>
-				<i className="far fa-smile" data-fa-transform="grow-20" />
-			</div>
+            <Star selected={value >= 3} />
 		</div>
 	</div>
 )
