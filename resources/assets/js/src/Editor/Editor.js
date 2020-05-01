@@ -62,7 +62,7 @@ class Editor extends Component<Props, State> {
 				text: '',
 			},
 			link: '',
-			rating: 1,
+			rating: null,
 			year: '',
 			spoilers: false,
 			date_completed: moment(),
@@ -137,7 +137,7 @@ class Editor extends Component<Props, State> {
 
 					<Rating
 						value={post.rating}
-						onChange={v => this.updatePost('rating', v)}
+						onChange={this.updateRating}
 					/>
 
 					<div className="almanac-mde">
@@ -400,6 +400,10 @@ class Editor extends Component<Props, State> {
 
 		return errors
 	}
+
+	updateRating = (value: number) => {
+	    this.updatePost('rating', value === this.state.post.rating ? null : value)
+    }
 
 	updatePost = (key: string, value: any) => {
 		const pathManuallyChanged = key === 'path' ? true : this.state.pathManuallyChanged

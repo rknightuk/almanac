@@ -114,7 +114,7 @@ class Post extends Model
 
 	public function getSubtitleOutputAttribute()
 	{
-        $rating = self::RATINGS[$this->rating];
+        $rating = self::RATINGS[$this->rating] ?? null;
 
 		if (!$this->subtitle && !$this->season && !$this->platform) {
 		    return $rating;

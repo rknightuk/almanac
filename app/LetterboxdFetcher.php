@@ -64,12 +64,12 @@ class LetterboxdFetcher {
 
         $rawRating = (int) $item->{'letterboxd:memberRating'};
         if ($rawRating === 5) {
-            $rating = 2;
+            $rating = 3;
         }
         else if ($rawRating >= 3 && $rawRating < 5) {
-            $rating = 1;
+            $rating = 2;
         } else {
-            $rating = 0;
+            $rating = 1;
         }
 
         $title = (string) $item->{'letterboxd:filmTitle'};
