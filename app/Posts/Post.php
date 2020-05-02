@@ -179,6 +179,6 @@ class Post extends Model implements Feedable
 
     public static function getFeedItems()
     {
-        return Post::orderBy('date_completed', 'desc')->get();
+        return Post::orderBy('date_completed', 'desc')->limit(50)->get();
     }
 }
