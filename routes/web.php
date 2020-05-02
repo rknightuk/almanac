@@ -20,9 +20,8 @@ Route::get('/{year?}/{month?}/{day?}/{path?}', 'SiteController@index')->where([
 	'date' => '[0-9]+'
 ]);
 
-
-Route::get('feed', 'FeedController@index');
-
 Route::get('/api/search/movie', 'SearchController@movie');
 Route::get('/api/search/tv', 'SearchController@tv');
 Route::get('/api/search/game', 'SearchController@game');
+
+Route::feeds();

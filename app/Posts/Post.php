@@ -7,9 +7,11 @@ use Almanac\NumberToAdjective;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
 
-class Post extends Model
+class Post extends Model implements Feedable
 {
 	use SoftDeletes, HasTags;
 
@@ -164,4 +166,19 @@ class Post extends Model
 		return ucfirst($this->verb) . ' on ' . $date . ' for the ' . NumberToAdjective::convert($this->time_viewed) . ' time';
 	}
 
+    public function toFeedItem(): FeedItem
+    {
+       return FeedItem::create()
+           ->id($this->id)
+           ->title($this->title)
+           ->summary($this->content ?? 'No review')
+           ->updated($this->updated_at)
+           ->link($this->permalink)
+           ->author('Robb Knight');
+    }
+
+    public static function getFeedItems()
+    {
+        return Post::orderBy('date_completed', 'desc')->get();
+    }
 }
