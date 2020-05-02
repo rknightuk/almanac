@@ -13,7 +13,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "html2text/html2text": "^4.3",
         "jonnybarnes/commonmark-linkify": "^0.4.0",
-        "laravel/framework": "5.8.*",
+        "laravel/framework": "^6.0",
         "laravel/tinker": "~1.0",
         "spatie/laravel-tags": "^2.0"
     },
