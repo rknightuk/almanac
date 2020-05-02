@@ -19,6 +19,11 @@
     </head>
     <body>
         @yield('content')
-        <script src="{{ asset('dist/bundle.js') }}"></script>
+
+        @if(env('APP_ENV') === 'local')
+            <script src="http://localhost:9000/bundle.js"></script>
+        @else
+            <script src="{{ asset('dist/js/bundle.js') }}"></script>
+        @endif
     </body>
 </html>
