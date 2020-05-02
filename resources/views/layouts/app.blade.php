@@ -23,6 +23,13 @@
     <body>
         @yield('content')
 
+        <script>
+            @if (isset($tags))
+                var AlmanacTags = <?= json_encode($tags) ?>;
+                var AlmanacSearch = <?= json_encode($searchConfig) ?>;
+            @endif
+        </script>
+
         @if(env('APP_ENV') === 'local')
             <script src="http://localhost:9000/bundle.js"></script>
         @else

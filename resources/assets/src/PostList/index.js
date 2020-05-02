@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import React from 'react'
 import axios from 'axios'
 import type { Post } from 'src/types'
 import Loader from 'src/ui/Loader'
@@ -22,7 +22,7 @@ type State = {
     type: ?string,
 }
 
-class PostList extends Component<*, State> {
+class PostList extends React.Component<*, State> {
 
     state: State = {
         page: 1,

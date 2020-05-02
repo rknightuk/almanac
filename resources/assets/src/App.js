@@ -6,17 +6,11 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import Navigation from 'src/Navigation'
 import Dashboard from 'src/Dashboard'
+import Create from 'src/Editor/Create'
+import Update from 'src/Editor/Update'
 
 import 'style-loader!css-loader!react-toastify/dist/ReactToastify.css'
 import css from './style.css'
-
-const Create = () => (
-    <div>Create</div>
-)
-
-const Update = () => (
-    <div>Update</div>
-)
 
 class App extends React.Component<{}> {
     render() {

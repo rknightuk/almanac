@@ -6,9 +6,7 @@ export type Post = {
     path: string,
     title: string,
     subtitle: string,
-    content: {
-        text: string,
-    },
+    content: string,
     link: ?string,
     rating: ?number,
     year: ?string,

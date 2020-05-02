@@ -12,3 +12,4 @@
 ;esproposal.class_static_fields=enable
 ;esproposal.class_instance_fields=enable
 ;unsafe.enable_getters_and_setters=true
+module.name_mapper='^src/\(.*\)' -> '<PROJECT_ROOT>/resources/assets/src/\1'
