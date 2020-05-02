@@ -4,6 +4,7 @@ namespace Almanac;
 
 use Almanac\Posts\Post;
 use Almanac\Posts\PostRepository;
+use Illuminate\Support\Str;
 
 class AutoTagger {
 
@@ -117,7 +118,7 @@ class AutoTagger {
         }
 
         foreach (self::KEYWORDS as $tag => $keywords) {
-            if (str_contains(strtolower($post->title), $keywords)) {
+            if (Str::contains(strtolower($post->title), $keywords)) {
                 $post->attachTag($tag);
             }
         }
