@@ -3,32 +3,27 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Variables
-@import "variables";
-@import "../shared";
+//@import "../shared";
 
-// Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+//@import "picker";
+//@import "rating";
+//@import "editor";
+//@import "icons";
+//@import "search";
 
-@import "loader";
-@import "picker";
-@import "rating";
-@import "editor";
-@import "icons";
-@import "search";
+* {
+    box-sizing: border-box;
+}
 
 body {
+    background: #f5f8fa;
 	margin-bottom: 50px;
+    font-family: "Raleway", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #636b6f;
 }
 
 .pagination-wrapper {
 	text-align: center;
-}
-
-.almn-search-bar {
-	display: flex;
-	margin: 10px 0;
-
-	& .form-control:first-child {
-		margin-right: 5px;
-	}
 }

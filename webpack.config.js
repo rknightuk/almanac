@@ -4,8 +4,9 @@ const inputRange = require('postcss-input-range');
 
 module.exports = {
     entry: [
-        './resources/assets/js/index.js',
-        './resources/assets/sass/site/site.scss'
+        './resources/assets/src/index.js',
+        './resources/assets/sass/site/site.scss',
+        './resources/assets/sass/app/app.scss'
     ],
     output: {
         path: path.resolve(__dirname, 'public/dist'),
@@ -13,6 +14,12 @@ module.exports = {
     },
     devServer: {
         port: 9000,
+    },
+    resolve: {
+        modules: ['public/assets/src', 'node_modules'],
+        alias: {
+            src: path.resolve('./resources/assets/src'),
+        },
     },
     module: {
         rules: [
@@ -56,7 +63,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 include: [
-                    path.join(__dirname, 'resources/assets/js'),
+                    path.join(__dirname, 'resources/assets/src'),
                 ],
                 use: [
                     { loader: 'style-loader' },

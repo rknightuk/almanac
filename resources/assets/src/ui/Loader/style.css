@@ -1,0 +1,8 @@
+.loader {
+    display: flex;
+    justify-content: center;
+}
+
+.spinner {
+    margin-right: 10px;
+}

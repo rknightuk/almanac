@@ -1,0 +1,15 @@
+.picker {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 5px;
+}
+
+.block {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+    height: 50px;
+    border: 1px solid lightgrey;
+    align-items: center;
+    font-size: 25px;
+}
