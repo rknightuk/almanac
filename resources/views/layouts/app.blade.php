@@ -10,9 +10,6 @@
 
         <title>{{ config('SITE_TITLE', 'Almanac') }}</title>
 
-        <!-- Styles -->
-        <link href="{{ asset('dist/app.css') }}" rel="stylesheet">
-
         <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="{{ asset('apple-touch-icon.png') }}">
 
         <script src="https://kit.fontawesome.com/4faa09972b.js" crossorigin="anonymous"></script>
@@ -23,7 +20,7 @@
         @if(env('APP_ENV') === 'local')
             <script src="http://localhost:9000/bundle.js"></script>
         @else
-            <script src="{{ asset('dist/js/bundle.js') }}"></script>
+            <script src="{{ asset('dist/bundle.js') }}"></script>
         @endif
     </body>
 </html>

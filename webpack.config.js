@@ -3,9 +3,12 @@ const cssnext = require('postcss-cssnext');
 const inputRange = require('postcss-input-range');
 
 module.exports = {
-    entry: './resources/assets/js/index.js',
+    entry: [
+        './resources/assets/js/index.js',
+        './resources/assets/sass/site/site.scss'
+    ],
     output: {
-        path: path.resolve(__dirname, 'public/dist/js'),
+        path: path.resolve(__dirname, 'public/dist'),
         filename: 'bundle.js'
     },
     devServer: {
@@ -13,6 +16,37 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].css',
+                        }
+                    },
+                    {
+                        loader: 'extract-loader'
+                    },
+                    {
+                        loader: 'css-loader?-url'
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                cssnext({
+                                    browsers: ['last 3 versions', 'ie 11'],
+                                }),
+                                inputRange(),
+                            ],
+                        },
+                    },
+                    {
+                        loader: 'sass-loader'
+                    }
+                ]
+            },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules)/,

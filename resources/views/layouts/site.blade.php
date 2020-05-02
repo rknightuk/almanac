@@ -9,8 +9,11 @@
 
 		<title>@if (isset($singlePost)) {{ $singlePost->title }} - @endif{{ env('SITE_TITLE', 'Almanac') }}</title>
 
-		<!-- Styles -->
-		<link href="{{ asset('css/site.css') }}" rel="stylesheet">
+        @if(env('APP_ENV') === 'local')
+            <link href="http://localhost:9000/site.css" rel="stylesheet">
+        @else
+            <link href="{{ asset('dist/site.css') }}" rel="stylesheet">
+        @endif
 
 		<link rel="apple-touch-icon" type="image/png" sizes="114x114" href="{{ asset('apple-touch-icon.png') }}">
 
