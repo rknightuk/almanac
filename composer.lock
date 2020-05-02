@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2cbda84e011aac2134552ec9f2719001",
+    "content-hash": "37f765ffbe24a8851decbc1199dba279",
     "packages": [
         {
             "name": "dereuromark/media-embed",
@@ -848,53 +848,6 @@
             "time": "2019-12-13T19:53:11+00:00"
         },
         {
-            "name": "jonnybarnes/commonmark-linkify",
-            "version": "v0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jonnybarnes/commonmark-linkify.git",
-                "reference": "fa5b1434dbd3639d2739e3b4f0aa5d14f322d60a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jonnybarnes/commonmark-linkify/zipball/fa5b1434dbd3639d2739e3b4f0aa5d14f322d60a",
-                "reference": "fa5b1434dbd3639d2739e3b4f0aa5d14f322d60a",
-                "shasum": ""
-            },
-            "require": {
-                "league/commonmark": "^0.17.0",
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Jonnybarnes\\CommonmarkLinkify\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "CC0-1.0"
-            ],
-            "authors": [
-                {
-                    "name": "Jonny Barnes",
-                    "email": "jonny@jonnybarnes.uk"
-                }
-            ],
-            "description": "Turn plaintext URLs into click-able links",
-            "homepage": "https://github.com/jonnybarnes/commonmark-linkify",
-            "keywords": [
-                "commonmark",
-                "extension",
-                "markdown"
-            ],
-            "abandoned": true,
-            "time": "2018-01-11T10:38:16+00:00"
-        },
-        {
             "name": "laravel/framework",
             "version": "v6.9.0",
             "source": {
@@ -1105,37 +1058,37 @@
         },
         {
             "name": "league/commonmark",
-            "version": "0.17.5",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "82d7ab62d7f68391cb9d323f3ccce50be24a5369"
+                "reference": "9e780d972185e4f737a03bade0fd34a9e67bbf31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/82d7ab62d7f68391cb9d323f3ccce50be24a5369",
-                "reference": "82d7ab62d7f68391cb9d323f3ccce50be24a5369",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/9e780d972185e4f737a03bade0fd34a9e67bbf31",
+                "reference": "9e780d972185e4f737a03bade0fd34a9e67bbf31",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "php": ">=5.6.5"
+                "php": "^7.1"
             },
-            "replace": {
-                "colinodell/commonmark-php": "*"
+            "conflict": {
+                "scrutinizer/ocular": "1.7.*"
             },
             "require-dev": {
                 "cebe/markdown": "~1.0",
-                "commonmark/commonmark.js": "0.28",
+                "commonmark/commonmark.js": "0.29.1",
                 "erusev/parsedown": "~1.0",
+                "ext-json": "*",
+                "github/gfm": "0.29.0",
                 "michelf/php-markdown": "~1.4",
-                "mikehaertl/php-shellcommand": "^1.2",
-                "phpunit/phpunit": "^5.7|^6.5",
-                "scrutinizer/ocular": "^1.1",
-                "symfony/finder": "^3.0|^4.0"
-            },
-            "suggest": {
-                "league/commonmark-extras": "Library of useful extensions including smart punctuation"
+                "mikehaertl/php-shellcommand": "^1.4",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^7.5",
+                "scrutinizer/ocular": "^1.5",
+                "symfony/finder": "^4.2"
             },
             "bin": [
                 "bin/commonmark"
@@ -1143,12 +1096,12 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.18-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "League\\CommonMark\\": "src/"
+                    "League\\CommonMark\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1163,14 +1116,19 @@
                     "role": "Lead Developer"
                 }
             ],
-            "description": "Markdown parser for PHP based on the CommonMark spec",
-            "homepage": "https://github.com/thephpleague/commonmark",
+            "description": "Highly-extensible PHP Markdown parser which fully supports the CommonMark spec and Github-Flavored Markdown (GFM)",
+            "homepage": "https://commonmark.thephpleague.com",
             "keywords": [
                 "commonmark",
+                "flavored",
+                "gfm",
+                "github",
+                "github-flavored",
                 "markdown",
+                "md",
                 "parser"
             ],
-            "time": "2018-03-29T14:35:19+00:00"
+            "time": "2020-04-24T13:39:56+00:00"
         },
         {
             "name": "league/flysystem",

@@ -1,10 +1,10 @@
 <?php
 namespace Almanac\Posts;
 
-use Jonnybarnes\CommonmarkLinkify\LinkifyExtension;
 use League\CommonMark\Converter;
 use League\CommonMark\DocParser;
 use League\CommonMark\Environment;
+use League\CommonMark\Extension\Autolink\AutolinkExtension;
 use League\CommonMark\HtmlRenderer;
 use MediaEmbed\MediaEmbed;
 
@@ -15,8 +15,10 @@ class ContentManager {
 
 	public function convertToHtml(Post $post)
 	{
+        if (is_null($post->content)) return null;
+
 		$env = Environment::createCommonMarkEnvironment();
-		$env->addExtension(new LinkifyExtension());
+		$env->addExtension(new AutolinkExtension());
 
 		$converter = new Converter(new DocParser($env), new HtmlRenderer($env));
 
