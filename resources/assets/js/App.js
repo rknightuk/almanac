@@ -1,8 +1,10 @@
+// @flow
+
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
 import css from './style.css'
 
-class App extends React.Component {
+class App extends React.Component<{}> {
     render() {
         return (
             <div>
