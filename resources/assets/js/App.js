@@ -3,6 +3,8 @@
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
 import { BrowserRouter, Route } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'style-loader!css-loader!react-toastify/dist/ReactToastify.css'
 import css from './style.css'
 
 const Dashbaord = () => (
@@ -28,6 +30,12 @@ class App extends React.Component<{}> {
                         <Route exact path="/app/new/:type/:id?" component={Create}/>
                         <Route exact path="/app/posts/:id" component={Update}/>
                     </div>
+
+                    <div onClick={() => toast.success('Post Created')}>CLICK ME</div>
+
+                    <ToastContainer
+                        position={toast.POSITION.BOTTOM_LEFT}
+                    />
                 </div>
             </BrowserRouter>
         )
