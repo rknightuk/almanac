@@ -79,8 +79,8 @@ class PostController extends Controller
 
 	    $post->syncTags($data['tags']);
 
-	    $feed = new Feed();
-	    $feed->setCache(0, FeedController::FEED_KEY);
+//	    $feed = new Feed();
+//	    $feed->setCache(0, FeedController::FEED_KEY);
 
 	    return $post;
     }
