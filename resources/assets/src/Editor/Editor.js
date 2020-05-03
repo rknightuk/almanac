@@ -95,11 +95,11 @@ class Editor extends React.Component<Props, State> {
 					/>
 				)}
 
-				<h1>
+				<div className={css.heading}>
 					<Icon
 						type={this.props.post ? this.props.post.type : this.props.type}
-					/> {this.props.isNew ? `Add new ${post.type}` : 'Edit Post'}
-				</h1>
+					/> {this.props.isNew ? `Add new ${post.type}` : `Editing "${this.state.post.title}"`}
+				</div>
 
 				<form>
 					<FormRow
