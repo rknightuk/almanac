@@ -11,3 +11,26 @@
     line-height: 1.6;
     color: #555;
 }
+
+.formRow {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 475px) {
+    .formRow {
+        display: inline;
+    }
+}
+
+.label {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    width: 120px;
+}
+
+.inputWrapper {
+    width: 100%;
+}

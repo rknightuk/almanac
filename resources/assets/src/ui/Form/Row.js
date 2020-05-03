@@ -1,17 +1,19 @@
 import React from 'react'
+import css from './style.css'
 
 type Props = {
     label: string,
     inputKey: string,
     input: any,
+    inline?: boolean,
 }
 
 const FormRow = ({ label, inputKey, input }: Props) => (
-    <div className="form-group row">
-        <label htmlFor={inputKey} className="col-sm-2 col-form-label">
+    <div className={css.formRow}>
+        <label htmlFor={inputKey} className={css.label}>
             {label}
         </label>
-        <div className="col-sm-10">
+        <div className={css.inputWrapper}>
             {input}
         </div>
     </div>

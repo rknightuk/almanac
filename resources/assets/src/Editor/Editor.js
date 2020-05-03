@@ -11,10 +11,12 @@ import TagInput from 'src/ui/TagInput'
 import Rating from 'src/ui/Rating'
 import Icon from 'src/ui/Icon'
 import SearchModal from 'src/SearchModal'
+import ReactMarkdown from 'react-markdown'
 
 import DatePicker from 'react-day-picker/DayPickerInput'
 import { formatDate, parseDate } from 'react-day-picker/moment'
 import 'style-loader!css-loader!react-day-picker/lib/style.css'
+import css from './style.css'
 
 import { PLATFORMS } from 'src/constants'
 
@@ -98,6 +100,7 @@ class Editor extends React.Component<Props, State> {
 
 				<form>
 					<FormRow
+                        inline
 						label="Title"
 						inputKey="post-title"
 						input={(
@@ -143,11 +146,20 @@ class Editor extends React.Component<Props, State> {
                         />
                     )}
 
-                    <div>
+                    <div className={css.contentWrapper}>
+                        <div className={css.previewBar} onClick={this.togglePreview}>
+                            {showPreview ? 'Hide' : 'Show'} Preview
+                        </div>
                         <textarea
+                            className={css.contentEditor}
                             value={post.content}
                             onChange={v => this.updatePost('content', v.target.value)}
                         />
+                        {showPreview && (
+                            <div className={css.preview}>
+                                <ReactMarkdown source={post.content === '' ? '_nothing yet_' : post.content} />
+                            </div>
+                        )}
                     </div>
 
 					<FormRow
@@ -334,6 +346,12 @@ class Editor extends React.Component<Props, State> {
 	componentDidMount() {
 		this.showSearch()
 	}
+
+    togglePreview = () => {
+	    this.setState((state: State) => ({
+            showPreview: !state.showPreview,
+        }))
+    }
 
 	showSearch = () => {
 		if (!this.props.post && window.AlmanacSearch[this.props.type]) {

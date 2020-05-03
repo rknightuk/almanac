@@ -1,6 +1,8 @@
 // @flow
 
 import React from 'react'
+import cx from 'classnames'
+import css from './style.css'
 
 type Props = {
     value: any,
@@ -8,13 +10,13 @@ type Props = {
 }
 
 const Star = ({ selected }: { selected: boolean }) => (
-    <div className={`almanac-rating--star almanac-rating--star--${selected ? 'selected' : 'unselected'}`}>
-        <i className="fas fa-star" data-fa-transform="grow-10"/>
+    <div className={cx(css.star, selected ? css.selected : css.unselected)}>
+        <i className="fas fa-star" />
     </div>
 )
 
 const Rating = ({ value, onChange }: Props) => (
-    <div className="almanac-rating">
+    <div className={css.ratings}>
         <div
             onClick={() => onChange(1)}
         >
