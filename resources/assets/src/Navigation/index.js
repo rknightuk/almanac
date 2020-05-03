@@ -1,11 +1,24 @@
 // @flow
 
 import React from 'react'
+import css from './style.css'
 
 class Navigation extends React.Component<{}> {
+    logout = (e) => {
+        e.preventDefault()
+        document.getElementById('logout-form').submit()
+    }
+
     render() {
         return (
-            <div>This is the navigation</div>
+            <nav className={css.nav}>
+                <div>
+                    <a href="/" target="_blank">Almanac</a>
+                </div>
+                <div>
+                    <a href="#" onClick={this.logout}><i className="far fa-sign-out"></i> Logout</a>
+                </div>
+            </nav>
         )
     }
 }

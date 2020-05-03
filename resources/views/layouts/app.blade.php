@@ -35,5 +35,9 @@
         @else
             <script src="{{ asset('dist/bundle.js') }}"></script>
         @endif
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     </body>
 </html>
