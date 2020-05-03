@@ -18,5 +18,12 @@ body {
     color: #636b6f;
 }
 
+.DayPickerInput input {
+    padding: 6px 12px;
+    font-size: 14px;
+    box-shadow: none;
+    font-family: 'Raleway', sans-serif;
+}
+
 @import "icons";
 @import "login";
