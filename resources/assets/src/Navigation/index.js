@@ -2,6 +2,7 @@
 
 import React from 'react'
 import css from './style.css'
+import { Link } from 'react-router-dom'
 
 class Navigation extends React.Component<{}> {
     logout = (e) => {
@@ -16,7 +17,11 @@ class Navigation extends React.Component<{}> {
                     <a href="/" target="_blank">View Site</a>
                 </div>
                 <div>
-                    <a href="/app">Almanac</a>
+                    <Link
+                        to="/app"
+                    >
+                        Almanac
+                    </Link>
                 </div>
                 <div>
                     <a href="#" onClick={this.logout}><i className="far fa-sign-out"></i> Logout</a>
