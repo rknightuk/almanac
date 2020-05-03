@@ -18,7 +18,7 @@
     align-items: center;
 }
 
-@media (max-width: 475px) {
+@media (max-width: 500px) {
     .formRow {
         display: inline;
     }
@@ -33,4 +33,36 @@
 
 .inputWrapper {
     width: 100%;
+}
+
+.button {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    border-radius: 4px;
+}
+
+.buttonSuccess {
+    composes: button;
+    color: #fff;
+    background-color: #2ab27b;
+    border-color: #259d6d;
+}
+
+.buttonDanger {
+    composes: button;
+    color: #fff;
+    background-color: #bf5329;
+    border-color: #aa4a24;
 }

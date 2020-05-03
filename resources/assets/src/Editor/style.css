@@ -74,3 +74,26 @@
     border-top-right-radius: 0;
     border-right: none;
 }
+
+.deleteButton {
+    margin-right: 10px;
+}
+
+.linkIcon {
+    margin-left: 5px;
+}
+
+.youtube {
+    composes: linkIcon;
+    color: red;
+}
+
+.vimeo {
+    composes: linkIcon;
+    color: #4DABE9;
+}
+
+.spotify {
+    composes: linkIcon;
+    color: #00BA5D;
+}

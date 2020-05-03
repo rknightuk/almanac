@@ -25,6 +25,7 @@ import type { Post, PostTypes, SearchResult } from '../types'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import slugify from 'slug'
+import Button from 'src/ui/Form/Button'
 
 
 type Props = {
@@ -185,17 +186,17 @@ class Editor extends React.Component<Props, State> {
 							<span>
 								Link
 								{this.linkIncludes('youtube') && (
-									<span className="almn-linkicon almn-linkicon--youtube">
+									<span className={css.youtube}>
 										<i className="fab fa-youtube" />
 									</span>
 								)}
 								{this.linkIncludes('spotify') && (
-									<span className="almn-linkicon almn-linkicon--spotify">
+									<span className={css.spotify}>
 										<i className="fab fa-spotify" />
 									</span>
 								)}
 								{this.linkIncludes('vimeo') && (
-									<span className="almn-linkicon almn-linkicon--vimeo">
+									<span className={css.vimeo}>
 										<i className="fab fa-vimeo" />
 									</span>
 								)}
@@ -313,33 +314,27 @@ class Editor extends React.Component<Props, State> {
 					/>
 
 					{this.state.post.id && (
-						<button
-							type="button"
-							className="btn btn-danger"
-							style={{ marginRight: '10px' }}
+						<Button
+                            type="danger"
 							onClick={this.handleDelete}
 							disabled={this.state.deleting || this.props.saving}
+                            saving={this.state.deleting}
+                            savingText="Deleting"
+                            className={css.deleteButton}
 						>
-							{this.state.deleting ? (
-								<span>
-								<i className="fas fa-spinner fa-spin" data-fa-transform="grow-6" /> Deleting
-							</span>
-							) : 'Delete'}
-						</button>
+							Delete
+						</Button>
 					)}
 
-					<button
-						type="button"
-						className="btn btn-success"
+					<Button
+                        type="success"
 						onClick={this.handleSave}
 						disabled={this.props.saving || !this.isValid() || this.state.deleting}
+                        saving={this.props.saving}
+                        savingText="Saving"
 					>
-						{this.props.saving ? (
-							<span>
-								<i className="fas fa-spinner fa-spin" data-fa-transform="grow-6" /> Saving
-							</span>
-						) : 'Save'}
-					</button>
+						Save
+					</Button>
 				</form>
 			</div>
 		)
