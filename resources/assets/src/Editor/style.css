@@ -17,6 +17,10 @@
     margin-bottom: 10px;
 }
 
+.previewBar:hover {
+    cursor: pointer;
+}
+
 .preview {
     background: white;
     padding: 5px;
