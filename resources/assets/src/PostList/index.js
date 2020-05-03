@@ -105,11 +105,11 @@ class PostList extends React.Component<*, State> {
                 )}
                 {this.state.posts.length > 0 && (
                     <div>
-                        <ul className="list-group">
+                        <div className={css.itemWrap}>
                             {this.state.posts.map((p: Post) => (
-                                <li key={p.id}><Item post={p} /></li>
+                                <Item key={p.id} post={p} />
                             ))}
-                        </ul>
+                        </div>
                         <Pagination
                             currentPage={this.state.page}
                             totalPages={this.state.totalPages}

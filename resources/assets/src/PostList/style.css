@@ -2,3 +2,9 @@
     text-align: center;
     margin-top: 10px;
 }
+
+.itemWrap {
+    background: white;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}

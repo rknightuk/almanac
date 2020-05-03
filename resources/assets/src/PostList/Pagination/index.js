@@ -12,12 +12,10 @@ type Props = {
 class Pagination extends React.Component<Props> {
     renderLink = (page: number) => (
         <div
-            className={this.props.currentPage === page ? 'page-item active' : 'page-item'}
             key={page}
         >
             <a
                 href="#"
-                className="page-link"
                 onClick={() => this.props.changePage(page)}
             >
                 {page}
@@ -30,10 +28,9 @@ class Pagination extends React.Component<Props> {
 
         return (
             <nav aria-label="Post navigation" className={css.wrapper}>
-                <div className={currentPage === 1 ? 'page-item disabled' : 'page-item'}>
+                <div>
                     <a
                         href="#"
-                        className="page-link"
                         onClick={() => changePage(currentPage - 1)}
                     >
                         Older
@@ -46,10 +43,9 @@ class Pagination extends React.Component<Props> {
                 {hasMoreThanSixPages && [totalPages - 2, totalPages - 1, totalPages].map((p) => (
                     this.renderLink(p)
                 ))}
-                <div className={currentPage === totalPages ? 'page-item disabled' : 'page-item'}>
+                <div>
                     <a
                         href="#"
-                        className="page-link"
                         onClick={() => changePage(currentPage + 1)}
                     >
                         Newer
