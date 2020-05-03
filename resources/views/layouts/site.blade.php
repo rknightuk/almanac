@@ -26,6 +26,11 @@
 	</head>
 	<body>
         <div class="almn-page">
+            @if (Auth::user())
+                <div class="almn-admin">
+                    <a href="/app"><i class="fas fa-user-cog"></i></a>
+                </div>
+            @endif
             <header class="almn-header">
                 <h1 class="almn-header--main"><a href="/">{{ env('SITE_TITLE', 'Almanac') }}</a></h1>
                 @if (env('SITE_SUBTITLE'))
