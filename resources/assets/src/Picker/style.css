@@ -4,12 +4,20 @@
     grid-column-gap: 5px;
 }
 
+@media (max-width: 550px) {
+    .picker {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
 .block {
-    display: flex;
+    background: white;
     justify-content: center;
-    margin-bottom: 5px;
-    height: 50px;
     border: 1px solid lightgrey;
     align-items: center;
-    font-size: 25px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    height: 75px;
+    margin-bottom: 5px;
 }
