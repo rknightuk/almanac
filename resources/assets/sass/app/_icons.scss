@@ -1,26 +1,26 @@
 .almn-icon {
 	&__movie {
-		color: #EC644B;
+		color: $type-movie;
 	}
 	&__tv {
-		color: #87D37C;
+		color: $type-tv;
 	}
 	&__game {
-		color: #947CB0;
+		color: $type-game;
 	}
 	&__music {
-		color: #52B3D9;
+		color: $type-music;
 	}
 	&__podcast {
-		color: #EC8436;
+		color: $type-podcast;
 	}
 	&__book {
-		color: #F7CA18;
+		color: $type-book;
 	}
 	&__video {
-		color: #EC644B;
+		color: $type-video;
 	}
 	&__quote {
-		color: #95A5A6;
+		color: $type-text;
 	}
 }

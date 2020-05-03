@@ -17,7 +17,7 @@ const Block = ({ name }: BlockProps) => (
         to={`app/new/${name}`}
         className={css.block}
     >
-        <div className={css.icon}>
+        <div>
             <Icon
                 type={name}
                 grow="20"
