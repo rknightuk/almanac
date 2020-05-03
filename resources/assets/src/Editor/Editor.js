@@ -44,6 +44,7 @@ type State = {
 	showPreview: boolean,
 	showSearch: boolean,
     cachedDate: ?moment,
+    searchAvailable: boolean,
 }
 
 class Editor extends React.Component<Props, State> {
@@ -80,11 +81,11 @@ class Editor extends React.Component<Props, State> {
 
 	render() {
 
-		const { post, showPreview } = this.state
+		const { post, showPreview, showSearch, searchAvailable } = this.state
 
 		return (
 			<div>
-				{this.state.showSearch && (
+				{showSearch && (
 					<SearchModal
 						type={this.props.type}
 						onClose={this.hideSearch}
@@ -104,19 +105,19 @@ class Editor extends React.Component<Props, State> {
 						label="Title"
 						inputKey="post-title"
 						input={(
-							<div className={!this.props.post ? 'input-group' : ''}>
+							<div className={!this.props.post ? css.grouped : ''}>
 								<TextInput
 									value={post.title}
 									onChange={v => this.handleTitleChange(v)}
+                                    className={searchAvailable ? css.inputAddonInputRight : ''}
 								/>
-								{!this.props.post && (
-									<a
-										className="input-group-addon almn-input-addon"
-										id="basic-addon3"
+								{searchAvailable && (
+									<div
+										className={css.inputAddonRight}
 										onClick={!this.props.post ? this.showSearch : () => false}
 									>
 										<i className={'fas fa-search'} />
-									</a>
+									</div>
 								)}
 							</div>
 						)}
@@ -166,14 +167,15 @@ class Editor extends React.Component<Props, State> {
 						label="Slug"
 						inputKey="post-path"
 						input={(
-							<div className="input-group">
-								<span className="input-group-addon almn-input-addon" id="basic-addon3">
+							<div className={css.grouped}>
+								<div className={css.inputAddonLeft}>
 									{this.generateStaticPath()}
-								</span>
-								<TextInput
-									value={post.path}
-									onChange={v => this.updatePost('path', v)}
-								/>
+								</div>
+                                <TextInput
+                                    value={post.path}
+                                    onChange={v => this.updatePost('path', v)}
+                                    className={css.inputAddonInputLeft}
+                                />
 							</div>
 						)}
 					/>
@@ -354,11 +356,11 @@ class Editor extends React.Component<Props, State> {
     }
 
 	showSearch = () => {
-		if (!this.props.post && window.AlmanacSearch[this.props.type]) {
-			this.setState({
-				showSearch: true,
-			})
-		}
+	    const hasSearch = !this.props.post && window.AlmanacSearch[this.props.type]
+	    this.setState({
+            showSearch: hasSearch,
+            searchAvailable: hasSearch,
+        })
 	}
 
 	hideSearch = () => {
