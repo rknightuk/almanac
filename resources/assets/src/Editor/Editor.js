@@ -12,6 +12,8 @@ import Rating from 'src/ui/Rating'
 import Icon from 'src/ui/Icon'
 import SearchModal from 'src/SearchModal'
 import ReactMarkdown from 'react-markdown'
+import Uploads from './Uploads'
+import { v4 as uuidv4 } from 'uuid'
 
 import DatePicker from 'react-day-picker/DayPickerInput'
 import { formatDate, parseDate } from 'react-day-picker/moment'
@@ -22,7 +24,7 @@ import inputAddons from 'src/ui/Form/inputAddons.css'
 import { PLATFORMS } from 'src/constants'
 
 import moment from 'moment'
-import type { Post, PostTypes, SearchResult } from '../types'
+import type { Attachment, Post, PostTypes, SearchResult } from '../types'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import slugify from 'slug'
@@ -47,6 +49,10 @@ type State = {
 	showSearch: boolean,
     cachedDate: ?moment,
     searchAvailable: boolean,
+    newUploads: {
+	    file: File,
+        uuid: string,
+    }[],
 }
 
 class Editor extends React.Component<Props, State> {
@@ -73,12 +79,14 @@ class Editor extends React.Component<Props, State> {
 			tags: [],
 			poster: null,
 			backdrop: null,
+            attachments: [],
 		},
         cachedDate: this.props.post ? this.props.post.date_completed : null,
 		deleting: false,
 		pathManuallyChanged: false,
 		showPreview: false,
 		showSearch: false,
+        newUploads: [],
 	}
 
 	render() {
@@ -164,6 +172,14 @@ class Editor extends React.Component<Props, State> {
                             </div>
                         )}
                     </div>
+
+                    <Uploads
+                        attachments={post.attachments}
+                        newUploads={this.state.newUploads}
+                        handleDelete={this.deleteUpload}
+                        handleDeleteNew={this.deleteNewUpload}
+                        addUploads={this.addUploads}
+                    />
 
 					<FormRow
 						label="Slug"
@@ -345,6 +361,39 @@ class Editor extends React.Component<Props, State> {
 		this.showSearch()
 	}
 
+	addUploads = (uploads: File[]) => {
+        this.setState((state: State) => ({
+            newUploads: state.newUploads.concat(uploads.map((u: File) => {
+                return {
+                    file: u,
+                    uuid: uuidv4(),
+                }
+            })),
+        }))
+    }
+
+    deleteNewUpload = (uuid: string) => {
+	    this.setState((state: State) => ({
+            newUploads: state.newUploads.filter((u) => u.uuid !== uuid)
+        }))
+    }
+
+    deleteUpload = (uuid: string) => {
+	    this.setState((state: State) => ({
+            post: {
+                ...state.post,
+                attachments: state.post.attachments.map((a: Attachment) => {
+                    if (uuid !== a.uuid) return a
+
+                    return {
+                        ...a,
+                        deleted_at: moment().toDate().toISOString(),
+                    }
+                })
+            }
+        }))
+    }
+
     togglePreview = () => {
 	    this.setState((state: State) => ({
             showPreview: !state.showPreview,
@@ -383,7 +432,7 @@ class Editor extends React.Component<Props, State> {
 		this.props.onSave({
 			...this.state.post,
 			date_completed: this.state.post.date_completed.toDate(),
-		})
+		}, this.state.newUploads)
 	}
 
 	showPlatform = () => ['game', 'quote'].includes(this.state.post.type)

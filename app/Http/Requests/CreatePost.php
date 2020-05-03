@@ -24,8 +24,7 @@ class CreatePost extends FormRequest
     public function rules()
     {
         return [
-	        'title' => 'required|min:1',
-	        'path' => 'required|min:1',
+	        'post' => 'required',
         ];
     }
 }

@@ -88,12 +88,22 @@ class Create extends React.Component<Props, State> {
 		)
 	}
 
-	handleSave = async (post: Post) => {
+	handleSave = async (post: Post, newUploads: any[]) => {
 		this.setState((s: State) => ({
 			saving: true,
 		}))
 
-		await axios.post('/api/posts', post)
+        const formData = new FormData();
+
+        newUploads.forEach((nu) => {
+            formData.append('file[]', nu.file)
+        })
+        formData.append('post', JSON.stringify(post))
+
+		await axios.post('/api/posts', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }})
 
 		this.setState((s: State) => ({
 			saving: false,

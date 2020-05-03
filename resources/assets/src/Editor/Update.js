@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import Editor from './Editor'
 import Loader from 'src/ui/Loader'
 import type { Post } from 'src/types'
+import { v4 as uuidv4 } from 'uuid'
 
 import moment from 'moment'
 
@@ -60,6 +61,12 @@ class Update extends React.Component<Props, State> {
 				content: response.data.content,
 				date_completed: moment.utc(response.data.date_completed),
 				tags: response.data.tags.map(t => t.name.en),
+                attachments: response.data.attachments.map(a => {
+                    return {
+                        ...a,
+                        uuid: uuidv4(),
+                    }
+                })
 			},
 			loading: false,
 		})
@@ -90,12 +97,24 @@ class Update extends React.Component<Props, State> {
 		)
 	}
 
-	handleSave = async (post: Post) => {
+	handleSave = async (post: Post, newUploads: any[]) => {
 		this.setState((s: State) => ({
 			saving: true,
 		}))
 
-		await axios.put(`/api/posts/${this.props.match.params.id}`, post)
+        const formData = new FormData();
+
+        newUploads.forEach((nu) => {
+            formData.append('file[]', nu.file)
+        })
+        formData.append('post', JSON.stringify(post))
+        formData.append('_method', 'put')
+
+		await axios.post(`/api/posts/${this.props.match.params.id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
 
 		this.setState((s: State) => ({
 			saving: false,

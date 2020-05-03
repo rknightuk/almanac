@@ -24,9 +24,7 @@ class UpdatePost extends FormRequest
     public function rules()
     {
 	    return [
-	    	'id' => 'required|numeric',
-		    'title' => 'required|min:1',
-		    'path' => 'required|min:1',
+            'post' => 'required',
 	    ];
     }
 }

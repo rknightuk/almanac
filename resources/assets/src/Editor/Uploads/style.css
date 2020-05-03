@@ -1,0 +1,18 @@
+.dropzone {
+    background: white;
+    padding: 10px;
+    border: 1px dotted lightgrey;
+}
+
+.upload {
+    display: flex;
+}
+
+.delete {
+    margin-right: 10px;
+    color: #bf5329;
+}
+
+.delete:hover {
+    cursor: pointer;
+}

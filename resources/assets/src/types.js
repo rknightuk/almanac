@@ -1,5 +1,12 @@
 // @flow
 
+export type Attachment = {
+    id: ?number,
+    filename: string,
+    uuid: string,
+    deleted_at: string,
+}
+
 export type Post = {
     id: ?number,
     type: string,
@@ -20,6 +27,7 @@ export type Post = {
     icon: string,
     poster: ?string,
     backdrop: ?string,
+    attachments: Attachment[],
 }
 
 export type PostTypes =
