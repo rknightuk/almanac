@@ -23,6 +23,7 @@ type State = {
 		poster: string,
 		title: string,
 		year: number,
+        meta?: string,
 	}[],
 }
 
