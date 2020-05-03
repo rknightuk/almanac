@@ -6,6 +6,9 @@ import type { PostTypes, SearchResult } from '../types'
 import TextInput from 'src/ui/Form/TextInput'
 import { debounce } from 'lodash'
 import axios from 'axios'
+import Button from 'src/ui/Form/Button'
+import css from './style.css'
+import inputAddons from 'src/ui/Form/inputAddons.css'
 
 type Props = {
 	type: PostTypes,
@@ -53,19 +56,18 @@ class SearchModal extends React.Component<Props, State> {
 				style={MODAL_STYLES}
 				onRequestClose={this.props.onClose}
 			>
-
-				<div className="input-group">
-					<span
-						className="input-group-addon almn-input-addon"
-						id="basic-addon3"
-					>
-						<i className={'fas fa-search'} />
-					</span>
-					<TextInput
-						value={this.state.query}
-						onChange={this.handleQueryChange}
-					/>
-				</div>
+                <div className={inputAddons.grouped}>
+                    <TextInput
+                        value={this.state.query}
+                        onChange={this.handleQueryChange}
+                        className={inputAddons.inputAddonInputRight}
+                    />
+                    <div
+                        className={inputAddons.inputAddonRight}
+                    >
+                        <i className={'fas fa-search'} />
+                    </div>
+                </div>
 
 				{this.state.results.map((r: SearchResult, i) => (
 					<div
@@ -73,21 +75,17 @@ class SearchModal extends React.Component<Props, State> {
 						style={{
 							backgroundImage: r.backdrop || r.poster ? `url("${r.backdrop || r.poster}")` : '',
 						}}
-						className="almn-search--result"
+						className={css.result}
 						onClick={() => this.props.onSelected(r)}
 					>
-						<div className="almn-search--result--title">{r.title} - {r.year}{r.meta ? ` - (${r.meta})` : ''}</div>
+						<div className={css.title}>{r.title} - {r.year}{r.meta ? ` - (${r.meta})` : ''}</div>
 					</div>
 				))}
 
-				<div className="almn-search--buttons">
-					<button
-						type="button"
-						className="btn btn-default"
-						onClick={this.props.onClose}
-					>
-						Cancel
-					</button>
+				<div>
+                    <Button type="success" onClick={this.props.onClose} className={css.cancelButton}>
+                        Cancel
+                    </Button>
 				</div>
 			</Modal>
 		)

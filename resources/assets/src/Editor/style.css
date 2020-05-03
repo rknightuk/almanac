@@ -27,54 +27,6 @@
     margin: 0;
 }
 
-.grouped {
-    display: flex;
-}
-
-.inputAddon {
-    padding: 6px 12px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1;
-    color: #555;
-    text-align: center;
-    background-color: #eee;
-    border: 1px solid #ccd0d2;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-}
-
-.inputAddonRight {
-    composes: inputAddon;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-}
-
-.inputAddonLeft {
-    composes: inputAddon;
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
-}
-
-.inputAddonInput {
-    width: 100%;
-}
-
-.inputAddonInputLeft {
-    composes: inputAddonInput;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-    border-left: none;
-}
-
-.inputAddonInputRight {
-    composes: inputAddonInput;
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
-    border-right: none;
-}
-
 .deleteButton {
     margin-right: 10px;
 }

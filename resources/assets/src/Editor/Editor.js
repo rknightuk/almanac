@@ -17,6 +17,7 @@ import DatePicker from 'react-day-picker/DayPickerInput'
 import { formatDate, parseDate } from 'react-day-picker/moment'
 import 'style-loader!css-loader!react-day-picker/lib/style.css'
 import css from './style.css'
+import inputAddons from 'src/ui/Form/inputAddons.css'
 
 import { PLATFORMS } from 'src/constants'
 
@@ -106,15 +107,15 @@ class Editor extends React.Component<Props, State> {
 						label="Title"
 						inputKey="post-title"
 						input={(
-							<div className={!this.props.post ? css.grouped : ''}>
+							<div className={!this.props.post ? inputAddons.grouped : ''}>
 								<TextInput
 									value={post.title}
 									onChange={v => this.handleTitleChange(v)}
-                                    className={searchAvailable ? css.inputAddonInputRight : ''}
+                                    className={searchAvailable ? inputAddons.inputAddonInputRight : ''}
 								/>
 								{searchAvailable && (
 									<div
-										className={css.inputAddonRight}
+										className={inputAddons.inputAddonRight}
 										onClick={!this.props.post ? this.showSearch : () => false}
 									>
 										<i className={'fas fa-search'} />
@@ -168,14 +169,14 @@ class Editor extends React.Component<Props, State> {
 						label="Slug"
 						inputKey="post-path"
 						input={(
-							<div className={css.grouped}>
-								<div className={css.inputAddonLeft}>
+							<div className={inputAddons.grouped}>
+								<div className={inputAddons.inputAddonLeft}>
 									{this.generateStaticPath()}
 								</div>
                                 <TextInput
                                     value={post.path}
                                     onChange={v => this.updatePost('path', v)}
-                                    className={css.inputAddonInputLeft}
+                                    className={inputAddons.inputAddonInputLeft}
                                 />
 							</div>
 						)}

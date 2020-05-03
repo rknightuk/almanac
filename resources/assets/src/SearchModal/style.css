@@ -1,0 +1,27 @@
+.cancelButton {
+    position: absolute;
+    bottom: 10px;
+}
+
+.result {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+    background: #e0e0e0;
+}
+
+.result:hover {
+    cursor: pointer;
+}
+
+.title {
+    color: white;
+    background: black;
+    padding: 15px 30px;
+    font-weight: bold;
+    border: 1px solid white;
+}
