@@ -10,15 +10,6 @@ body {
 	margin: 0 5px;
 }
 
-a {
-	text-decoration: none;
-	transition: all 0.4s;
-	color: $lighter-text-color;
-	&:hover {
-		color: $primary-color;
-	}
-}
-
 iframe {
     max-width: 100%;
 }

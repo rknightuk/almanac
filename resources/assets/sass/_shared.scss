@@ -1,3 +1,5 @@
+$primary-color: #EB9532;
+
 $type-movie: #ff5f5f;
 $type-tv: #2ABB9B;
 $type-game: #6686ff;
@@ -10,3 +12,14 @@ $type-quote: #95A5A6;
 
 $rating-color: #f7ca18;
 $rating-color-light: #d9d9d9;
+
+$lighter-text-color: #919ba2;
+
+a {
+    text-decoration: none;
+    transition: all 0.4s;
+    color: $lighter-text-color;
+    &:hover {
+        color: $primary-color;
+    }
+}
