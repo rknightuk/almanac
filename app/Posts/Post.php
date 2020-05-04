@@ -45,8 +45,6 @@ class Post extends Model implements Feedable
 	    'creator',
 	    'season',
 	    'platform',
-	    'poster',
-	    'backdrop',
     ];
 
     const STAR_SELECTED = '<span class="almn-post--titles--sub--rating--selected">&#9733;</span>';

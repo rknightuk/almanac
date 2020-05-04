@@ -56,7 +56,7 @@ class TheMovieDBClient {
 			return array_map(function ($r) {
 				return [
 					'title' => $r->name,
-					'year' => $r->first_air_date ? (Carbon::createFromFormat('Y-m-d', $r->first_air_date))->year : null,
+					'year' => isset($r->first_air_date) ? (Carbon::createFromFormat('Y-m-d', $r->first_air_date))->year : null,
 					'poster' => self::IMAGE_PATH . $r->poster_path,
 					'backdrop' => self::IMAGE_PATH . $r->backdrop_path,
 				];

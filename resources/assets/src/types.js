@@ -25,8 +25,6 @@ export type Post = {
     published: boolean,
     tags: string[],
     icon: string,
-    poster: ?string,
-    backdrop: ?string,
     attachments: Attachment[],
 }
 

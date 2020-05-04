@@ -18,13 +18,7 @@ type Props = {
 
 type State = {
 	query: ?string,
-	results: {
-		backdrop: string,
-		poster: string,
-		title: string,
-		year: number,
-        meta?: string,
-	}[],
+	results: SearchResult[],
 }
 
 const MODAL_STYLES = {
