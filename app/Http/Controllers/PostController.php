@@ -45,13 +45,7 @@ class PostController extends Controller
     {
         $postData = json_decode($request->input('post'), true);
 
-    	unset($postData['id']);
-	    $postData['date_completed'] = $postData['date_completed'] ? new Carbon($postData['date_completed']) : new Carbon();
-        $postData['year'] = $postData['year'] === '' ? null : $postData['year'];
-	    $postData['path'] = $this->pathGenerator->getValidPath(
-	    	$postData['path'],
-		    $postData['date_completed']
-	    );
+        $postData = $this->formatData($postData);
 
         $post = Post::create($postData);
 
@@ -71,14 +65,7 @@ class PostController extends Controller
 
 	    $post = $this->postRepository->one((new PostQuery())->id($id));
 
-	    unset($postData['id']);
-	    $postData['date_completed'] = $postData['date_completed'] ? new Carbon($postData['date_completed']) : new Carbon();
-        $postData['year'] = $postData['year'] === '' ? null : $postData['year'];
-	    $postData['path'] = $this->pathGenerator->getValidPath(
-	    	$postData['path'],
-		    $postData['date_completed'],
-		    $id
-	    );
+        $postData = $this->formatData($postData);
 
 	    $post->update($postData);
 
@@ -130,5 +117,19 @@ class PostController extends Controller
         $path = $file->storePubliclyAs($storagePath, $file->getClientOriginalName());
 
         return str_replace($storagePath . '/', '', $path);
+    }
+
+    private function formatData(array $postData, ?int $id = null)
+    {
+        unset($postData['id']);
+        $postData['date_completed'] = $postData['date_completed'] ? new Carbon($postData['date_completed']) : new Carbon();
+        $postData['year'] = $postData['year'] === '' ? null : $postData['year'];
+        $postData['path'] = $this->pathGenerator->getValidPath(
+            $postData['path'],
+            $postData['date_completed'],
+            $id
+        );
+
+        return $postData;
     }
 }
