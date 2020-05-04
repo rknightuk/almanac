@@ -97,14 +97,14 @@ class Update extends React.Component<Props, State> {
 		)
 	}
 
-	handleSave = async (post: Post, newUploads: any[]) => {
+	handleSave = async (post: Post, newAttachments: any[]) => {
 		this.setState((s: State) => ({
 			saving: true,
 		}))
 
         const formData = new FormData();
 
-        newUploads.forEach((nu) => {
+        newAttachments.forEach((nu) => {
             formData.append('file[]', nu.file)
         })
         formData.append('post', JSON.stringify(post))

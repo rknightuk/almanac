@@ -9,7 +9,7 @@ type Props = {
     onDelete: (uuid: string) => any,
 }
 
-class Upload extends React.Component<Props> {
+class Attachment extends React.Component<Props> {
     handleDelete = () => {
         this.props.onDelete(this.props.uuid)
     }
@@ -18,12 +18,12 @@ class Upload extends React.Component<Props> {
         const { title } = this.props
 
         return (
-            <li className={css.upload}>
+            <li className={css.attachment}>
                 <div onClick={this.handleDelete} className={css.delete}><i className="fas fa-trash"></i></div> <div>{title}</div>
             </li>
         )
     }
 }
 
-export default Upload
+export default Attachment
 

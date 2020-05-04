@@ -12,7 +12,7 @@ import Rating from 'src/ui/Rating'
 import Icon from 'src/ui/Icon'
 import SearchModal from 'src/SearchModal'
 import ReactMarkdown from 'react-markdown'
-import Uploads from './Uploads'
+import Attachments from './Attachments'
 import { v4 as uuidv4 } from 'uuid'
 
 import DatePicker from 'react-day-picker/DayPickerInput'
@@ -49,7 +49,7 @@ type State = {
 	showSearch: boolean,
     cachedDate: ?moment,
     searchAvailable: boolean,
-    newUploads: {
+    newAttachments: {
 	    file: File,
         uuid: string,
     }[],
@@ -86,7 +86,7 @@ class Editor extends React.Component<Props, State> {
 		pathManuallyChanged: false,
 		showPreview: false,
 		showSearch: false,
-        newUploads: [],
+        newAttachments: [],
 	}
 
 	render() {
@@ -173,12 +173,12 @@ class Editor extends React.Component<Props, State> {
                         )}
                     </div>
 
-                    <Uploads
+                    <Attachments
                         attachments={post.attachments}
-                        newUploads={this.state.newUploads}
-                        handleDelete={this.deleteUpload}
-                        handleDeleteNew={this.deleteNewUpload}
-                        addUploads={this.addUploads}
+                        newAttachments={this.state.newAttachments}
+                        handleDelete={this.deleteAttachment}
+                        handleDeleteNew={this.deleteNewAttachment}
+                        addAttachments={this.addAttachments}
                     />
 
 					<FormRow
@@ -361,24 +361,24 @@ class Editor extends React.Component<Props, State> {
 		this.showSearch()
 	}
 
-	addUploads = (uploads: File[]) => {
+	addAttachments = (attachments: File[]) => {
         this.setState((state: State) => ({
-            newUploads: state.newUploads.concat(uploads.map((u: File) => {
+            newAttachments: state.newAttachments.concat(attachments.map((a: File) => {
                 return {
-                    file: u,
+                    file: a,
                     uuid: uuidv4(),
                 }
             })),
         }))
     }
 
-    deleteNewUpload = (uuid: string) => {
+    deleteNewAttachment = (uuid: string) => {
 	    this.setState((state: State) => ({
-            newUploads: state.newUploads.filter((u) => u.uuid !== uuid)
+            newAttachments: state.newAttachments.filter((u) => u.uuid !== uuid)
         }))
     }
 
-    deleteUpload = (uuid: string) => {
+    deleteAttachment = (uuid: string) => {
 	    this.setState((state: State) => ({
             post: {
                 ...state.post,
@@ -432,7 +432,7 @@ class Editor extends React.Component<Props, State> {
 		this.props.onSave({
 			...this.state.post,
 			date_completed: this.state.post.date_completed.toDate(),
-		}, this.state.newUploads)
+		}, this.state.newAttachments)
 	}
 
 	showPlatform = () => ['game', 'quote'].includes(this.state.post.type)

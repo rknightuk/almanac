@@ -59,7 +59,7 @@ class PostController extends Controller
 
         $files = $request->file();
         if (is_array($files)) {
-            $this->uploadFilesForPost($post, $files['file'] ?? []);
+            $this->uploadAttachments($post, $files['file'] ?? []);
         }
 
         return $post;
@@ -96,7 +96,7 @@ class PostController extends Controller
 
         $files = $request->file();
         if (is_array($files)) {
-            $this->uploadFilesForPost($post, $files['file'] ?? []);
+            $this->uploadAttachments($post, $files['file'] ?? []);
         }
 
 	    return $post;
@@ -113,7 +113,7 @@ class PostController extends Controller
      * @param Post|null $post
      * @param UploadedFile[] $files
      */
-    private function uploadFilesForPost(?Post $post, array $files)
+    private function uploadAttachments(?Post $post, array $files)
     {
         foreach ($files as $upload)
         {

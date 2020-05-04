@@ -4,20 +4,20 @@ import React from 'react'
 import Dropzone from 'react-dropzone'
 import FormRow from 'src/ui/Form/Row'
 import css from './style.css'
-import type { Attachment, Post } from 'src/types'
-import Upload from 'src/Editor/Uploads/Upload'
+import type { Attachment } from 'src/types'
+import AttachmentItem from 'src/Editor/Attachments/Attachment'
 
 type Props = {
     attachments: Attachment[],
-    newUploads: File[],
+    newAttachments: File[],
     handleDelete: (uuid: string) => any,
     handleDeleteNew: (uuid: string) => any,
-    addUploads: (uploads: File[]) => any,
+    addAttachments: (attachments: File[]) => any,
 }
 
-class Uploads extends React.Component<Props> {
+class Attachments extends React.Component<Props> {
     render() {
-        const { attachments, newUploads } = this.props
+        const { attachments, newAttachments } = this.props
         return (
             <FormRow
                 label="Uploads"
@@ -26,10 +26,10 @@ class Uploads extends React.Component<Props> {
                     <React.Fragment>
                         {this.renderDropzone()}
                         <ul>
-                            {newUploads.map(this.renderUpload)}
+                            {newAttachments.map(this.renderAttachment)}
                         </ul>
                         <ul>
-                            {attachments.filter((a: Attachment) => a.deleted_at === null).map(this.renderUpload)}
+                            {attachments.filter((a: Attachment) => a.deleted_at === null).map(this.renderAttachment)}
                         </ul>
                     </React.Fragment>
                 )}
@@ -38,7 +38,7 @@ class Uploads extends React.Component<Props> {
     }
 
     renderDropzone = () => (
-        <Dropzone onDrop={acceptedFiles => this.props.addUploads(acceptedFiles)}>
+        <Dropzone onDrop={acceptedFiles => this.props.addAttachments(acceptedFiles)}>
             {({getRootProps, getInputProps}) => (
                 <div className={css.dropzone}>
                     <div {...getRootProps()}>
@@ -50,8 +50,8 @@ class Uploads extends React.Component<Props> {
         </Dropzone>
     )
 
-    renderUpload = (attachment: any) => (
-        <Upload
+    renderAttachment = (attachment: any) => (
+        <AttachmentItem
             uuid={attachment.uuid}
             title={attachment.filename || attachment.file.name}
             onDelete={attachment.filename ? this.handleDelete : this.handleDeleteNew}
@@ -67,4 +67,4 @@ class Uploads extends React.Component<Props> {
     }
 }
 
-export default Uploads
+export default Attachments
