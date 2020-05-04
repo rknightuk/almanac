@@ -83,7 +83,7 @@
                 @yield('content')
             </div>
             <div class="almn-footer">
-                Powered by <a href="https://code.rknight.me/almanac">Almanac</a>
+                Powered by <a href="https://code.rknight.me/almanac">Almanac</a> | <a href="/feed">RSS</a>
             </div>
         </div>
 
