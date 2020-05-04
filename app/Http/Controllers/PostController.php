@@ -115,10 +115,20 @@ class PostController extends Controller
      */
     private function uploadAttachments(?Post $post, array $files)
     {
-        foreach ($files as $upload)
+        foreach ($files as $file)
         {
-            // todo upload for post
-            info('Uploading file ' . $upload->getClientOriginalName());
+            $path = $this->upload($file);
+            $post->attachments()->create([
+                'filename' => $path,
+            ]);
         }
+    }
+
+    private function upload(UploadedFile $file): string
+    {
+        $storagePath = config('almanac.storage_path');
+        $path = $file->store($storagePath);
+
+        return str_replace($storagePath, '', $path);
     }
 }
