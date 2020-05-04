@@ -94,9 +94,9 @@ class PostController extends Controller
             }
         }
 
-        $files = $request->file();
+        $files = $request->file('file');
         if (is_array($files)) {
-            $this->uploadAttachments($post, $files['file'] ?? []);
+            $this->uploadAttachments($post, $files ?? []);
         }
 
 	    return $post;
