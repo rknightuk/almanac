@@ -5,7 +5,7 @@ import css from './style.css'
 
 type Props = {
     value: any,
-    onChange: (value) => any,
+    onChange: (value: string) => any,
     options: {
         value: string,
         label: string,

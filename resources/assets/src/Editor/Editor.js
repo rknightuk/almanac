@@ -30,10 +30,14 @@ import axios from 'axios'
 import slugify from 'slug'
 import Button from 'src/ui/Form/Button'
 
+export type AttachmentWithId = {
+    file: File,
+    uuid: string,
+}
 
 type Props = {
-	type?: PostTypes,
-	onSave: (post: Post) => any,
+	type: PostTypes,
+	onSave: (post: Post, newAttachments: AttachmentWithId[]) => any,
 	post?: Post,
 	saving: boolean,
 	history: any,
@@ -49,10 +53,7 @@ type State = {
 	showSearch: boolean,
     cachedDate: ?moment,
     searchAvailable: boolean,
-    newAttachments: {
-	    file: File,
-        uuid: string,
-    }[],
+    newAttachments: AttachmentWithId[],
 }
 
 class Editor extends React.Component<Props, State> {
@@ -63,6 +64,7 @@ class Editor extends React.Component<Props, State> {
 		post: this.props.post || {
 			id: null,
 			type: this.props.type || 'movie',
+            icon: 'movie',
 			path: '',
 			title: '',
 			subtitle: '',
@@ -80,6 +82,7 @@ class Editor extends React.Component<Props, State> {
             attachments: [],
 		},
         cachedDate: this.props.post ? this.props.post.date_completed : null,
+        searchAvailable: false,
 		deleting: false,
 		pathManuallyChanged: false,
 		showPreview: false,
@@ -413,7 +416,7 @@ class Editor extends React.Component<Props, State> {
 	}
 
 	handleSelected = (result: SearchResult) => {
-		this.setState(state => ({
+		this.setState((state: State) => ({
 			post: {
 				...state.post,
 				title: result.title,
@@ -516,7 +519,7 @@ class Editor extends React.Component<Props, State> {
 			deleting: true,
 		}))
 
-		await axios.delete(`/api/posts/${this.state.post.id}`)
+		await axios.delete(`/api/posts/${String(this.state.post.id)}`)
 
 		this.setState((s: State) => ({
 			deleting: false,

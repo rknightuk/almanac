@@ -1,5 +1,7 @@
 // @flow
 
+import Moment from 'moment'
+
 export type Attachment = {
     id: ?number,
     filename: string,
@@ -7,9 +9,19 @@ export type Attachment = {
     deleted_at: string,
 }
 
+export type PostTypes =
+    'movie'
+    | 'tv'
+    | 'game'
+    | 'music'
+    | 'book'
+    | 'podcast'
+    | 'video'
+    | 'quote'
+
 export type Post = {
     id: ?number,
-    type: string,
+    type: PostTypes,
     path: string,
     title: string,
     subtitle: string,
@@ -28,19 +40,9 @@ export type Post = {
     attachments: Attachment[],
 }
 
-export type PostTypes =
-    'movie'
-    | 'tv'
-    | 'game'
-    | 'music'
-    | 'book'
-    | 'podcast'
-    | 'video'
-    | 'quote'
-
 export type SearchResult = {
     title: string,
-    year: number,
+    year: string,
     poster: ?string,
     backdrop: ?string,
     meta: ?string,

@@ -5,9 +5,12 @@ import css from './style.css'
 import { Link } from 'react-router-dom'
 
 class Navigation extends React.Component<{}> {
-    logout = (e) => {
+    logout = (e: any) => {
         e.preventDefault()
-        document.getElementById('logout-form').submit()
+        const logoutForm = (document.getElementById('logout-form'): any)
+        if (logoutForm) {
+            logoutForm.submit()
+        }
     }
 
     render() {

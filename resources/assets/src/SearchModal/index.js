@@ -64,19 +64,22 @@ class SearchModal extends React.Component<Props, State> {
                     </div>
                 </div>
 
-				{this.state.results.map((r: SearchResult, i) => (
-					<div
-						key={i}
-						style={{
-							backgroundImage: r.backdrop || r.poster ? `url("${r.backdrop || r.poster}")` : '',
-						}}
-						className={css.result}
-						onClick={() => this.props.onSelected(r)}
-					>
-						<div className={css.title}>{r.title} - {r.year}{r.meta ? ` - (${r.meta})` : ''}</div>
-					</div>
-				))}
-
+                {this.state.results.map((r: SearchResult, i) => {
+                    const background = this.getBackgroundUrl(r)
+                    return (
+                        <div
+                            key={i}
+                            style={background && {
+                                backgroundImage: `url("${background}")`,
+                            }}
+                            className={css.result}
+                            onClick={() => this.props.onSelected(r)}
+                        >
+                            <div className={css.title}>{r.title} - {r.year}{r.meta ? ` - (${r.meta})` : ''}</div>
+                        </div>
+                    )
+                })}
+                
 				<div>
                     <Button type="success" onClick={this.props.onClose} className={css.cancelButton}>
                         Cancel
@@ -85,6 +88,13 @@ class SearchModal extends React.Component<Props, State> {
 			</Modal>
 		)
 	}
+
+    getBackgroundUrl = (r: SearchResult): ?string => {
+        if (r.backdrop) return r.backdrop
+        if (r.poster) return r.poster
+
+        return null
+    }
 
 	handleQueryChange = (query: string) => {
 		this.debounceSearch(query)

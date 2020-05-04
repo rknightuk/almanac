@@ -4,7 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Icon from 'src/ui/Icon'
 
-import { PostTypes } from 'src/types'
+import type { PostTypes } from 'src/types'
 
 import css from './style.css'
 

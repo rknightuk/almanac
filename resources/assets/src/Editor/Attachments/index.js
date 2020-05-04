@@ -5,11 +5,12 @@ import Dropzone from 'react-dropzone'
 import FormRow from 'src/ui/Form/Row'
 import css from './style.css'
 import type { Attachment } from 'src/types'
-import AttachmentItem from 'src/Editor/Attachments/Attachment'
+import AttachmentItem from './Attachment'
+import type { AttachmentWithId } from 'src/Editor/Editor'
 
 type Props = {
     attachments: Attachment[],
-    newAttachments: File[],
+    newAttachments: AttachmentWithId[],
     handleDelete: (uuid: string) => any,
     handleDeleteNew: (uuid: string) => any,
     addAttachments: (attachments: File[]) => any,
