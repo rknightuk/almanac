@@ -40,7 +40,7 @@ class TheMovieDBClient {
 			return array_map(function($r) {
 				return [
 					'title' => $r->title,
-					'year' => $r->release_date ? (Carbon::createFromFormat('Y-m-d', $r->release_date))->year : null,
+					'year' => isset($r->release_date) ? (Carbon::createFromFormat('Y-m-d', $r->release_date))->year : null,
 					'poster' => self::IMAGE_PATH . $r->poster_path,
 					'backdrop' => self::IMAGE_PATH . $r->backdrop_path,
 				];
