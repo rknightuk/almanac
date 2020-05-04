@@ -127,8 +127,8 @@ class PostController extends Controller
     private function upload(UploadedFile $file): string
     {
         $storagePath = config('almanac.storage_path');
-        $path = $file->store($storagePath);
+        $path = $file->storePublicly($storagePath);
 
-        return str_replace($storagePath, '', $path);
+        return str_replace($storagePath . '/', '', $path);
     }
 }
