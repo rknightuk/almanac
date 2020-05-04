@@ -59,9 +59,7 @@ class Create extends React.Component<Props, State> {
 			post: {
 				...response.data,
 				id: null,
-				content: {
-					text: '',
-				},
+				content: '',
 				date_completed: moment(),
 				tags: response.data.tags.map(t => t.name.en),
 			},
