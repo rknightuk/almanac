@@ -48,7 +48,7 @@
                             </a>
                         </div>
                         @if (count($post->attachments) > 1)
-                            <div class="almn-post--attachments--grid">
+                            <div class="almn-post--attachments--grid almn-post--attachments--grid--{{ count($post->attachments) < 5 ? count($post->attachments) : 5 }}">
                                 @foreach ($post->attachments as $index => $attachment)
                                     <div class="almn-post--attachments--grid--single">
                                         <a class="almn-post--attachments--grid--single--link" data-post-id="{{ $post->id }}" href="{{ $attachment->real_path }}" target="_blank">
