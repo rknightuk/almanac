@@ -25,12 +25,19 @@ class GiantBombClient {
 		]);
 
 		$this->params = [
-			'api_key' => env('GIANTBOMB_API_KEY'),
+			'api_key' => $this->getKey(),
 		];
 	}
 
+	public function getKey()
+    {
+        return config('almanac.services.giantbomb');
+    }
+
 	public function find(string $query)
 	{
+	    if (!$this->getKey()) return [];
+
         return Cache::remember($query, 15, function () use ($query) {
             $results = $this->get($query);
 

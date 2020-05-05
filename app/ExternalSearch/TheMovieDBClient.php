@@ -27,13 +27,20 @@ class TheMovieDBClient {
 		]);
 
 		$this->params = [
-			'api_key' => env('THEMOVIEDB_API_KEY'),
+			'api_key' => $this->getKey(),
 			'language' => 'en-US',
 		];
 	}
 
+    public function getKey()
+    {
+        return config('almanac.services.moviedb');
+    }
+
 	public function findMovie(string $query)
 	{
+        if (!$this->getKey()) return [];
+
 		return Cache::remember($query, 15, function () use ($query) {
 			$results = $this->get('movie', $query);
 
@@ -50,6 +57,8 @@ class TheMovieDBClient {
 
 	public function findTV(string $query)
 	{
+        if (!$this->getKey()) return [];
+
 		return Cache::remember($query, 15, function () use ($query) {
 			$results = $this->get('tv', $query);
 

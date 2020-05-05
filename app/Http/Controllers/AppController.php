@@ -17,9 +17,9 @@ class AppController extends Controller
 	    return view('admin')->with([
 	    	'tags' => $tags,
 		    'searchConfig' => [
-		    	'movie' => (bool) env('THEMOVIEDB_API_KEY'),
-			    'tv' => (bool) env('THEMOVIEDB_API_KEY'),
-                'game' => (bool) env('GIANTBOMB_API_KEY'),
+		    	'movie' => (bool) config('almanac.services.moviedb'),
+			    'tv' => (bool) config('almanac.services.moviedb'),
+                'game' => (bool) config('almanac.services.giantbomb'),
 		    ],
 	    ]);
     }
