@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --mode development",
-    "build": "webpack"
+    "build": "webpack",
+    "prettier": "./node_modules/.bin/prettier --config .prettierrc --check \"resources/assets/src/**/*.js\" --write"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.0",
@@ -22,6 +23,7 @@
     "postcss-cssnext": "^3.1.0",
     "postcss-input-range": "^4.0.0",
     "postcss-loader": "^3.0.0",
+    "prettier": "2.0.5",
     "sass-loader": "^8.0.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.43.0",

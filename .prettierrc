@@ -1,0 +1,8 @@
+{
+    "useTabs": true,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "always",
+    "filepath": "./resources/assets/src/**/*.js"
+}
