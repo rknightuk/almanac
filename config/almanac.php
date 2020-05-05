@@ -20,4 +20,14 @@ return [
         'giantbomb' => env('GIANTBOMB_API_KEY', null),
     ],
 
+    /**
+     * Metatdata for the site
+     */
+    'meta' => [
+        'site_title' => env('SITE_TITLE', 'Almanac'),
+        'site_subtitle' => env('SITE_SUBTITLE', 'by Robb Knight'),
+        'external_website' => env('WEBSITE', 'https://rknight.me'),
+        'twitter_username' => env('TWITTER', null),
+    ]
+
 ];

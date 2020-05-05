@@ -7,7 +7,7 @@
 
         <script src="https://kit.fontawesome.com/4faa09972b.js" crossorigin="anonymous"></script>
 
-		<title>@if (isset($singlePost)) {{ $singlePost->title }} - @endif{{ env('SITE_TITLE', 'Almanac') }}</title>
+		<title>@if (isset($singlePost)) {{ $singlePost->title }} - @endif{{ config('almanac.meta.site_title') }}</title>
 
         @if(env('APP_ENV') === 'local')
             <link href="http://localhost:9000/site.css" rel="stylesheet">
@@ -17,9 +17,9 @@
 
 		<link rel="apple-touch-icon" type="image/png" sizes="114x114" href="{{ asset('apple-touch-icon.png') }}">
 
-		@if (isset($singlePost))
+		@if (isset($singlePost) && config('almanac.meta.twitter_username'))
 			<meta name="twitter:card" content="summary">
-			<meta name="twitter:site" content="@rknightuk">
+			<meta name="twitter:site" content="{{'@'}}{{ config('almanac.meta.twitter_username') }}">
 			<meta name="twitter:title" content="{{ $singlePost->title }}">
 			<meta name="twitter:description" content="{{ $singlePost->twitter_preview }}">
 		@endif
@@ -32,12 +32,10 @@
                 </div>
             @endif
             <header class="almn-header">
-                <h1 class="almn-header--main"><a href="/">{{ env('SITE_TITLE', 'Almanac') }}</a></h1>
-                @if (env('SITE_SUBTITLE'))
-                    @if (env('WEBSITE'))<a href="{{ env('WEBSITE') }}">@endif
-                        <p class="almn-header--subtitle">{{ env('SITE_SUBTITLE') }}</p>
-                    @if (env('WEBSITE'))</a>@endif
-                @endif
+                <h1 class="almn-header--main"><a href="/">{{ config('almanac.meta.site_title') }}</a></h1>
+                <a href="{{ config('almanac.meta.external_website') }}">
+                    <p class="almn-header--subtitle">{{ config('almanac.meta.site_subtitle') }}</p>
+                </a>
             </header>
             <div class="almn-search">
                 <form action="/">
