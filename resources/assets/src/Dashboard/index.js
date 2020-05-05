@@ -5,23 +5,20 @@ import React from 'react'
 import Picker from 'src/Picker'
 import PostList from 'src/PostList'
 
-type Props = {
+type Props = {}
 
-}
-
-type State = {
-}
+type State = {}
 
 class Dashboard extends React.Component<Props, State> {
-    render() {
-        return (
-            <div>
-                <Picker/>
+	render() {
+		return (
+			<div>
+				<Picker />
 
-                <PostList />
-            </div>
-        )
-    }
+				<PostList />
+			</div>
+		)
+	}
 }
 
 export default Dashboard

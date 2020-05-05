@@ -9,63 +9,65 @@ import AttachmentItem from './Attachment'
 import type { AttachmentWithId } from 'src/Editor/Editor'
 
 type Props = {
-    attachments: Attachment[],
-    newAttachments: AttachmentWithId[],
-    handleDelete: (uuid: string) => any,
-    handleDeleteNew: (uuid: string) => any,
-    addAttachments: (attachments: File[]) => any,
+	attachments: Attachment[],
+	newAttachments: AttachmentWithId[],
+	handleDelete: (uuid: string) => any,
+	handleDeleteNew: (uuid: string) => any,
+	addAttachments: (attachments: File[]) => any,
 }
 
 class Attachments extends React.Component<Props> {
-    render() {
-        const { attachments, newAttachments } = this.props
-        return (
-            <FormRow
-                label="Uploads"
-                inputKey="uploads"
-                input={(
-                    <React.Fragment>
-                        {this.renderDropzone()}
-                        <ul>
-                            {newAttachments.map(this.renderAttachment)}
-                        </ul>
-                        <ul>
-                            {attachments.filter((a: Attachment) => a.deleted_at === null).map(this.renderAttachment)}
-                        </ul>
-                    </React.Fragment>
-                )}
-            />
-        )
-    }
+	render() {
+		const { attachments, newAttachments } = this.props
+		return (
+			<FormRow
+				label="Uploads"
+				inputKey="uploads"
+				input={
+					<React.Fragment>
+						{this.renderDropzone()}
+						<ul>{newAttachments.map(this.renderAttachment)}</ul>
+						<ul>
+							{attachments
+								.filter((a: Attachment) => a.deleted_at === null)
+								.map(this.renderAttachment)}
+						</ul>
+					</React.Fragment>
+				}
+			/>
+		)
+	}
 
-    renderDropzone = () => (
-        <Dropzone onDrop={acceptedFiles => this.props.addAttachments(acceptedFiles)}>
-            {({getRootProps, getInputProps}) => (
-                <div className={css.dropzone}>
-                    <div {...getRootProps()}>
-                        <input {...getInputProps()} />
-                        <p>Add some photos</p>
-                    </div>
-                </div>
-            )}
-        </Dropzone>
-    )
+	renderDropzone = () => (
+		<Dropzone
+			onDrop={(acceptedFiles) => this.props.addAttachments(acceptedFiles)}
+		>
+			{({ getRootProps, getInputProps }) => (
+				<div className={css.dropzone}>
+					<div {...getRootProps()}>
+						<input {...getInputProps()} />
+						<p>Add some photos</p>
+					</div>
+				</div>
+			)}
+		</Dropzone>
+	)
 
-    renderAttachment = (attachment: any) => (
-        <AttachmentItem
-            uuid={attachment.uuid}
-            title={attachment.filename || attachment.file.name}
-            onDelete={attachment.filename ? this.handleDelete : this.handleDeleteNew}
-        />
-    )
+	renderAttachment = (attachment: any) => (
+		<AttachmentItem
+			uuid={attachment.uuid}
+			title={attachment.filename || attachment.file.name}
+			onDelete={attachment.filename ? this.handleDelete : this.handleDeleteNew}
+		/>
+	)
 
-    handleDelete = (uuid: string) => {
-        this.props.handleDelete(uuid)
-    }
+	handleDelete = (uuid: string) => {
+		this.props.handleDelete(uuid)
+	}
 
-    handleDeleteNew = (uuid: string) => {
-        this.props.handleDeleteNew(uuid)
-    }
+	handleDeleteNew = (uuid: string) => {
+		this.props.handleDeleteNew(uuid)
+	}
 }
 
 export default Attachments

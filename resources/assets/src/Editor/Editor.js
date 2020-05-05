@@ -31,8 +31,8 @@ import slugify from 'slug'
 import Button from 'src/ui/Form/Button'
 
 export type AttachmentWithId = {
-    file: File,
-    uuid: string,
+	file: File,
+	uuid: string,
 }
 
 type Props = {
@@ -51,20 +51,19 @@ type State = {
 	pathManuallyChanged: boolean,
 	showPreview: boolean,
 	showSearch: boolean,
-    cachedDate: ?moment,
-    searchAvailable: boolean,
-    newAttachments: AttachmentWithId[],
+	cachedDate: ?moment,
+	searchAvailable: boolean,
+	newAttachments: AttachmentWithId[],
 }
 
 class Editor extends React.Component<Props, State> {
-
 	props: Props
 
 	state: State = {
 		post: this.props.post || {
 			id: null,
 			type: this.props.type || 'movie',
-            icon: 'movie',
+			icon: 'movie',
 			path: '',
 			title: '',
 			subtitle: '',
@@ -79,19 +78,18 @@ class Editor extends React.Component<Props, State> {
 			platform: '',
 			published: true,
 			tags: [],
-            attachments: [],
+			attachments: [],
 		},
-        cachedDate: this.props.post ? this.props.post.date_completed : null,
-        searchAvailable: false,
+		cachedDate: this.props.post ? this.props.post.date_completed : null,
+		searchAvailable: false,
 		deleting: false,
 		pathManuallyChanged: false,
 		showPreview: false,
 		showSearch: false,
-        newAttachments: [],
+		newAttachments: [],
 	}
 
 	render() {
-
 		const { post, showPreview, showSearch, searchAvailable } = this.state
 
 		return (
@@ -107,20 +105,25 @@ class Editor extends React.Component<Props, State> {
 				<div className={css.heading}>
 					<Icon
 						type={this.props.post ? this.props.post.type : this.props.type}
-					/> {this.props.isNew ? `Add new ${post.type}` : `Editing "${this.state.post.title}"`}
+					/>{' '}
+					{this.props.isNew
+						? `Add new ${post.type}`
+						: `Editing "${this.state.post.title}"`}
 				</div>
 
 				<form>
 					<FormRow
-                        inline
+						inline
 						label="Title"
 						inputKey="post-title"
-						input={(
+						input={
 							<div className={!this.props.post ? inputAddons.grouped : ''}>
 								<TextInput
 									value={post.title}
-									onChange={v => this.handleTitleChange(v)}
-                                    className={searchAvailable ? inputAddons.inputAddonInputRight : ''}
+									onChange={(v) => this.handleTitleChange(v)}
+									className={
+										searchAvailable ? inputAddons.inputAddonInputRight : ''
+									}
 								/>
 								{searchAvailable && (
 									<div
@@ -131,76 +134,75 @@ class Editor extends React.Component<Props, State> {
 									</div>
 								)}
 							</div>
-						)}
+						}
 					/>
 
 					<FormRow
 						label="Subtitle"
 						inputKey="post-subtitle"
-						input={(
+						input={
 							<TextInput
 								value={post.subtitle}
-								onChange={v => this.updatePost('subtitle', v)}
+								onChange={(v) => this.updatePost('subtitle', v)}
 							/>
-						)}
+						}
 					/>
 
-                    {post.type !== 'quote' && (
-                        <FormRow
-                            label="Rating"
-                            inputKey="post-rating"
-                            input={(
-                                <Rating
-                                    value={post.rating}
-                                    onChange={this.updateRating}
-                                />
-                            )}
-                        />
-                    )}
+					{post.type !== 'quote' && (
+						<FormRow
+							label="Rating"
+							inputKey="post-rating"
+							input={
+								<Rating value={post.rating} onChange={this.updateRating} />
+							}
+						/>
+					)}
 
-                    <div className={css.contentWrapper}>
-                        <div className={css.previewBar} onClick={this.togglePreview}>
-                            {showPreview ? 'Hide' : 'Show'} Preview
-                        </div>
-                        <textarea
-                            className={css.contentEditor}
-                            value={post.content}
-                            onChange={v => this.updatePost('content', v.target.value)}
-                        />
-                        {showPreview && (
-                            <div className={css.preview}>
-                                <ReactMarkdown source={post.content === '' ? '_nothing yet_' : post.content} />
-                            </div>
-                        )}
-                    </div>
+					<div className={css.contentWrapper}>
+						<div className={css.previewBar} onClick={this.togglePreview}>
+							{showPreview ? 'Hide' : 'Show'} Preview
+						</div>
+						<textarea
+							className={css.contentEditor}
+							value={post.content}
+							onChange={(v) => this.updatePost('content', v.target.value)}
+						/>
+						{showPreview && (
+							<div className={css.preview}>
+								<ReactMarkdown
+									source={post.content === '' ? '_nothing yet_' : post.content}
+								/>
+							</div>
+						)}
+					</div>
 
-                    <Attachments
-                        attachments={post.attachments}
-                        newAttachments={this.state.newAttachments}
-                        handleDelete={this.deleteAttachment}
-                        handleDeleteNew={this.deleteNewAttachment}
-                        addAttachments={this.addAttachments}
-                    />
+					<Attachments
+						attachments={post.attachments}
+						newAttachments={this.state.newAttachments}
+						handleDelete={this.deleteAttachment}
+						handleDeleteNew={this.deleteNewAttachment}
+						addAttachments={this.addAttachments}
+					/>
 
 					<FormRow
 						label="Slug"
 						inputKey="post-path"
-						input={(
+						input={
 							<div className={inputAddons.grouped}>
 								<div className={inputAddons.inputAddonLeft}>
 									{this.generateStaticPath()}
 								</div>
-                                <TextInput
-                                    value={post.path}
-                                    onChange={v => this.updatePost('path', v)}
-                                    className={inputAddons.inputAddonInputLeft}
-                                />
+								<TextInput
+									value={post.path}
+									onChange={(v) => this.updatePost('path', v)}
+									className={inputAddons.inputAddonInputLeft}
+								/>
 							</div>
-						)}
+						}
 					/>
 
 					<FormRow
-						label={(
+						label={
 							<span>
 								Link
 								{this.linkIncludes('youtube') && (
@@ -219,45 +221,45 @@ class Editor extends React.Component<Props, State> {
 									</span>
 								)}
 							</span>
-						)}
+						}
 						inputKey="post-link"
-						input={(
+						input={
 							<TextInput
 								value={post.link}
-								onChange={v => this.updatePost('link', v)}
+								onChange={(v) => this.updatePost('link', v)}
 							/>
-						)}
+						}
 					/>
 
 					<FormRow
 						label="Year"
 						inputKey="post-year"
-						input={(
+						input={
 							<TextInput
 								type="number"
 								min={1900}
 								max={9999}
 								value={post.year}
-								onChange={v => this.updatePost('year', v)}
+								onChange={(v) => this.updatePost('year', v)}
 							/>
-						)}
+						}
 					/>
 
 					<FormRow
 						label="Spoilers?"
 						inputKey="post-spoilers"
-						input={(
+						input={
 							<Checkbox
 								value={post.spoilers}
-								onChange={v => this.updatePost('spoilers', v)}
+								onChange={(v) => this.updatePost('spoilers', v)}
 							/>
-						)}
+						}
 					/>
 
 					<FormRow
 						label="Post Date"
 						inputKey="post-date"
-						input={(
+						input={
 							<DatePicker
 								format="DD-MM-YYYY"
 								value={moment(post.date_completed).format('DD-MM-YYYY')}
@@ -265,21 +267,21 @@ class Editor extends React.Component<Props, State> {
 								formatDate={formatDate}
 								parseDate={parseDate}
 							/>
-						)}
+						}
 					/>
 
 					{this.showPlatform() && (
 						<FormRow
 							label="Platform"
 							inputKey="post-platform"
-							input={(
+							input={
 								<Select
 									value={post.platform}
-									onChange={v => this.updatePost('platform', v)}
+									onChange={(v) => this.updatePost('platform', v)}
 									options={PLATFORMS}
 									withBlank
 								/>
-							)}
+							}
 						/>
 					)}
 
@@ -287,12 +289,12 @@ class Editor extends React.Component<Props, State> {
 						<FormRow
 							label={post.type === 'book' ? 'Author' : 'Artist'}
 							inputKey="post-author"
-							input={(
+							input={
 								<TextInput
 									value={post.creator}
-									onChange={v => this.updatePost('creator', v)}
+									onChange={(v) => this.updatePost('creator', v)}
 								/>
-							)}
+							}
 						/>
 					)}
 
@@ -300,56 +302,58 @@ class Editor extends React.Component<Props, State> {
 						<FormRow
 							label={post.type === 'book' ? 'Series' : 'Season'}
 							inputKey="post-season"
-							input={(
+							input={
 								<TextInput
 									value={post.season}
-									onChange={v => this.updatePost('season', v)}
+									onChange={(v) => this.updatePost('season', v)}
 								/>
-							)}
+							}
 						/>
 					)}
 
 					<FormRow
 						label="Tags"
 						inputKey="post-tags"
-						input={(
+						input={
 							<TagInput
-								onChange={tags => this.updatePost('tags', tags)}
+								onChange={(tags) => this.updatePost('tags', tags)}
 								tags={post.tags}
 							/>
-						)}
+						}
 					/>
 
 					<FormRow
 						label="Published?"
 						inputKey="post-published"
-						input={(
+						input={
 							<Checkbox
 								value={post.published}
-								onChange={v => this.updatePost('published', v)}
+								onChange={(v) => this.updatePost('published', v)}
 							/>
-						)}
+						}
 					/>
 
 					{this.state.post.id && (
 						<Button
-                            type="danger"
+							type="danger"
 							onClick={this.handleDelete}
 							disabled={this.state.deleting || this.props.saving}
-                            saving={this.state.deleting}
-                            savingText="Deleting"
-                            className={css.deleteButton}
+							saving={this.state.deleting}
+							savingText="Deleting"
+							className={css.deleteButton}
 						>
 							Delete
 						</Button>
 					)}
 
 					<Button
-                        type="success"
+						type="success"
 						onClick={this.handleSave}
-						disabled={this.props.saving || !this.isValid() || this.state.deleting}
-                        saving={this.props.saving}
-                        savingText="Saving"
+						disabled={
+							this.props.saving || !this.isValid() || this.state.deleting
+						}
+						saving={this.props.saving}
+						savingText="Saving"
 					>
 						Save
 					</Button>
@@ -363,50 +367,52 @@ class Editor extends React.Component<Props, State> {
 	}
 
 	addAttachments = (attachments: File[]) => {
-        this.setState((state: State) => ({
-            newAttachments: state.newAttachments.concat(attachments.map((a: File) => {
-                return {
-                    file: a,
-                    uuid: uuidv4(),
-                }
-            })),
-        }))
-    }
+		this.setState((state: State) => ({
+			newAttachments: state.newAttachments.concat(
+				attachments.map((a: File) => {
+					return {
+						file: a,
+						uuid: uuidv4(),
+					}
+				}),
+			),
+		}))
+	}
 
-    deleteNewAttachment = (uuid: string) => {
-	    this.setState((state: State) => ({
-            newAttachments: state.newAttachments.filter((u) => u.uuid !== uuid)
-        }))
-    }
+	deleteNewAttachment = (uuid: string) => {
+		this.setState((state: State) => ({
+			newAttachments: state.newAttachments.filter((u) => u.uuid !== uuid),
+		}))
+	}
 
-    deleteAttachment = (uuid: string) => {
-	    this.setState((state: State) => ({
-            post: {
-                ...state.post,
-                attachments: state.post.attachments.map((a: Attachment) => {
-                    if (uuid !== a.uuid) return a
+	deleteAttachment = (uuid: string) => {
+		this.setState((state: State) => ({
+			post: {
+				...state.post,
+				attachments: state.post.attachments.map((a: Attachment) => {
+					if (uuid !== a.uuid) return a
 
-                    return {
-                        ...a,
-                        deleted_at: moment().toDate().toISOString(),
-                    }
-                })
-            }
-        }))
-    }
+					return {
+						...a,
+						deleted_at: moment().toDate().toISOString(),
+					}
+				}),
+			},
+		}))
+	}
 
-    togglePreview = () => {
-	    this.setState((state: State) => ({
-            showPreview: !state.showPreview,
-        }))
-    }
+	togglePreview = () => {
+		this.setState((state: State) => ({
+			showPreview: !state.showPreview,
+		}))
+	}
 
 	showSearch = () => {
-	    const hasSearch = !this.props.post && window.AlmanacSearch[this.props.type]
-	    this.setState({
-            showSearch: hasSearch,
-            searchAvailable: hasSearch,
-        })
+		const hasSearch = !this.props.post && window.AlmanacSearch[this.props.type]
+		this.setState({
+			showSearch: hasSearch,
+			searchAvailable: hasSearch,
+		})
 	}
 
 	hideSearch = () => {
@@ -428,10 +434,13 @@ class Editor extends React.Component<Props, State> {
 	}
 
 	handleSave = () => {
-		this.props.onSave({
-			...this.state.post,
-			date_completed: this.state.post.date_completed.toDate(),
-		}, this.state.newAttachments)
+		this.props.onSave(
+			{
+				...this.state.post,
+				date_completed: this.state.post.date_completed.toDate(),
+			},
+			this.state.newAttachments,
+		)
 	}
 
 	showPlatform = () => ['game', 'quote'].includes(this.state.post.type)
@@ -457,11 +466,12 @@ class Editor extends React.Component<Props, State> {
 	}
 
 	updateRating = (value: number) => {
-	    this.updatePost('rating', value === this.state.post.rating ? null : value)
-    }
+		this.updatePost('rating', value === this.state.post.rating ? null : value)
+	}
 
 	updatePost = (key: string, value: any) => {
-		const pathManuallyChanged = key === 'path' ? true : this.state.pathManuallyChanged
+		const pathManuallyChanged =
+			key === 'path' ? true : this.state.pathManuallyChanged
 
 		this.setState((s: State) => ({
 			post: {
@@ -472,13 +482,14 @@ class Editor extends React.Component<Props, State> {
 		}))
 	}
 
-    updateDate = (date: moment) => {
-        const formattedDate = moment(date).format('YYYY/MM/DD')
-        const time = this.state.cachedDate ? this.state.cachedDate : moment.utc()
-        const datetime = formattedDate + ' ' + time.get('hour') + ':' + time.get('minute')
-        const format = 'YYYY/MM/DD HH:mm'
-	    this.updatePost('date_completed', moment.utc(datetime, format))
-    }
+	updateDate = (date: moment) => {
+		const formattedDate = moment(date).format('YYYY/MM/DD')
+		const time = this.state.cachedDate ? this.state.cachedDate : moment.utc()
+		const datetime =
+			formattedDate + ' ' + time.get('hour') + ':' + time.get('minute')
+		const format = 'YYYY/MM/DD HH:mm'
+		this.updatePost('date_completed', moment.utc(datetime, format))
+	}
 
 	shouldGeneratePath = () => {
 		return !this.props.post && !this.state.pathManuallyChanged
@@ -499,14 +510,16 @@ class Editor extends React.Component<Props, State> {
 	}
 
 	handleTitleChange = (title: string) => {
-		const path = this.shouldGeneratePath() ? this.slugifyTitle(title) : this.state.post.path
+		const path = this.shouldGeneratePath()
+			? this.slugifyTitle(title)
+			: this.state.post.path
 
 		this.setState((s: State) => ({
 			post: {
 				...s.post,
 				title,
 				path,
-			}
+			},
 		}))
 	}
 

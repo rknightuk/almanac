@@ -28,7 +28,6 @@ type State = {
 }
 
 class Create extends React.Component<Props, State> {
-
 	props: Props
 
 	state: State = {
@@ -61,18 +60,14 @@ class Create extends React.Component<Props, State> {
 				id: null,
 				content: '',
 				date_completed: moment(),
-				tags: response.data.tags.map(t => t.name.en),
+				tags: response.data.tags.map((t) => t.name.en),
 			},
 		})
 	}
 
 	render() {
 		if (this.state.loading) {
-			return (
-				<Loader
-					text="Loading Post"
-				/>
-			)
+			return <Loader text="Loading Post" />
 		}
 
 		return (
@@ -91,17 +86,18 @@ class Create extends React.Component<Props, State> {
 			saving: true,
 		}))
 
-        const formData = new FormData();
+		const formData = new FormData()
 
-        newAttachments.forEach((nu) => {
-            formData.append('file[]', nu.file)
-        })
-        formData.append('post', JSON.stringify(post))
+		newAttachments.forEach((nu) => {
+			formData.append('file[]', nu.file)
+		})
+		formData.append('post', JSON.stringify(post))
 
 		await axios.post('/api/posts', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }})
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		})
 
 		this.setState((s: State) => ({
 			saving: false,

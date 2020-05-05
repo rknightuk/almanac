@@ -30,7 +30,6 @@ type State = {
 }
 
 class Update extends React.Component<Props, State> {
-
 	props: Props
 
 	state: State = {
@@ -60,32 +59,25 @@ class Update extends React.Component<Props, State> {
 				...response.data,
 				content: response.data.content,
 				date_completed: moment.utc(response.data.date_completed),
-				tags: response.data.tags.map(t => t.name.en),
-                attachments: response.data.attachments.map(a => {
-                    return {
-                        ...a,
-                        uuid: uuidv4(),
-                    }
-                })
+				tags: response.data.tags.map((t) => t.name.en),
+				attachments: response.data.attachments.map((a) => {
+					return {
+						...a,
+						uuid: uuidv4(),
+					}
+				}),
 			},
 			loading: false,
 		})
 	}
 
 	render() {
-
 		if (this.state.loading) {
-			return (
-				<Loader
-					text="Loading Post"
-				/>
-			)
+			return <Loader text="Loading Post" />
 		}
 
 		if (this.state.notFound) {
-			return (
-				<div>Post not found</div>
-			)
+			return <div>Post not found</div>
 		}
 
 		return (
@@ -102,19 +94,19 @@ class Update extends React.Component<Props, State> {
 			saving: true,
 		}))
 
-        const formData = new FormData();
+		const formData = new FormData()
 
-        newAttachments.forEach((nu) => {
-            formData.append('file[]', nu.file)
-        })
-        formData.append('post', JSON.stringify(post))
-        formData.append('_method', 'put')
+		newAttachments.forEach((nu) => {
+			formData.append('file[]', nu.file)
+		})
+		formData.append('post', JSON.stringify(post))
+		formData.append('_method', 'put')
 
 		await axios.post(`/api/posts/${this.props.match.params.id}`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		})
 
 		this.setState((s: State) => ({
 			saving: false,

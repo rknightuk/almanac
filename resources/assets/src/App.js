@@ -13,25 +13,23 @@ import 'style-loader!css-loader!react-toastify/dist/ReactToastify.css'
 import css from './style.css'
 
 class App extends React.Component<{}> {
-    render() {
-        return (
-            <BrowserRouter>
-                <div>
-                    <div className={css.wrapper}>
-                        <Navigation />
-                        <Route exact path="/app" component={Dashboard}/>
-                        <Route exact path="/app/new" component={Create}/>
-                        <Route exact path="/app/new/:type/:id?" component={Create}/>
-                        <Route exact path="/app/posts/:id" component={Update}/>
-                    </div>
+	render() {
+		return (
+			<BrowserRouter>
+				<div>
+					<div className={css.wrapper}>
+						<Navigation />
+						<Route exact path="/app" component={Dashboard} />
+						<Route exact path="/app/new" component={Create} />
+						<Route exact path="/app/new/:type/:id?" component={Create} />
+						<Route exact path="/app/posts/:id" component={Update} />
+					</div>
 
-                    <ToastContainer
-                        position={toast.POSITION.BOTTOM_LEFT}
-                    />
-                </div>
-            </BrowserRouter>
-        )
-    }
+					<ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
+				</div>
+			</BrowserRouter>
+		)
+	}
 }
 
 export default hot(module)(App)

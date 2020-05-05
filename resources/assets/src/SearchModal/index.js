@@ -22,21 +22,20 @@ type State = {
 }
 
 const MODAL_STYLES = {
-	content : {
+	content: {
 		maxWidth: '800px',
 		margin: '0 auto',
 		height: '500px',
-		top: '200px'
+		top: '200px',
 	},
 	overlay: {
-		zIndex: 10
+		zIndex: 10,
 	},
-};
+}
 
 Modal.setAppElement('#admin')
 
 class SearchModal extends React.Component<Props, State> {
-
 	props: Props
 
 	state: State = {
@@ -46,68 +45,72 @@ class SearchModal extends React.Component<Props, State> {
 
 	render() {
 		return (
-			<Modal
-				isOpen
-				style={MODAL_STYLES}
-				onRequestClose={this.props.onClose}
-			>
-                <div className={inputAddons.grouped}>
-                    <TextInput
-                        value={this.state.query}
-                        onChange={this.handleQueryChange}
-                        className={inputAddons.inputAddonInputRight}
-                    />
-                    <div
-                        className={inputAddons.inputAddonRight}
-                    >
-                        <i className={'fas fa-search'} />
-                    </div>
-                </div>
+			<Modal isOpen style={MODAL_STYLES} onRequestClose={this.props.onClose}>
+				<div className={inputAddons.grouped}>
+					<TextInput
+						value={this.state.query}
+						onChange={this.handleQueryChange}
+						className={inputAddons.inputAddonInputRight}
+					/>
+					<div className={inputAddons.inputAddonRight}>
+						<i className={'fas fa-search'} />
+					</div>
+				</div>
 
-                {this.state.results.map((r: SearchResult, i) => {
-                    const background = this.getBackgroundUrl(r)
-                    return (
-                        <div
-                            key={i}
-                            style={background && {
-                                backgroundImage: `url("${background}")`,
-                            }}
-                            className={css.result}
-                            onClick={() => this.props.onSelected(r)}
-                        >
-                            <div className={css.title}>{r.title} - {r.year}{r.meta ? ` - (${r.meta})` : ''}</div>
-                        </div>
-                    )
-                })}
-                
+				{this.state.results.map((r: SearchResult, i) => {
+					const background = this.getBackgroundUrl(r)
+					return (
+						<div
+							key={i}
+							style={
+								background && {
+									backgroundImage: `url("${background}")`,
+								}
+							}
+							className={css.result}
+							onClick={() => this.props.onSelected(r)}
+						>
+							<div className={css.title}>
+								{r.title} - {r.year}
+								{r.meta ? ` - (${r.meta})` : ''}
+							</div>
+						</div>
+					)
+				})}
+
 				<div>
-                    <Button type="success" onClick={this.props.onClose} className={css.cancelButton}>
-                        Cancel
-                    </Button>
+					<Button
+						type="success"
+						onClick={this.props.onClose}
+						className={css.cancelButton}
+					>
+						Cancel
+					</Button>
 				</div>
 			</Modal>
 		)
 	}
 
-    getBackgroundUrl = (r: SearchResult): ?string => {
-        if (r.backdrop) return r.backdrop
-        if (r.poster) return r.poster
+	getBackgroundUrl = (r: SearchResult): ?string => {
+		if (r.backdrop) return r.backdrop
+		if (r.poster) return r.poster
 
-        return null
-    }
+		return null
+	}
 
 	handleQueryChange = (query: string) => {
 		this.debounceSearch(query)
 	}
 
 	debounceSearch = debounce(async (query) => {
-		const response = await axios.get(`/api/search/${this.props.type}?query=${query}`)
+		const response = await axios.get(
+			`/api/search/${this.props.type}?query=${query}`,
+		)
 
 		this.setState({
 			results: response.data,
 		})
 	}, 500)
-
 }
 
 export default SearchModal
