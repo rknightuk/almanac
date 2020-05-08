@@ -6,6 +6,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import Navigation from 'src/Navigation'
 import Dashboard from 'src/Dashboard'
+import Settings from 'src/Settings'
 import Create from 'src/Editor/Create'
 import Update from 'src/Editor/Update'
 
@@ -23,6 +24,7 @@ class App extends React.Component<{}> {
 						<Route exact path="/app/new" component={Create} />
 						<Route exact path="/app/new/:type/:id?" component={Create} />
 						<Route exact path="/app/posts/:id" component={Update} />
+                        <Route exact path="/app/settings" component={Settings} />
 					</div>
 
 					<ToastContainer position={toast.POSITION.BOTTOM_LEFT} />

@@ -24,6 +24,9 @@ class Navigation extends React.Component<{}> {
 				<div>
 					<Link to="/app">Almanac</Link>
 				</div>
+                <div>
+                    <Link to="/app/settings">Settings</Link>
+                </div>
 				<div>
 					<a href="#" onClick={this.logout}>
 						<i className="far fa-sign-out"></i> Logout
