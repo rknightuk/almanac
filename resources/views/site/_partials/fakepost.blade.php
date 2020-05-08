@@ -17,4 +17,7 @@
 			{!! $content !!}
 		@endif
 	</div>
+    <footer class="almn-post--footer">
+        <div class="almn-post--footer--row"></div>
+    </footer>
 </div>
