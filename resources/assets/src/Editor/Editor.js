@@ -62,8 +62,8 @@ class Editor extends React.Component<Props, State> {
 	state: State = {
 		post: this.props.post || {
 			id: null,
-			type: this.props.type || 'movie',
-			icon: 'movie',
+			type: this.props.type || window.AlmanacConfig.postTypes[0].key,
+			icon: window.AlmanacConfig.postTypes[0].icon,
 			path: '',
 			title: '',
 			subtitle: '',
