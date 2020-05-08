@@ -44,17 +44,21 @@ class LetterboxdFetcher {
         $content = file_get_contents($this->getFeed());
         $data = simplexml_load_string($content);
 
+        $postsToCreate = []; // get new posts in reverse order
         foreach($data->channel->item as $item) {
-            $this->createPost($item);
+            if ($this->shouldCreate($item)) {
+                array_unshift($postsToCreate, $item);
+            }
+        }
+
+        foreach ($postsToCreate as $post)
+        {
+            $this->createPost($post);
         }
     }
 
     private function createPost(SimpleXMLElement $item)
     {
-        if (!$this->shouldCreate($item)) {
-            return;
-        }
-
         $letterboxdData = $item->children('letterboxd', true);
 
         $hasSpoilers = $this->doesHaveSpoilers((string) $item->title);
