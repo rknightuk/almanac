@@ -40,4 +40,14 @@ class PostType {
         PostType::VIDEO => 'watched',
     ];
 
+    const ALL = [
+        self::MOVIE,
+        self::TV,
+        self::GAME,
+        self::MUSIC,
+        self::BOOK,
+        self::PODCAST,
+        self::VIDEO,
+    ];
+
 }
