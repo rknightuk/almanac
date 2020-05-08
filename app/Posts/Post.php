@@ -108,7 +108,7 @@ class Post extends Model implements Feedable
 
     public function getIconAttribute()
     {
-        return PostType::ICONS[$this->type];
+        return $this->link_post ? 'link' : PostType::ICONS[$this->type];
     }
 
 	public function getVerbAttribute()

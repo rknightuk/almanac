@@ -23,7 +23,7 @@
 			</a>
 			@if ($post->year || $post->link_post)
 				<span class="almn-post--titles--main__meta">
-					@if ($post->link_post)({{ $post->link_host }})@endif {{ $post->year }}
+					{{ $post->year }}
 				</span>
 			@endif
 		</div>
