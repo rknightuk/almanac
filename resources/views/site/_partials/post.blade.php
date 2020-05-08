@@ -14,13 +14,8 @@
 	</a>
 	<div class="almn-post--titles">
 		<div class="almn-post--titles--main">
-			@if ($post->isQuote())
-				<div class="almn-post--titles--main__quote">
-					{!! $post->html !!}
-				</div>
-			@endif
 			<a href="{{ $post->permalink }}">
-				@if ($post->isQuote()) — @endif{{ $post->title }}
+				{{ $post->title }}
 			</a>
 			@if ($post->year)
 				<span class="almn-post--titles--main__meta">
@@ -35,9 +30,9 @@
 		@endif
 	</div>
 
-    @if (($post->html && !$post->isQuote()) || count($post->attachments) > 0)
+    @if ($post->html || count($post->attachments) > 0)
         <div class="almn-post--content">
-            @if ($post->html && !$post->isQuote())
+            @if ($post->html)
                 @if ($post->spoilers)
                     <p>
                         <em>Review contains spoilers. <a href="#" class="spoiler-reveal" data-post-id="{{ $post->id }}">Reveal your secrets</a>.</em>

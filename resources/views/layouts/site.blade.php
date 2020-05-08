@@ -71,9 +71,6 @@
                     <a href="/?category=video"><i class="fas fa-video"></i></a>
                 </div>
                 <div class="almn-nav--link">
-                    <a href="/?category=quote"><i class="fas fa-quote-left"></i></a>
-                </div>
-                <div class="almn-nav--link">
                     <a href="/tags"><i class="fas fa-tags" data-fa-transform="shrink-2"></i></a>
                 </div>
             </nav>

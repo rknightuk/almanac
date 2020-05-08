@@ -73,12 +73,7 @@ class Post extends Model implements Feedable
 
 	public function shouldShowCount(): bool
 	{
-		return !$this->isQuote() && !$this->isMusic() && $this->time_viewed > 1;
-	}
-
-	public function isQuote(): bool
-	{
-		return $this->type === PostType::QUOTE;
+		return !$this->isMusic() && $this->time_viewed > 1;
 	}
 
 	public function isMusic(): bool
@@ -158,8 +153,6 @@ class Post extends Model implements Feedable
 	public function getTwitterPreviewAttribute()
 	{
 		$date = $this->date_completed->format('l jS F Y');
-
-		if ($this->isQuote()) return $date;
 
 		return ucfirst($this->verb) . ' on ' . $date . ' for the ' . NumberToAdjective::convert($this->time_viewed) . ' time';
 	}

@@ -11,7 +11,6 @@ class PostType {
 	const BOOK = 'book';
 	const PODCAST = 'podcast';
 	const VIDEO = 'video';
-	const QUOTE = 'quote';
 
     const MOVIE_ICON = 'film';
     const TV_ICON = 'tv-retro';
@@ -20,7 +19,6 @@ class PostType {
     const BOOK_ICON = 'book';
     const PODCAST_ICON = 'podcast';
     const VIDEO_ICON = 'video';
-    const QUOTE_ICON = 'quote-left';
 
 	const ICONS = [
         PostType::MOVIE => self::MOVIE_ICON,
@@ -30,7 +28,6 @@ class PostType {
         PostType::BOOK => self::BOOK_ICON,
         PostType::PODCAST => self::PODCAST_ICON,
         PostType::VIDEO => self::VIDEO_ICON,
-        PostType::QUOTE => self::QUOTE_ICON,
     ];
 
     const VERBS = [
@@ -41,7 +38,6 @@ class PostType {
         PostType::BOOK => 'read',
         PostType::PODCAST => 'listened',
         PostType::VIDEO => 'watched',
-        PostType::QUOTE => '',
     ];
 
 }
