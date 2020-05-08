@@ -13,7 +13,7 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-    	factory(Post::class, 10)->create()->each(function(Post $post) {
+    	factory(Post::class, 100)->create()->each(function(Post $post) {
     	    if (rand(0, 3) == 1) {
                 $post->attachments()->createMany(factory(Attachment::class, rand(1, 5))->make()->toArray());
             }
