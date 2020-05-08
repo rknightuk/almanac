@@ -10,7 +10,10 @@
 			href="/?category={{ strtolower($post->type) }}"
 			class="almn-post--icon almn-post--icon--{{ strtolower($post->type) }}"
 	>
-		<i class="fas fa-{{ $post->icon }}" @if(in_array($post->icon, ['tv', 'book', 'video'])) data-fa-transform="shrink-3" @endif></i>
+		<i
+            class="fas fa-{{ $post->icon }}"
+            @if(in_array($post->icon, \Almanac\Posts\PostType::ICONS_SHRINK_POST)) data-fa-transform="shrink-3" @endif
+        ></i>
 	</a>
 	<div class="almn-post--titles">
 		<div class="almn-post--titles--main">

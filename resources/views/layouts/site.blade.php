@@ -49,27 +49,16 @@
                 </form>
             </div>
             <nav class="almn-nav">
-                <div class="almn-nav--link">
-                    <a href="/?category=movie"><i class="fas fa-film"></i></a>
-                </div>
-                <div class="almn-nav--link">
-                    <a href="/?category=tv"><i class="fas fa-tv-retro" data-fa-transform="shrink-3"></i></a>
-                </div>
-                <div class="almn-nav--link">
-                    <a href="/?category=game"><i class="fas fa-gamepad"></i></a>
-                </div>
-                <div class="almn-nav--link">
-                    <a href="/?category=music"><i class="fas fa-headphones"></i></a>
-                </div>
-                <div class="almn-nav--link">
-                    <a href="/?category=book"><i class="fas fa-book" data-fa-transform="shrink-3"></i></a>
-                </div>
-                <div class="almn-nav--link">
-                    <a href="/?category=podcast"><i class="fas fa-podcast"></i></a>
-                </div>
-                <div class="almn-nav--link">
-                    <a href="/?category=video"><i class="fas fa-video"></i></a>
-                </div>
+                @foreach ($postTypes as $postType)
+                    <div class="almn-nav--link">
+                        <a href="/?category={{ $postType['key'] }}">
+                            <i
+                                class="fas fa-{{ $postType['icon'] }}"
+                                @if (in_array($postType['key'], \Almanac\Posts\PostType::ICONS_SHRINK_NAV))data-fa-transform="shrink-2"@endif
+                            ></i>
+                        </a>
+                    </div>
+                @endforeach
                 <div class="almn-nav--link">
                     <a href="/tags"><i class="fas fa-tags" data-fa-transform="shrink-2"></i></a>
                 </div>

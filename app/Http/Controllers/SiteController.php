@@ -4,6 +4,7 @@ namespace Almanac\Http\Controllers;
 
 use Almanac\Posts\PostQuery;
 use Almanac\Posts\PostRepository;
+use Almanac\Posts\PostType;
 use Spatie\Tags\Tag;
 
 class SiteController extends Controller
@@ -53,6 +54,7 @@ class SiteController extends Controller
 		$category = request()->input('category');
 
 		return view('site.index', [
+            'postTypes' => PostType::getConfig(),
 			'posts' => $posts,
 			'search' => request()->input('search'),
 			'tags' => request()->input('tags'),

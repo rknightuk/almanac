@@ -50,6 +50,17 @@ class PostType {
         self::VIDEO,
     ];
 
+    const ICONS_SHRINK_NAV = [
+        self::TV,
+        self::BOOK,
+    ];
+
+    const ICONS_SHRINK_POST = [
+        self::TV,
+        self::BOOK,
+        self::VIDEO,
+    ];
+
     public static function getConfig()
     {
         $disabledTypes = explode(',', config('almanac.disabled_types'));
