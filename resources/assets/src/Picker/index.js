@@ -29,7 +29,6 @@ const Picker = () => (
 		<Block name="podcast" />
 		<Block name="book" />
 		<Block name="video" />
-		<Block name="quote" />
 	</div>
 )
 

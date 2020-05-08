@@ -1,13 +1,7 @@
 .picker {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-column-gap: 5px;
-}
-
-@media (max-width: 550px) {
-    .picker {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
 }
 
 .block {
@@ -25,4 +19,13 @@
 
 .block:hover {
     background: #f5f5f5;
+}
+
+@media (max-width: 550px) {
+    .picker {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .block {
+        height: 55px;
+    }
 }

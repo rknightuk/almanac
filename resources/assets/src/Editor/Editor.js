@@ -148,15 +148,11 @@ class Editor extends React.Component<Props, State> {
 						}
 					/>
 
-					{post.type !== 'quote' && (
-						<FormRow
-							label="Rating"
-							inputKey="post-rating"
-							input={
-								<Rating value={post.rating} onChange={this.updateRating} />
-							}
-						/>
-					)}
+					<FormRow
+						label="Rating"
+						inputKey="post-rating"
+						input={<Rating value={post.rating} onChange={this.updateRating} />}
+					/>
 
 					<div className={css.contentWrapper}>
 						<div className={css.previewBar} onClick={this.togglePreview}>
@@ -443,9 +439,9 @@ class Editor extends React.Component<Props, State> {
 		)
 	}
 
-	showPlatform = () => ['game', 'quote'].includes(this.state.post.type)
-	showCreator = () => ['book', 'music', 'quote'].includes(this.state.post.type)
-	showSeason = () => ['tv', 'book', 'quote'].includes(this.state.post.type)
+	showPlatform = () => ['game'].includes(this.state.post.type)
+	showCreator = () => ['book', 'music'].includes(this.state.post.type)
+	showSeason = () => ['tv', 'book'].includes(this.state.post.type)
 
 	isValid = () => Object.keys(this.getErrors()).length === 0
 

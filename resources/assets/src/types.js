@@ -17,7 +17,6 @@ export type PostTypes =
 	| 'book'
 	| 'podcast'
 	| 'video'
-	| 'quote'
 
 export type Post = {
 	id: ?number,
