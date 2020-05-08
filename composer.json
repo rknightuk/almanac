@@ -19,7 +19,8 @@
         "league/commonmark": "^1.4",
         "league/flysystem-aws-s3-v3": "^1.0",
         "spatie/laravel-feed": "^2.6",
-        "spatie/laravel-tags": "^2.0"
+        "spatie/laravel-tags": "^2.0",
+        "ext-gd": "*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
