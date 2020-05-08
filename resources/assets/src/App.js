@@ -24,7 +24,7 @@ class App extends React.Component<{}> {
 						<Route exact path="/app/new" component={Create} />
 						<Route exact path="/app/new/:type/:id?" component={Create} />
 						<Route exact path="/app/posts/:id" component={Update} />
-                        <Route exact path="/app/settings" component={Settings} />
+						<Route exact path="/app/settings" component={Settings} />
 					</div>
 
 					<ToastContainer position={toast.POSITION.BOTTOM_LEFT} />

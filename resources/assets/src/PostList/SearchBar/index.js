@@ -6,6 +6,7 @@ import TextInput from 'src/ui/Form/TextInput'
 import Select from 'src/ui/Form/Select'
 
 import css from './style.css'
+import type { PostTypeConfig } from 'src/types'
 
 type Props = {
 	search: ?string,
@@ -25,16 +26,9 @@ const SearchBar = ({ search, type, onChangeQuery, onChangeType }: Props) => (
 
 		<Select
 			value={type}
-			options={[
-				{ value: 'movie', label: 'Movie' },
-				{ value: 'tv', label: 'TV' },
-				{ value: 'game', label: 'Game' },
-				{ value: 'music', label: 'Music' },
-				{ value: 'podcast', label: 'Podcast' },
-				{ value: 'book', label: 'Book' },
-				{ value: 'video', label: 'Video' },
-				{ value: 'text', label: 'Text' },
-			]}
+			options={window.AlmanacConfig.postTypes.map((type: PostTypeConfig) => (
+                { value: type.key, label: type.name }
+            ))}
 			onChange={(t) => onChangeType(t === '' ? null : t)}
 			withBlank
 		/>

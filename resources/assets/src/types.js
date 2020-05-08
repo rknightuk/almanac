@@ -18,6 +18,12 @@ export type PostTypes =
 	| 'podcast'
 	| 'video'
 
+export type PostTypeConfig = {
+	key: PostTypes,
+    name: string,
+	icon: string,
+}
+
 export type Post = {
 	id: ?number,
 	type: PostTypes,
@@ -26,7 +32,7 @@ export type Post = {
 	subtitle: string,
 	content: string,
 	link: ?string,
-    link_post: boolean,
+	link_post: boolean,
 	rating: ?number,
 	year: ?string,
 	spoilers: boolean,

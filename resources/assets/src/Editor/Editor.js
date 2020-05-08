@@ -69,7 +69,7 @@ class Editor extends React.Component<Props, State> {
 			subtitle: '',
 			content: '',
 			link: '',
-            link_post: false,
+			link_post: false,
 			rating: null,
 			year: '',
 			spoilers: false,
@@ -223,16 +223,16 @@ class Editor extends React.Component<Props, State> {
 						}
 					/>
 
-                    <FormRow
-                        label="Link Post?"
-                        inputKey="post-link-post"
-                        input={
-                            <Checkbox
-                                value={post.link_post}
-                                onChange={(v) => this.updatePost('link_post', v)}
-                            />
-                        }
-                    />
+					<FormRow
+						label="Link Post?"
+						inputKey="post-link-post"
+						input={
+							<Checkbox
+								value={post.link_post}
+								onChange={(v) => this.updatePost('link_post', v)}
+							/>
+						}
+					/>
 
 					<FormRow
 						label="Year"
@@ -411,7 +411,8 @@ class Editor extends React.Component<Props, State> {
 	}
 
 	showSearch = () => {
-		const hasSearch = !this.props.post && window.AlmanacSearch[this.props.type]
+		const hasSearch =
+			!this.props.post && window.AlmanacConfig.search[this.props.type]
 		this.setState({
 			showSearch: hasSearch,
 			searchAvailable: hasSearch,
@@ -466,8 +467,8 @@ class Editor extends React.Component<Props, State> {
 		}
 
 		if (post.link_post && !post.link) {
-		    errors.link = 'Link required for link post'
-        }
+			errors.link = 'Link required for link post'
+		}
 
 		return errors
 	}

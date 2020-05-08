@@ -35,7 +35,7 @@ class TagInput extends React.Component<Props, State> {
 			const inputValue = (props.value && props.value.trim().toLowerCase()) || ''
 			const inputLength = inputValue.length
 
-			let suggestions = window.AlmanacTags.filter((t) => {
+			let suggestions = window.AlmanacConfig.tags.filter((t) => {
 				return t.toLowerCase().slice(0, inputLength) === inputValue
 			})
 
