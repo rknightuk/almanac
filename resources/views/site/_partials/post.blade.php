@@ -37,7 +37,7 @@
 		@endif
 	</div>
 
-    @if ($post->html || count($post->attachments) > 0)
+    @if ($post->html || count($post->getSortedAttachments()) > 0)
         <div class="almn-post--content">
             @if ($post->html)
                 @if ($post->spoilers)
@@ -51,16 +51,16 @@
                     {!! $post->html !!}
                 @endif
             @endif
-                @if (count($post->attachments) > 0)
+                @if (count($post->getSortedAttachments()) > 0)
                     <div class="almn-post--attachments">
                         <div class="almn-post--attachments--main">
-                            <a href="{{ $post->attachments[0]->real_path }}" target="_blank" id="gallery-{{ $post->id }}">
-                                <img src="{{ $post->attachments[0]->real_path }}" />
+                            <a href="{{ $post->getSortedAttachments()[0]->real_path }}" target="_blank" id="gallery-{{ $post->id }}">
+                                <img src="{{ $post->getSortedAttachments()[0]->real_path }}" />
                             </a>
                         </div>
-                        @if (count($post->attachments) > 1)
-                            <div class="almn-post--attachments--grid almn-post--attachments--grid--{{ count($post->attachments) < 5 ? count($post->attachments) : 5 }}">
-                                @foreach ($post->attachments as $index => $attachment)
+                        @if (count($post->getSortedAttachments()) > 1)
+                            <div class="almn-post--attachments--grid almn-post--attachments--grid--{{ count($post->getSortedAttachments()) < 5 ? count($post->getSortedAttachments()) : 5 }}">
+                                @foreach ($post->getSortedAttachments() as $index => $attachment)
                                     <div class="almn-post--attachments--grid--single">
                                         <a class="almn-post--attachments--grid--single--link" data-post-id="{{ $post->id }}" href="{{ $attachment->real_path }}" target="_blank">
                                             <img src="{{ $attachment->real_path }}" />

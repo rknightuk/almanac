@@ -46,6 +46,7 @@ class Post extends Model implements Feedable
 	    'creator',
 	    'season',
 	    'platform',
+        'attachment_order',
     ];
 
     protected $casts = [
@@ -167,6 +168,21 @@ class Post extends Model implements Feedable
 
 		return ucfirst($this->verb) . ' on ' . $date . ' for the ' . NumberToAdjective::convert($this->time_viewed) . ' time';
 	}
+
+	public function getAttachmentOrderAttribute($attachmentOrder)
+    {
+        return explode(',', $attachmentOrder ?? '');
+    }
+
+    public function getSortedAttachments()
+    {
+        if (empty($this->attachment_order)) return [];
+
+        return $this->attachments->sortBy(function(Attachment $attachment) {
+            $found = array_search($attachment->id, $this->attachment_order);
+            return $found === false ? 9999999999+$attachment->id : $found;
+        })->values()->all();
+    }
 
     public function toFeedItem(): FeedItem
     {

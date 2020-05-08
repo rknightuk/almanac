@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLinkPostToPosts extends Migration
+class AddAttachmentOrderToPosts extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddLinkPostToPosts extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->boolean('link_post')->default(false)->after('link');
+            $table->text('attachment_order')->nullable(true)->after('published');
         });
     }
 
