@@ -43,6 +43,7 @@ class SiteController extends Controller
 
 		return view('site.show', [
 			'post' => $post,
+            'postTypes' => PostType::getConfig(),
 		]);
 	}
 
@@ -75,6 +76,7 @@ class SiteController extends Controller
 		})->values()->toArray();
 
 		return view('site.tags', [
+            'postTypes' => PostType::getConfig(),
 			'tags' => $tags,
 		]);
 	}
