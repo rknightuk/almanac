@@ -207,11 +207,6 @@ class Editor extends React.Component<Props, State> {
 										<i className="fab fa-youtube" />
 									</span>
 								)}
-								{this.linkIncludes('spotify') && (
-									<span className={css.spotify}>
-										<i className="fab fa-spotify" />
-									</span>
-								)}
 								{this.linkIncludes('vimeo') && (
 									<span className={css.vimeo}>
 										<i className="fab fa-vimeo" />
