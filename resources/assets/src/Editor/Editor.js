@@ -69,6 +69,7 @@ class Editor extends React.Component<Props, State> {
 			subtitle: '',
 			content: '',
 			link: '',
+            link_post: false,
 			rating: null,
 			year: '',
 			spoilers: false,
@@ -226,6 +227,17 @@ class Editor extends React.Component<Props, State> {
 							/>
 						}
 					/>
+
+                    <FormRow
+                        label="Link Post?"
+                        inputKey="post-link-post"
+                        input={
+                            <Checkbox
+                                value={post.link_post}
+                                onChange={(v) => this.updatePost('link_post', v)}
+                            />
+                        }
+                    />
 
 					<FormRow
 						label="Year"
@@ -457,6 +469,10 @@ class Editor extends React.Component<Props, State> {
 		if (!post.path || post.path === '') {
 			errors.path = 'Slug is required'
 		}
+
+		if (post.link_post && !post.link) {
+		    errors.link = 'Link required for link post'
+        }
 
 		return errors
 	}

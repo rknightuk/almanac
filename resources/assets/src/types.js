@@ -26,6 +26,7 @@ export type Post = {
 	subtitle: string,
 	content: string,
 	link: ?string,
+    link_post: boolean,
 	rating: ?number,
 	year: ?string,
 	spoilers: boolean,

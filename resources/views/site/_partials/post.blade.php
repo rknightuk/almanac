@@ -14,8 +14,12 @@
 	</a>
 	<div class="almn-post--titles">
 		<div class="almn-post--titles--main">
-			<a href="{{ $post->permalink }}">
-				{{ $post->title }}
+			<a
+                href="{{ $post->link_post ? $post->link: $post->permalink }}"
+                class="almn-post--titles--main--link @if ($post->link_post)@endif"
+                @if ($post->link_post) target="_blank" @endif
+            >
+                @if ($post->link_post)<i class="far fa-link" data-fa-transform="shrink-6"></i>@endif{{ $post->title }}
 			</a>
 			@if ($post->year)
 				<span class="almn-post--titles--main__meta">

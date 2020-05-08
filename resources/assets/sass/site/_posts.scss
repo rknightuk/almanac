@@ -15,8 +15,6 @@ $post-top-padding: 15px;
     &--podcast { border-left-color: $type-podcast; }
     &--book { border-left-color: $type-book; }
     &--video { border-left-color: $type-video; }
-    &--text { border-left-color: $type-text; }
-    &--quote { border-left-color: $type-quote; }
 
 	&__related {
 		padding: 15px 20px;
@@ -56,23 +54,15 @@ $post-top-padding: 15px;
         &--podcast { background: $type-podcast; }
         &--book { background: $type-book; }
         &--video { background: $type-video; }
-        &--text { background: $type-text; }
-        &--quote { background: $type-quote; }
-
     }
 
 	&--titles {
 		margin-right: 30px;
 		&--main {
 			font-size: 25px;
-			& a {
-				color: $text-color;
-			}
-			&__quote {
-				font-size: 20px;
-				margin-top: -10px;
-				color: $lighter-text-color;
-			}
+            &--link {
+                color: $text-color;
+            }
 			&__meta {
 				color: $lighter-text-color;
 				font-size: 18px;
