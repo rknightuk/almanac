@@ -2,12 +2,13 @@ $post-top-padding: 15px;
 
 .almn-post {
 	position: relative;
-    padding: 15px 20px 15px 25px;
+    padding: 15px 20px 0 25px;
 	background: $background-post;
 	color: $text-color;
 	margin: 0 auto;
     margin-bottom: 20px;
     border-left: 1px solid $primary-color;
+    box-shadow: 1px 1px 3px 1px #e1e1e1;
     &--movie { border-left-color: $type-movie; }
     &--tv { border-left-color: $type-tv; }
     &--game { border-left-color: $type-game; }
@@ -57,7 +58,6 @@ $post-top-padding: 15px;
     }
 
 	&--titles {
-		margin-right: 30px;
 		&--main {
 			font-size: 25px;
             &--link {
@@ -178,6 +178,7 @@ $post-top-padding: 15px;
         }
 		&--date {
 			flex: 1;
+            margin-bottom: 10px;
 			&--rewatched {
 				font-size: 12px;
 				color: #d8d8d8;
