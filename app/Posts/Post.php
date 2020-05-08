@@ -101,6 +101,11 @@ class Post extends Model implements Feedable
 		);
 	}
 
+	public function getLinkHostAttribute()
+    {
+        return str_replace('www.', '', parse_url($this->link)['host'] ?? $this->link);
+    }
+
     public function getIconAttribute()
     {
         return PostType::ICONS[$this->type];

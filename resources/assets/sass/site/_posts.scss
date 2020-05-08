@@ -62,6 +62,7 @@ $post-top-padding: 15px;
 			font-size: 25px;
             &--link {
                 color: $text-color;
+                margin-right: -3px;
             }
 			&__meta {
 				color: $lighter-text-color;

@@ -16,14 +16,14 @@
 		<div class="almn-post--titles--main">
 			<a
                 href="{{ $post->link_post ? $post->link: $post->permalink }}"
-                class="almn-post--titles--main--link @if ($post->link_post)@endif"
+                class="almn-post--titles--main--link"
                 @if ($post->link_post) target="_blank" @endif
             >
-                @if ($post->link_post)<i class="far fa-link" data-fa-transform="shrink-6"></i>@endif{{ $post->title }}
+                {{ $post->title }}
 			</a>
-			@if ($post->year)
+			@if ($post->year || $post->link_post)
 				<span class="almn-post--titles--main__meta">
-					{{ $post->year }}
+					@if ($post->link_post)({{ $post->link_host }})@endif {{ $post->year }}
 				</span>
 			@endif
 		</div>
@@ -86,7 +86,7 @@
             <div class="almn-post--footer--tags">
                 @if ($post->link)
                     <a href="{{ $post->link }}" target="_blank">
-                        {{ str_replace('www.', '', parse_url($post->link)['host'] ?? $post->link) }}
+                        {{ $post->link_host  }}
                     </a>
                 @endif
                 @foreach ($post->tags->sortBy('name') as $tag)
