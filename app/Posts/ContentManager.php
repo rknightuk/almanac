@@ -22,25 +22,9 @@ class ContentManager {
 
 		$converter = new Converter(new DocParser($env), new HtmlRenderer($env));
 
-		$markdown = $converter->convertToHtml($post->content);
-		$content = $this->wrapSpoilers($post->spoilers, $markdown);
+		$content = $converter->convertToHtml($post->content);
 
 		return $post->link ? $this->attemptEmbed($post->link, $content) : $content;
-	}
-
-	private function wrapSpoilers(bool $spoilers, string $content)
-	{
-		if ($spoilers) {
-			$content = str_replace('[spoiler]', '', $content);
-			$content = str_replace('[/spoiler]', '', $content);
-			$content = '<div class="almn-post--content__spoiler">' . $content;
-			$content =  $content . '</div>';
-		} else {
-			$content = str_replace('[spoiler]', '<span class="almn-post--content__spoiler">', $content);
-			$content = str_replace('[/spoiler]', '</span>', $content);
-		}
-
-		return $content;
 	}
 
 	private function attemptEmbed(string $link, string $content)

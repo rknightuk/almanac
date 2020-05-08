@@ -38,7 +38,16 @@
     @if (($post->html && !$post->isQuote()) || count($post->attachments) > 0)
         <div class="almn-post--content">
             @if ($post->html && !$post->isQuote())
-                {!! $post->html !!}
+                @if ($post->spoilers)
+                    <p>
+                        <em>Review contains spoilers. <a href="#" class="spoiler-reveal" data-post-id="{{ $post->id }}">Reveal your secrets</a>.</em>
+                    </p>
+                    <span id="content-{{ $post->id }}" style="display:none;">
+                        {!! $post->html !!}
+                    </span>
+                @else
+                    {!! $post->html !!}
+                @endif
             @endif
                 @if (count($post->attachments) > 0)
                     <div class="almn-post--attachments">

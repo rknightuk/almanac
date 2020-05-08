@@ -87,12 +87,14 @@
 
 		<script>
 			(function() {
-				var spoilers = document.getElementsByClassName("almn-post--content__spoiler");
+				var spoilers = document.getElementsByClassName("spoiler-reveal");
 
 				for (var i = 0; i < spoilers.length; i++) {
 					var spoiler = spoilers[i]
 					spoiler.addEventListener('click', function(e) {
-						e.currentTarget.className += ' almn-post--content__spoiler--show'
+						var postId = e.currentTarget.dataset.postId
+                        e.currentTarget.parentElement.style.display = 'none'
+						document.getElementById('content-' + postId).style.display = 'block'
 					}, false);
 				}
 

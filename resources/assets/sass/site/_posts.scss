@@ -1,5 +1,4 @@
 $post-top-padding: 15px;
-$spoiler-color: #383838;
 
 .almn-post {
 	position: relative;
@@ -115,26 +114,6 @@ $spoiler-color: #383838;
 			color: $primary-color;
 			&:hover {
 				color: $lighter-text-color;
-			}
-		}
-
-		&__spoiler {
-			background: $spoiler-color;
-			color: $spoiler-color;
-			box-shadow: 0 0 5px 2px $spoiler-color;
-			border-radius: 1px;
-			&--show {
-				transition: all 0.7s;
-				background: transparent;
-				color: inherit;
-				box-shadow: none;
-			}
-			&:hover {
-				cursor: pointer;
-			}
-			&::selection {
-				background: $spoiler-color;
-				color: $spoiler-color;
 			}
 		}
 	}
