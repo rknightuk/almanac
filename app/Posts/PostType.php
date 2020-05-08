@@ -50,4 +50,35 @@ class PostType {
         self::VIDEO,
     ];
 
+    const ICONS_SHRINK_NAV = [
+        self::TV,
+        self::BOOK,
+    ];
+
+    const ICONS_SHRINK_POST = [
+        self::TV,
+        self::BOOK,
+        self::VIDEO,
+    ];
+
+    public static function getConfig()
+    {
+        $disabledTypes = explode(',', config('almanac.disabled_types'));
+        $enabledTypes = array_values(array_filter(self::ALL, function($type) use ($disabledTypes) {
+            return !in_array($type, $disabledTypes);
+        }));
+
+        if (count($enabledTypes) === 0) {
+            throw new \Exception('You need to enable at least one post type');
+        }
+
+        return array_map(function($type) {
+            return [
+                'key' => $type,
+                'name' => $type === 'tv' ? 'TV' : ucfirst($type),
+                'icon' => self::ICONS[$type],
+            ];
+        },$enabledTypes);
+    }
+
 }

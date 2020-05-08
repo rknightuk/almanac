@@ -4,7 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Icon from 'src/ui/Icon'
 
-import type { PostTypes } from 'src/types'
+import type { PostTypes, PostTypeConfig } from 'src/types'
 
 import css from './style.css'
 
@@ -22,13 +22,9 @@ const Block = ({ name }: BlockProps) => (
 
 const Picker = () => (
 	<div className={css.picker}>
-		<Block name="movie" />
-		<Block name="tv" />
-		<Block name="game" />
-		<Block name="music" />
-		<Block name="podcast" />
-		<Block name="book" />
-		<Block name="video" />
+		{window.AlmanacConfig.postTypes.map((type: PostTypeConfig) => (
+			<Block key={type.key} name={type.key} />
+		))}
 	</div>
 )
 

@@ -2,6 +2,7 @@
 
 namespace Almanac\Http\Controllers;
 
+use Almanac\Posts\PostType;
 use Spatie\Tags\Tag;
 
 class AppController extends Controller
@@ -15,12 +16,15 @@ class AppController extends Controller
 	    })->values()->toArray();
 
 	    return view('admin')->with([
-	    	'tags' => $tags,
-		    'searchConfig' => [
-		    	'movie' => (bool) config('almanac.services.moviedb'),
-			    'tv' => (bool) config('almanac.services.moviedb'),
-                'game' => (bool) config('almanac.services.giantbomb'),
-		    ],
+		    'config' => [
+                'tags' => $tags,
+                'search' => [
+                    'movie' => (bool) config('almanac.services.moviedb'),
+                    'tv' => (bool) config('almanac.services.moviedb'),
+                    'game' => (bool) config('almanac.services.giantbomb'),
+                ],
+                'postTypes' => PostType::getConfig(),
+            ]
 	    ]);
     }
 }

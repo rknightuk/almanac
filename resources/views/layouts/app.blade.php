@@ -24,10 +24,7 @@
         @yield('content')
 
         <script>
-            @if (isset($tags))
-                var AlmanacTags = <?= json_encode($tags) ?>;
-                var AlmanacSearch = <?= json_encode($searchConfig) ?>;
-            @endif
+            var AlmanacConfig = <?= json_encode($config) ?>;
         </script>
 
         @if(env('APP_ENV') === 'local')
