@@ -37,6 +37,7 @@ class Post extends Model implements Feedable
 	    'subtitle',
 	    'content',
 	    'link',
+        'link_post',
 	    'rating',
 	    'year',
 	    'spoilers',
@@ -45,6 +46,11 @@ class Post extends Model implements Feedable
 	    'creator',
 	    'season',
 	    'platform',
+    ];
+
+    protected $casts = [
+        'spoilers' => 'boolean',
+        'link_post' => 'boolean',
     ];
 
     const STAR_SELECTED = '<span class="almn-post--titles--sub--rating--selected">&#9733;</span>';
