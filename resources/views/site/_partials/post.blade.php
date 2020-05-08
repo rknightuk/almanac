@@ -1,4 +1,4 @@
-@if (isset($showRelated) && $showRelated)
+@if (isset($singlePost) && $singlePost)
 	@include('site._partials.related', [
 		'related' => $post->getFuturePosts(),
 		'type' => 'future',
