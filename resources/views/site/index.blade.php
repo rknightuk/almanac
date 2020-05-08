@@ -56,5 +56,5 @@
 		])
 	@endforelse
 
-	{{ $posts->links() }}
+	{{ $posts->appends(request()->input())->links() }}
 @endsection
