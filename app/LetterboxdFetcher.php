@@ -41,8 +41,6 @@ class LetterboxdFetcher {
     {
         if (is_null($this->getUser())) return;
 
-        dd($this->getFeed());
-
         try {
             $data = $this->fetchFeedData();
         } catch (FeedException $e) {
