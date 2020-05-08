@@ -41,26 +41,12 @@ class LetterboxdFetcher {
     {
         if (is_null($this->getUser())) return;
 
-        try {
-            $data = $this->fetchFeedData();
-        } catch (FeedException $e) {
-            info('Unable to fetch feed');
-            return;
-        }
+        $content = file_get_contents($this->getFeed());
+        $data = simplexml_load_string($content);
 
-        foreach ($data->item as $item)
-        {
+        foreach($data->channel->item as $item) {
             $this->createPost($item);
         }
-    }
-
-    /**
-     * @return Feed
-     * @throws FeedException
-     */
-    private function fetchFeedData(): Feed
-    {
-        return Feed::load(self::FEED);
     }
 
     private function createPost(SimpleXMLElement $item)
@@ -69,11 +55,13 @@ class LetterboxdFetcher {
             return;
         }
 
+        $letterboxdData = $item->children('letterboxd', true);
+
         $hasSpoilers = $this->doesHaveSpoilers((string) $item->title);
 
-        $date = Carbon::createFromFormat('Y-m-d',  $item->{'letterboxd:watchedDate'})->setTimezone('Europe/London');
+        $date = Carbon::createFromFormat('Y-m-d', (string) $letterboxdData->watchedDate)->setTimezone('Europe/London');
 
-        $rawRating = (int) $item->{'letterboxd:memberRating'};
+        $rawRating = (int) $letterboxdData->memberRating;
         if ($rawRating === 5) {
             $rating = 3;
         }
@@ -83,7 +71,7 @@ class LetterboxdFetcher {
             $rating = 1;
         }
 
-        $title = (string) $item->{'letterboxd:filmTitle'};
+        $title = (string) $letterboxdData->filmTitle;
         $path = $this->makePath($title, $date);
 
         $post = Post::create([
@@ -93,7 +81,7 @@ class LetterboxdFetcher {
             'content' => $this->extractReview((string) $item->description),
             'link' => $link = (string) $item->link,
             'rating' => $rating,
-            'year' => (string) $item->{'letterboxd:filmYear'},
+            'year' => (string) $letterboxdData->filmYear,
             'spoilers' => $hasSpoilers,
             'published' => true,
             'created_at' => Carbon::now(),
