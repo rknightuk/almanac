@@ -2,6 +2,7 @@
 
 namespace Almanac\Http\Controllers;
 
+use Almanac\Posts\PostType;
 use Spatie\Tags\Tag;
 
 class AppController extends Controller
@@ -22,43 +23,7 @@ class AppController extends Controller
                     'tv' => (bool) config('almanac.services.moviedb'),
                     'game' => (bool) config('almanac.services.giantbomb'),
                 ],
-                'postTypes' => [ // todo
-                    [
-                        'key' => 'movie',
-                        'name' => 'Movie',
-                        'icon' => 'film',
-                    ],
-                    [
-                        'key' => 'tv',
-                        'name' => 'TV',
-                        'icon' => 'tv-retro',
-                    ],
-                    [
-                        'key' => 'game',
-                        'name' => 'Game',
-                        'icon' => 'gamepad',
-                    ],
-                    [
-                        'key' => 'music',
-                        'name' => 'Music',
-                        'icon' => 'headphones',
-                    ],
-                    [
-                        'key' => 'book',
-                        'name' => 'Book',
-                        'icon' => 'book',
-                    ],
-                    [
-                        'key' => 'podcast',
-                        'name' => 'Podcast',
-                        'icon' => 'podcast',
-                    ],
-                    [
-                        'key' => 'video',
-                        'name' => 'Video',
-                        'icon' => 'video',
-                    ],
-                ],
+                'postTypes' => PostType::getConfig(),
             ]
 	    ]);
     }

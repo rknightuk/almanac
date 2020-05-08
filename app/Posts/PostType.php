@@ -50,4 +50,20 @@ class PostType {
         self::VIDEO,
     ];
 
+    public static function getConfig()
+    {
+        $disabledTypes = explode(',', config('almanac.disabled_types'));
+        $enabledTypes = array_values(array_filter(self::ALL, function($type) use ($disabledTypes) {
+            return !in_array($type, $disabledTypes);
+        }));
+
+        return array_map(function($type) {
+            return [
+                'key' => $type,
+                'name' => $type === 'tv' ? 'TV' : ucfirst($type),
+                'icon' => self::ICONS[$type],
+            ];
+        },$enabledTypes);
+    }
+
 }

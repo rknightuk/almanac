@@ -29,6 +29,12 @@ return [
         'site_subtitle' => env('SITE_SUBTITLE', 'by Robb Knight'),
         'external_website' => env('WEBSITE', 'https://rknight.me'),
         'twitter_username' => env('TWITTER', null),
-    ]
+    ],
+
+    /**
+     * Disable post types here
+     * movie, tv, game, music, book, podcast, video
+     */
+    'disabled_types' => env('DISABLED_TYPES', ''),
 
 ];
