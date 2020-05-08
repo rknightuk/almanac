@@ -11,7 +11,7 @@ use SimpleXMLElement;
 
 class LetterboxdFetcher {
 
-    const FEED = 'https://letterboxd.com/rknightuk/rss/';
+    const FEED = 'https://letterboxd.com/%s/rss/';
 
     /**
      * @var PathGenerator
@@ -28,8 +28,21 @@ class LetterboxdFetcher {
         $this->autoTagger = $autoTagger;
     }
 
+    private function getFeed(): string {
+        return sprintf(self::FEED, $this->getUser());
+    }
+
+    private function getUser(): ?string
+    {
+        return config('almanac.services.letterboxd');
+    }
+
     public function run()
     {
+        if (is_null($this->getUser())) return;
+
+        dd($this->getFeed());
+
         try {
             $data = $this->fetchFeedData();
         } catch (FeedException $e) {

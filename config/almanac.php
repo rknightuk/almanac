@@ -18,6 +18,7 @@ return [
     'services' => [
         'moviedb' => env('THEMOVIEDB_API_KEY', null),
         'giantbomb' => env('GIANTBOMB_API_KEY', null),
+        'letterboxd' => env('LETTERBOXD_USER', null),
     ],
 
     /**
