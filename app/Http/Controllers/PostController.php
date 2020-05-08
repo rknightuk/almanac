@@ -65,7 +65,7 @@ class PostController extends Controller
 
 	    $post = $this->postRepository->one((new PostQuery())->id($id));
 
-        $postData = $this->formatData($postData);
+        $postData = $this->formatData($postData, $id);
 
 	    $post->update($postData);
 
