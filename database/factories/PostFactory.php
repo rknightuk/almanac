@@ -10,7 +10,10 @@ use Faker\Generator as Faker;
 $factory->define(Post::class, function (Faker $faker) {
     $link = rand(0,1) === 1 ? $faker->url : null;
     $type = PostType::ALL[array_rand(PostType::ALL)];
-    $content = rand(0, 3) === 1 ? $faker->sentence : null;
+    $content = null;
+    if (rand(0, 3) === 1) {
+        $content = rand(0, 3) === 1 ? implode('\n\n', $faker->paragraphs(rand(1, 3))) : $faker->sentence;
+    }
 
     return [
         'type' => $type,
