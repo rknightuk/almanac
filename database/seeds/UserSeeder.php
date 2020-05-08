@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,9 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-    	$this->call([
-            UserSeeder::class,
-            PostSeeder::class,
-	    ]);
+        factory(\Almanac\User::class, 1)->create();
     }
 }
