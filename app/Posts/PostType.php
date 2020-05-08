@@ -68,6 +68,10 @@ class PostType {
             return !in_array($type, $disabledTypes);
         }));
 
+        if (count($enabledTypes) === 0) {
+            throw new \Exception('You need to enable at least one post type');
+        }
+
         return array_map(function($type) {
             return [
                 'key' => $type,
