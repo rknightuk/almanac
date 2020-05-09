@@ -59,7 +59,7 @@
                             </a>
                         </div>
                         @if (count($post->getSortedAttachments()) > 1)
-                            <div class="almn-post--attachments--grid almn-post--attachments--grid--{{ count($post->getSortedAttachments()) < 5 ? count($post->getSortedAttachments()) : 5 }}">
+                            <div class="almn-post--attachments--grid">
                                 @foreach ($post->getSortedAttachments() as $index => $attachment)
                                     <div class="almn-post--attachments--grid--single">
                                         <a class="almn-post--attachments--grid--single--link" data-post-id="{{ $post->id }}" href="{{ $attachment->real_path }}" target="_blank">
