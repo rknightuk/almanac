@@ -176,7 +176,7 @@ class Editor extends React.Component<Props, State> {
 
 					<Attachments
 						attachments={post.attachments.sort(function(a, b){
-                            return post.attachment_order.indexOf(a.id) - post.attachment_order.indexOf(b.id);
+                            return (post.attachment_order || []).indexOf(a.id) - (post.attachment_order || []).indexOf(b.id);
                         })}
 						newAttachments={this.state.newAttachments}
 						handleDelete={this.deleteAttachment}
