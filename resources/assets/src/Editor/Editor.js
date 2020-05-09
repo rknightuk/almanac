@@ -80,6 +80,7 @@ class Editor extends React.Component<Props, State> {
 			published: true,
 			tags: [],
 			attachments: [],
+			attachment_order: [],
 		},
 		cachedDate: this.props.post ? this.props.post.date_completed : null,
 		searchAvailable: false,
@@ -179,6 +180,7 @@ class Editor extends React.Component<Props, State> {
 						handleDelete={this.deleteAttachment}
 						handleDeleteNew={this.deleteNewAttachment}
 						addAttachments={this.addAttachments}
+						reorderAttachments={this.setAttachmentOrder}
 					/>
 
 					<FormRow
@@ -382,6 +384,10 @@ class Editor extends React.Component<Props, State> {
 		}))
 	}
 
+	setAttachmentOrder = (attachments: Attachment[]) => {
+		this.updatePost('attachments', attachments)
+	}
+
 	deleteNewAttachment = (uuid: string) => {
 		this.setState((state: State) => ({
 			newAttachments: state.newAttachments.filter((u) => u.uuid !== uuid),
@@ -485,6 +491,10 @@ class Editor extends React.Component<Props, State> {
 			post: {
 				...s.post,
 				[key]: value,
+				attachment_order:
+					key === 'attachments'
+						? value.map((a: Attachment) => a.id)
+						: s.post.attachment_order,
 			},
 			pathManuallyChanged,
 		}))

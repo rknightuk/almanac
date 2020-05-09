@@ -5,8 +5,10 @@ import Dropzone from 'react-dropzone'
 import FormRow from 'src/ui/Form/Row'
 import css from './style.css'
 import type { Attachment } from 'src/types'
-import AttachmentItem from './Attachment'
+import AttachmentItem, { DeleteButton } from './Attachment'
 import type { AttachmentWithId } from 'src/Editor/Editor'
+import { SortableContainer, SortableElement } from 'react-sortable-hoc'
+import arrayMove from 'array-move'
 
 type Props = {
 	attachments: Attachment[],
@@ -14,7 +16,33 @@ type Props = {
 	handleDelete: (uuid: string) => any,
 	handleDeleteNew: (uuid: string) => any,
 	addAttachments: (attachments: File[]) => any,
+	reorderAttachments: (attachments: Attachment[]) => void,
 }
+
+const SortableItem = SortableElement(({ value, uuid }) => (
+    <AttachmentItem
+        uuid={uuid}
+        title={value}
+    />
+))
+
+const SortableList = SortableContainer(({ attachments, onDelete }) => {
+	return (
+		<ul>
+			{attachments.map((attachment, index) => (
+			    <div className={css.sortableItem}>
+                    <DeleteButton onDelete={() => onDelete(attachment.uuid)} />
+                    <SortableItem
+                        key={`item-${attachment.id}`}
+                        index={index}
+                        value={attachment.filename}
+                        uuid={attachment.uuid}
+                    />
+                </div>
+			))}
+		</ul>
+	)
+})
 
 class Attachments extends React.Component<Props> {
 	render() {
@@ -27,11 +55,13 @@ class Attachments extends React.Component<Props> {
 					<React.Fragment>
 						{this.renderDropzone()}
 						<ul>{newAttachments.map(this.renderAttachment)}</ul>
-						<ul>
-							{attachments
-								.filter((a: Attachment) => a.deleted_at === null)
-								.map(this.renderAttachment)}
-						</ul>
+						<SortableList
+							attachments={attachments.filter(
+								(a: Attachment) => a.deleted_at === null,
+							)}
+							onSortEnd={this.onSortEnd}
+							onDelete={this.handleDelete}
+						/>
 					</React.Fragment>
 				}
 			/>
@@ -67,6 +97,18 @@ class Attachments extends React.Component<Props> {
 
 	handleDeleteNew = (uuid: string) => {
 		this.props.handleDeleteNew(uuid)
+	}
+
+	onSortEnd = ({
+		oldIndex,
+		newIndex,
+	}: {
+		oldIndex: number,
+		newIndex: number,
+	}) => {
+		this.props.reorderAttachments(
+			arrayMove(this.props.attachments, oldIndex, newIndex),
+		)
 	}
 }
 

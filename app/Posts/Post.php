@@ -4,6 +4,7 @@ namespace Almanac\Posts;
 
 use Almanac\Attachment;
 use Almanac\NumberToAdjective;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -52,6 +53,7 @@ class Post extends Model implements Feedable
     protected $casts = [
         'spoilers' => 'boolean',
         'link_post' => 'boolean',
+        'attachment_order' => 'array',
     ];
 
     const STAR_SELECTED = '<span class="almn-post--titles--sub--rating--selected">&#9733;</span>';
@@ -169,14 +171,9 @@ class Post extends Model implements Feedable
 		return ucfirst($this->verb) . ' on ' . $date . ' for the ' . NumberToAdjective::convert($this->time_viewed) . ' time';
 	}
 
-	public function getAttachmentOrderAttribute($attachmentOrder)
-    {
-        return explode(',', $attachmentOrder ?? '');
-    }
-
     public function getSortedAttachments()
     {
-        if (empty($this->attachment_order)) return [];
+        if (empty($this->attachment_order)) return $this->attachments;
 
         return $this->attachments->sortBy(function(Attachment $attachment) {
             $found = array_search($attachment->id, $this->attachment_order);

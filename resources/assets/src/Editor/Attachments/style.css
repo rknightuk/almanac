@@ -8,6 +8,10 @@
     display: flex;
 }
 
+.sortableItem {
+    display: flex;
+}
+
 .delete {
     margin-right: 10px;
     color: #bf5329;

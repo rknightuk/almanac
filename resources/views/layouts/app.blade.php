@@ -24,7 +24,7 @@
         @yield('content')
 
         <script>
-            var AlmanacConfig = <?= json_encode($config) ?>;
+            var AlmanacConfig = <?= json_encode($config ?? []) ?>;
         </script>
 
         @if(env('APP_ENV') === 'local')

@@ -44,6 +44,7 @@ export type Post = {
 	tags: string[],
 	icon: string,
 	attachments: Attachment[],
+    attachment_order: number[],
 }
 
 export type SearchResult = {
