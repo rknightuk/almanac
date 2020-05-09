@@ -79,6 +79,9 @@
             <div class="almn-post--footer--date">
                 <a href="{{ $post->permalink }}">
                     {{ $post->date_completed->format('jS F Y') }}
+                    @if ($post->link)
+                        &bull; <a href="{{ $post->link }}" target="_blank">{{ $post->link_host  }}</a>
+                    @endif
                     @if ($post->related_count > 1 && $post->shouldShowCount())
                         <span class="almn-post--footer--date--rewatched">
 						<i class="fas fa-sync" data-fa-transform="shrink-2"></i>
@@ -86,34 +89,31 @@
                     @endif
                 </a>
             </div>
-            <div class="almn-post--footer--tags">
-                @if ($post->link)
-                    <a href="{{ $post->link }}" target="_blank">
-                        {{ $post->link_host  }}
+            @if ($post->hasTags())
+                <div class="almn-post--footer--tags">
+                    @foreach ($post->tags->sortBy('name') as $tag)
+                        <a href="/?tags[]={{ $tag->name }}">#{{ str_replace(' ', '', $tag->name) }}</a>
+                    @endforeach
+                </div>
+            @endif
+            @if (Auth::user())
+                <div class="almn-post--footer--tags--admin">
+                    <a
+                        href="/app/posts/{{$post->id}}"
+                        target="_blank"
+                        title="Edit Post"
+                    >
+                        <i class="fas fa-edit" data-fa-transform="shrink-2"></i>
                     </a>
-                @endif
-                @foreach ($post->tags->sortBy('name') as $tag)
-                    <a href="/?tags[]={{ $tag->name }}">#{{ str_replace(' ', '', $tag->name) }}</a>
-                @endforeach
-                @if (Auth::user())
-                    <div class="almn-post--footer--tags--admin">
-                        <a
-                            href="/app/posts/{{$post->id}}"
-                            target="_blank"
-                            title="Edit Post"
-                        >
-                            <i class="fas fa-edit" data-fa-transform="shrink-2"></i>
-                        </a>
-                        <a
-                            href="/app/new/{{$post->type}}/{{$post->id}}"
-                            target="_blank"
-                            title="Rewatch"
-                        >
-                            <i class="fas fa-sync" data-fa-transform="shrink-2"></i>
-                        </a>
-                    </div>
-                @endif
-            </div>
+                    <a
+                        href="/app/new/{{$post->type}}/{{$post->id}}"
+                        target="_blank"
+                        title="Rewatch"
+                    >
+                        <i class="fas fa-sync" data-fa-transform="shrink-2"></i>
+                    </a>
+                </div>
+            @endif
         </div>
 	</footer>
 </div>

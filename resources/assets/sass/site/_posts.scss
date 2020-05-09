@@ -35,7 +35,7 @@ $post-top-padding: 15px;
         width: 20px;
         height: 20px;
 		padding: 7px;
-        top: 13px;
+        top: 15px;
         left: -17px;
 		display: flex;
 		justify-content: center;
@@ -43,7 +43,7 @@ $post-top-padding: 15px;
         font-size: 15px;
         color: white;
         border-radius: 36px;
-        background: $primary-color; // todo
+        background: $primary-color;
 		&:hover {
 			color: white;
 			background: black;
@@ -172,13 +172,13 @@ $post-top-padding: 15px;
 		margin-top: 5px;
         &--row {
             display: flex;
+            padding-bottom: 10px;
             @media (max-width: 555px) {
                 flex-direction: column;
             }
         }
 		&--date {
 			flex: 1;
-            margin-bottom: 10px;
 			&--rewatched {
 				font-size: 12px;
 				color: #d8d8d8;
@@ -188,14 +188,9 @@ $post-top-padding: 15px;
             flex: 1;
             text-align: right;
             &--admin {
-                display: inline;
-                @media (max-width: 555px) {
-                    float: right;
-                }
-            }
-            @media (max-width: 555px) {
-                margin-top: 5px;
-                text-align: left;
+                position: absolute;
+                top: 10px;
+                right: 20px;
             }
         }
         &--link {
