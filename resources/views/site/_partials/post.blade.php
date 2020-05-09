@@ -79,13 +79,13 @@
             <div class="almn-post--footer--date">
                 <a href="{{ $post->permalink }}">
                     {{ $post->date_completed->format('jS F Y') }}
-                    @if ($post->link)
-                        &bull; <a href="{{ $post->link }}" target="_blank">{{ $post->link_host  }}</a>
-                    @endif
                     @if ($post->related_count > 1 && $post->shouldShowCount())
                         <span class="almn-post--footer--date--rewatched">
-						<i class="fas fa-sync" data-fa-transform="shrink-2"></i>
-					</span>
+						    <i class="fas fa-sync" data-fa-transform="shrink-2"></i>
+					    </span>
+                    @endif
+                    @if ($post->link)
+                        &bull; <a href="{{ $post->link }}" target="_blank">{{ $post->link_host  }}</a>
                     @endif
                 </a>
             </div>
