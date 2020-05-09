@@ -49,7 +49,7 @@ class Attachments extends React.Component<Props> {
 		const { attachments, newAttachments } = this.props
 		return (
 			<FormRow
-				label="Uploads"
+				label="Attachments"
 				inputKey="uploads"
 				input={
 					<React.Fragment>
