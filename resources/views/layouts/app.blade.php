@@ -12,7 +12,7 @@
 
         <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="{{ asset('apple-touch-icon.png') }}">
 
-        <script src="https://kit.fontawesome.com/4faa09972b.js" crossorigin="anonymous"></script>
+        <script src="/fa-pro.min.js"></script>
 
         @if(env('APP_ENV') === 'local')
             <link href="http://localhost:9000/app.css" rel="stylesheet">
