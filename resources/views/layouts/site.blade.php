@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <script src="https://kit.fontawesome.com/4faa09972b.js" crossorigin="anonymous"></script>
+        <script src="/fa-pro.min.js"></script>
 
 		<title>@if (isset($singlePost)) {{ $singlePost->title }} - @endif{{ config('almanac.meta.site_title') }}</title>
 
