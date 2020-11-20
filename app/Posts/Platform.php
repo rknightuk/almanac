@@ -48,6 +48,7 @@ class Platform {
 		self::SONY_PS2 => 'PS2',
 		self::SONY_PS3 => 'PS3',
 		self::SONY_PS4 => 'PS4',
+		self::SONY_PS5 => 'PS5',
 		self::SONY_PSP => 'PSP',
 		self::SONY_VITA => 'PSVita',
 		self::MS_XBOX => 'Xbox',
