@@ -1,5 +1,5 @@
 export const PLATFORMS = [
-	{ value: 'PS4', label: 'PS5' },
+	{ value: 'PS5', label: 'PS5' },
 	{ value: 'PS4', label: 'PS4' },
 	{ value: 'Xbox One', label: 'Xbox One' },
 	{ value: 'Switch', label: 'Switch' },
