@@ -42,6 +42,7 @@ class Platform {
 	const LINUX = 31;
 
 	const OTHER = 32;
+	const SONY_PS5 = 33;
 
 	const NAMES = [
 		self::SONY_PS1 => 'PS1',
