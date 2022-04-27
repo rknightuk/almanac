@@ -6,6 +6,7 @@ use Almanac\Posts\PathGenerator;
 use Almanac\Posts\Post;
 use Almanac\Posts\PostType;
 use Carbon\Carbon;
+use DateTime;
 use Html2Text\Html2Text;
 use SimpleXMLElement;
 
@@ -59,11 +60,10 @@ class LetterboxdFetcher {
 
     private function createPost(SimpleXMLElement $item)
     {
+        $date = Carbon::instance(new DateTime((string) $item->pubDate))->setTimezone('Europe/London');
         $letterboxdData = $item->children('letterboxd', true);
 
         $hasSpoilers = $this->doesHaveSpoilers((string) $item->title);
-
-        $date = Carbon::createFromFormat('Y-m-d', (string) $letterboxdData->watchedDate)->setTimezone('Europe/London');
 
         $rawRating = (int) $letterboxdData->memberRating;
         if ($rawRating === 5) {
@@ -83,14 +83,14 @@ class LetterboxdFetcher {
             'path' => $path,
             'title' => $title,
             'content' => $this->extractReview((string) $item->description),
-            'link' => $link = (string) $item->link,
+            'link' => (string) $item->link,
             'rating' => $rating,
             'year' => (string) $letterboxdData->filmYear,
             'spoilers' => $hasSpoilers,
             'published' => true,
             'created_at' => Carbon::now(),
             'date_completed' => $date,
-            'remote_id' => $remoteId = (string) $item->guid,
+            'remote_id' => (string) $item->guid,
         ]);
 
         $this->autoTagger->tag($post);
