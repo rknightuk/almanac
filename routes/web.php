@@ -45,9 +45,9 @@ Route::get('feed.json', function() {
                 'id' => $post->id,
                 'url' => $post->permalink,
                 'title' => $post->title,
-                'content_text' => $post->content,
+                'content_text' => $post->content ?? '',
                 'date_published' => $post->date_completed->toIso8601String(),
-                'image' => $attachment ? $attachment->real_path : null,
+                'image' => $attachment ? $attachment->real_path : '',
             ];
         }),
 	];
