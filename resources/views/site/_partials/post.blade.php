@@ -12,7 +12,7 @@
 	>
 		<i
             class="fas fa-{{ $post->icon }}"
-            @if(in_array($post->icon, \Almanac\Posts\PostType::ICONS_SHRINK_POST)) data-fa-transform="shrink-3" @endif
+            @if(in_array($post->icon, \App\Posts\PostType::ICONS_SHRINK_POST)) data-fa-transform="shrink-3" @endif
         ></i>
 	</a>
 	<div class="almn-post--titles">

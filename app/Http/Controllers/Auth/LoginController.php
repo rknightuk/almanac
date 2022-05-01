@@ -1,8 +1,8 @@
 <?php
 
-namespace Almanac\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use Almanac\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller

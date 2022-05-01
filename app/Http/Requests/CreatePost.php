@@ -1,6 +1,6 @@
 <?php
 
-namespace Almanac\Http\Requests;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,7 @@ class CreatePost extends FormRequest
     public function rules()
     {
         return [
-	        'post' => 'required',
+            'post' => 'required',
         ];
     }
 }

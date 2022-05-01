@@ -1,9 +1,9 @@
 <?php
 
-namespace Almanac;
+namespace App;
 
-use Almanac\Posts\Post;
-use Almanac\Posts\PostRepository;
+use App\Posts\Post;
+use App\Posts\PostRepository;
 use Illuminate\Support\Str;
 
 class AutoTagger {
@@ -92,10 +92,8 @@ class AutoTagger {
             'tags' => ['Fast and Furious'],
         ],
     ];
-    /**
-     * @var PostRepository
-     */
-    private $posts;
+
+    private PostRepository $posts;
 
     public function __construct(PostRepository $posts)
     {

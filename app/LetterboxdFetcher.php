@@ -1,10 +1,10 @@
 <?php
 
-namespace Almanac;
+namespace App;
 
-use Almanac\Posts\PathGenerator;
-use Almanac\Posts\Post;
-use Almanac\Posts\PostType;
+use App\Posts\PathGenerator;
+use App\Posts\Post;
+use App\Posts\PostType;
 use Carbon\Carbon;
 use DateTime;
 use Html2Text\Html2Text;
@@ -14,14 +14,8 @@ class LetterboxdFetcher {
 
     const FEED = 'https://letterboxd.com/%s/rss/';
 
-    /**
-     * @var PathGenerator
-     */
-    private $pathGenerator;
-    /**
-     * @var AutoTagger
-     */
-    private $autoTagger;
+    private PathGenerator $pathGenerator;
+    private AutoTagger $autoTagger;
 
     public function __construct(PathGenerator $pathGenerator, AutoTagger $autoTagger)
     {
@@ -105,7 +99,7 @@ class LetterboxdFetcher {
         $review = trim(str_replace('_This review may contain spoilers._', '', $html->getText()));
 
         // If it says Watched on, there's no review (probably)
-        if (strpos($review, 'Watched on') !== false) {
+        if (\str_contains($review, 'Watched on')) {
             return null;
         }
 
@@ -127,7 +121,7 @@ class LetterboxdFetcher {
 
     private function doesHaveSpoilers(string $rawTitle): bool
     {
-        return strpos($rawTitle, ' (contains spoilers)') !== false;
+        return \str_contains($rawTitle, ' (contains spoilers)');
     }
 
     private function shouldCreate(SimpleXMLElement $item): bool

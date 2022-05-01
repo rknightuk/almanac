@@ -1,22 +1,22 @@
 <?php
 
-namespace Almanac\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Almanac\Posts\PostType;
+use App\Posts\PostType;
 use Spatie\Tags\Tag;
 
 class AppController extends Controller
 {
     public function index()
     {
-	    $tags = Tag::all()->sortBy('name');
+        $tags = Tag::all()->sortBy('name');
 
-	    $tags = $tags->map(function(Tag $tag) {
-		    return $tag->name;
-	    })->values()->toArray();
+        $tags = $tags->map(function(Tag $tag) {
+            return $tag->name;
+        })->values()->toArray();
 
-	    return view('admin')->with([
-		    'config' => [
+        return view('admin')->with([
+            'config' => [
                 'tags' => $tags,
                 'search' => [
                     'movie' => (bool) config('almanac.services.moviedb'),
@@ -25,6 +25,6 @@ class AppController extends Controller
                 ],
                 'postTypes' => PostType::getConfig(),
             ]
-	    ]);
+        ]);
     }
 }

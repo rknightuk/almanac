@@ -1,6 +1,6 @@
 <?php
 
-namespace Almanac\ExternalSearch;
+namespace App\ExternalSearch;
 
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -8,35 +8,28 @@ use Illuminate\Support\Facades\Cache;
 
 class GiantBombClient {
 
-	/**
-	 * @var Client
-	 */
-	private $client;
+    private Client$client;
+    private array $params = [];
 
-	/**
-	 * @var array
-	 */
-	private $params;
+    public function __construct()
+    {
+        $this->client = new Client([
+            'base_uri' => 'https://www.giantbomb.com/api/search',
+        ]);
 
-	public function __construct()
-	{
-		$this->client = new Client([
-			'base_uri' => 'https://www.giantbomb.com/api/search',
-		]);
+        $this->params = [
+            'api_key' => $this->getKey(),
+        ];
+    }
 
-		$this->params = [
-			'api_key' => $this->getKey(),
-		];
-	}
-
-	public function getKey()
+    public function getKey()
     {
         return config('almanac.services.giantbomb');
     }
 
-	public function find(string $query)
-	{
-	    if (!$this->getKey()) return [];
+    public function find(string $query)
+    {
+        if (!$this->getKey()) return [];
 
         return Cache::remember($query, 15, function () use ($query) {
             $results = $this->get($query);
@@ -48,27 +41,27 @@ class GiantBombClient {
 
                 return [
                     'title' => $r->name,
-                    'meta' => implode($platforms, ','),
+                    'meta' => implode(',', $platforms),
                     'year' => isset($r->original_release_date) ? (Carbon::createFromFormat('Y-m-d', $r->original_release_date))->year : null,
                     'poster' => $r->image->screen_large_url,
                     'backdrop' => $r->image->original_url,
                 ];
             }, $results);
         });
-	}
+    }
 
-	private function get(string $query)
-	{
-		$response = $this->client->request('GET', '', [
-			'query' => array_merge($this->params, [
-				'query' => $query,
+    private function get(string $query)
+    {
+        $response = $this->client->request('GET', '', [
+            'query' => array_merge($this->params, [
+                'query' => $query,
                 'resources' => 'game',
                 'format' => 'json',
                 'limit' => 50,
-			])
-		]);
+            ])
+        ]);
 
-		return json_decode($response->getBody()->getContents())->results;
-	}
+        return json_decode($response->getBody()->getContents())->results;
+    }
 
 }

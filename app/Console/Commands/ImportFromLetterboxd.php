@@ -1,8 +1,8 @@
 <?php
 
-namespace Almanac\Console\Commands;
+namespace App\Console\Commands;
 
-use Almanac\LetterboxdFetcher;
+use App\LetterboxdFetcher;
 use Illuminate\Console\Command;
 
 class ImportFromLetterboxd extends Command
@@ -45,4 +45,5 @@ class ImportFromLetterboxd extends Command
     {
         $this->letterboxdFetcher->run();
     }
+
 }

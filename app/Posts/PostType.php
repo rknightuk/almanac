@@ -1,16 +1,16 @@
 <?php
 
-namespace Almanac\Posts;
+namespace App\Posts;
 
 class PostType {
 
     const MOVIE = 'movie';
     const TV = 'tv';
     const GAME = 'game';
-	const MUSIC = 'music';
-	const BOOK = 'book';
-	const PODCAST = 'podcast';
-	const VIDEO = 'video';
+    const MUSIC = 'music';
+    const BOOK = 'book';
+    const PODCAST = 'podcast';
+    const VIDEO = 'video';
 
     const MOVIE_ICON = 'film';
     const TV_ICON = 'tv-retro';
@@ -20,7 +20,7 @@ class PostType {
     const PODCAST_ICON = 'podcast';
     const VIDEO_ICON = 'video';
 
-	const ICONS = [
+    const ICONS = [
         PostType::MOVIE => self::MOVIE_ICON,
         PostType::TV => self::TV_ICON,
         PostType::GAME => self::GAME_ICON,

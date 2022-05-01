@@ -5,8 +5,8 @@ alias h='cd ~'
 alias c='clear'
 alias art=artisan
 
+alias codecept='vendor/bin/codecept'
 alias phpspec='vendor/bin/phpspec'
-alias phpunit='vendor/bin/phpunit'
 alias serve=serve-laravel
 
 alias xoff='sudo phpdismod -s cli xdebug'
@@ -23,31 +23,84 @@ function dusk() {
         Xvfb :0 -screen 0 1280x960x24 &
     fi
 
-    php artisan dusk "$@"
+    if [[ $? -eq 0 ]]
+    then
+        php artisan dusk
+    else
+        php artisan dusk --filter "$@"
+    fi
 }
+
+function p() {
+    if [ -f vendor/bin/pest ]; then
+       vendor/bin/pest "$@"
+    else
+       vendor/bin/phpunit "$@"
+    fi
+ }
+ 
+ function pf() {
+    if [ -f vendor/bin/pest ]; then
+       vendor/bin/pest --filter "$@"
+    else
+       vendor/bin/phpunit --filter "$@"
+    fi
+ }
 
 function php56() {
     sudo update-alternatives --set php /usr/bin/php5.6
+    sudo update-alternatives --set php-config /usr/bin/php-config5.6
+    sudo update-alternatives --set phpize /usr/bin/phpize5.6
 }
 
 function php70() {
     sudo update-alternatives --set php /usr/bin/php7.0
+    sudo update-alternatives --set php-config /usr/bin/php-config7.0
+    sudo update-alternatives --set phpize /usr/bin/phpize7.0
 }
 
 function php71() {
     sudo update-alternatives --set php /usr/bin/php7.1
+    sudo update-alternatives --set php-config /usr/bin/php-config7.1
+    sudo update-alternatives --set phpize /usr/bin/phpize7.1
 }
 
 function php72() {
     sudo update-alternatives --set php /usr/bin/php7.2
+    sudo update-alternatives --set php-config /usr/bin/php-config7.2
+    sudo update-alternatives --set phpize /usr/bin/phpize7.2
+}
+
+function php73() {
+    sudo update-alternatives --set php /usr/bin/php7.3
+    sudo update-alternatives --set php-config /usr/bin/php-config7.3
+    sudo update-alternatives --set phpize /usr/bin/phpize7.3
+}
+
+function php74() {
+    sudo update-alternatives --set php /usr/bin/php7.4
+    sudo update-alternatives --set php-config /usr/bin/php-config7.4
+    sudo update-alternatives --set phpize /usr/bin/phpize7.4
+}
+
+function php80() {
+    sudo update-alternatives --set php /usr/bin/php8.0
+    sudo update-alternatives --set php-config /usr/bin/php-config8.0
+    sudo update-alternatives --set phpize /usr/bin/phpize8.0
+}
+
+function php81() {
+    sudo update-alternatives --set php /usr/bin/php8.1
+    sudo update-alternatives --set php-config /usr/bin/php-config8.1
+    sudo update-alternatives --set phpize /usr/bin/phpize8.1
 }
 
 function serve-apache() {
     if [[ "$1" && "$2" ]]
     then
         sudo bash /vagrant/vendor/laravel/homestead/scripts/create-certificate.sh "$1"
-        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/serve-apache.sh
-        sudo bash /vagrant/vendor/laravel/homestead/scripts/serve-apache.sh "$1" "$2" 80 443 "${3:-7.1}"
+        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/site-types/apache.sh
+        sudo bash /vagrant/vendor/laravel/homestead/scripts/site-types/apache.sh "$1" "$2" 80 443 "${3:-8.1}"
     else
         echo "Error: missing required parameters."
         echo "Usage: "
@@ -59,8 +112,8 @@ function serve-laravel() {
     if [[ "$1" && "$2" ]]
     then
         sudo bash /vagrant/vendor/laravel/homestead/scripts/create-certificate.sh "$1"
-        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/serve-laravel.sh
-        sudo bash /vagrant/vendor/laravel/homestead/scripts/serve-laravel.sh "$1" "$2" 80 443 "${3:-7.1}"
+        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/site-types/laravel.sh
+        sudo bash /vagrant/vendor/laravel/homestead/scripts/site-types/laravel.sh "$1" "$2" 80 443 "${3:-8.1}"
     else
         echo "Error: missing required parameters."
         echo "Usage: "
@@ -71,8 +124,8 @@ function serve-laravel() {
 function serve-proxy() {
     if [[ "$1" && "$2" ]]
     then
-        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/serve-proxy.sh
-        sudo bash /vagrant/vendor/laravel/homestead/scripts/serve-proxy.sh "$1" "$2" 80 443 "${3:-7.1}"
+        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/site-types/proxy.sh
+        sudo bash /vagrant/vendor/laravel/homestead/scripts/site-types/proxy.sh "$1" "$2" 80 443 "${3:-8.1}"
     else
         echo "Error: missing required parameters."
         echo "Usage: "
@@ -84,8 +137,8 @@ function serve-silverstripe() {
     if [[ "$1" && "$2" ]]
     then
         sudo bash /vagrant/vendor/laravel/homestead/scripts/create-certificate.sh "$1"
-        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/serve-silverstripe.sh
-        sudo bash /vagrant/vendor/laravel/homestead/scripts/serve-silverstripe.sh "$1" "$2" 80 443 "${3:-7.1}"
+        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/site-types/silverstripe.sh
+        sudo bash /vagrant/vendor/laravel/homestead/scripts/site-types/silverstripe.sh "$1" "$2" 80 443 "${3:-8.1}"
     else
         echo "Error: missing required parameters."
         echo "Usage: "
@@ -94,24 +147,24 @@ function serve-silverstripe() {
 }
 
 function serve-spa() {
-  if [[ "$1" && "$2" ]]
-  then
-    sudo bash /vagrant/vendor/laravel/homestead/scripts/create-certificate.sh "$1"
-    sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/serve-spa.sh
-    sudo bash /vagrant/vendor/laravel/homestead/scripts/serve-spa.sh "$1" "$2" 80 443 "${3:-7.1}"
-  else
-    echo "Error: missing required parameters."
-    echo "Usage: "
-    echo "  serve-spa domain path"
-  fi
+    if [[ "$1" && "$2" ]]
+    then
+        sudo bash /vagrant/vendor/laravel/homestead/scripts/create-certificate.sh "$1"
+        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/site-types/spa.sh
+        sudo bash /vagrant/vendor/laravel/homestead/scripts/site-types/spa.sh "$1" "$2" 80 443 "${3:-8.1}"
+    else
+        echo "Error: missing required parameters."
+        echo "Usage: "
+        echo "  serve-spa domain path"
+    fi
 }
 
 function serve-statamic() {
     if [[ "$1" && "$2" ]]
     then
         sudo bash /vagrant/vendor/laravel/homestead/scripts/create-certificate.sh "$1"
-        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/serve-statamic.sh
-        sudo bash /vagrant/vendor/laravel/homestead/scripts/serve-statamic.sh "$1" "$2" 80 443 "${3:-7.1}"
+        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/site-types/statamic.sh
+        sudo bash /vagrant/vendor/laravel/homestead/scripts/site-types/statamic.sh "$1" "$2" 80 443 "${3:-8.1}"
     else
         echo "Error: missing required parameters."
         echo "Usage: "
@@ -123,8 +176,8 @@ function serve-symfony2() {
     if [[ "$1" && "$2" ]]
     then
         sudo bash /vagrant/vendor/laravel/homestead/scripts/create-certificate.sh "$1"
-        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/serve-symfony2.sh
-        sudo bash /vagrant/vendor/laravel/homestead/scripts/serve-symfony2.sh "$1" "$2" 80 443 "${3:-7.1}"
+        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/site-types/symfony2.sh
+        sudo bash /vagrant/vendor/laravel/homestead/scripts/site-types/symfony2.sh "$1" "$2" 80 443 "${3:-8.1}"
     else
         echo "Error: missing required parameters."
         echo "Usage: "
@@ -136,8 +189,8 @@ function serve-symfony4() {
     if [[ "$1" && "$2" ]]
     then
         sudo bash /vagrant/vendor/laravel/homestead/scripts/create-certificate.sh "$1"
-        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/serve-symfony4.sh
-        sudo bash /vagrant/vendor/laravel/homestead/scripts/serve-symfony4.sh "$1" "$2" 80 443 "${3:-7.1}"
+        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/site-types/symfony4.sh
+        sudo bash /vagrant/vendor/laravel/homestead/scripts/site-types/symfony4.sh "$1" "$2" 80 443 "${3:-8.1}"
     else
         echo "Error: missing required parameters."
         echo "Usage: "
@@ -149,8 +202,8 @@ function serve-pimcore() {
     if [[ "$1" && "$2" ]]
     then
         sudo bash /vagrant/vendor/laravel/homestead/scripts/create-certificate.sh "$1"
-        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/serve-pimcore.sh
-        sudo bash /vagrant/vendor/laravel/homestead/scripts/serve-pimcore.sh "$1" "$2" 80 443 "${3:-7.1}"
+        sudo dos2unix /vagrant/vendor/laravel/homestead/scripts/site-types/pimcore.sh
+        sudo bash /vagrant/vendor/laravel/homestead/scripts/site-types/pimcore.sh "$1" "$2" 80 443 "${3:-8.1}"
     else
         echo "Error: missing required parameters."
         echo "Usage: "
@@ -206,9 +259,9 @@ function dbexport() {
         HUMAN_READABLE_SIZE=$(numfmt --to=iec-i --suffix=B --format="%.3f" $ADJUSTED_SIZE)
 
         echo "Estimated uncompressed size: $HUMAN_READABLE_SIZE"
-        mysqldump -uhomestead -psecret --all-databases --skip-lock-tables 2>/dev/null | pv  --size=$ADJUSTED_SIZE | gzip > "$FILE"
+        mysqldump -uhomestead -psecret --all-databases --skip-lock-tables --routines 2>/dev/null | pv  --size=$ADJUSTED_SIZE | gzip > "$FILE"
     else
-        mysqldump -uhomestead -psecret --all-databases --skip-lock-tables 2>/dev/null | gzip > "$FILE"
+        mysqldump -uhomestead -psecret --all-databases --skip-lock-tables --routines 2>/dev/null | gzip > "$FILE"
     fi
 
     echo "Done."
@@ -242,9 +295,21 @@ function xphp() {
     if ! $XDEBUG_ENABLED; then xon; fi
 
     php \
-        -dxdebug.remote_host=192.168.10.1 \
-        -dxdebug.remote_autostart=1 \
+        -dxdebug.client_host=192.168.10.1 \
+        -dxdebug.start_with_request=yes \
         "$@"
 
     if ! $XDEBUG_ENABLED; then xoff; fi
+}
+
+function update-socket-wrench() {
+    cd /var/www/socket-wrench
+    git pull origin release
+    composer install
+    php artisan migrate --force
+}
+
+function seed-socket-wrench() {
+    cd /var/www/socket-wrench
+    php artisan db:seed
 }

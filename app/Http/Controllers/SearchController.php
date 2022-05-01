@@ -1,40 +1,35 @@
 <?php
 
-namespace Almanac\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Almanac\ExternalSearch\GiantBombClient;
-use Almanac\ExternalSearch\TheMovieDBClient;
+
+use App\ExternalSearch\GiantBombClient;
+use App\ExternalSearch\TheMovieDbClient;
 
 class SearchController extends Controller
 {
-	/**
-	 * @var TheMovieDBClient
-	 */
-	private $movieDBClient;
-    /**
-     * @var GiantBombClient
-     */
-    private $giantBombClient;
+    private TheMovieDbClient $movieDBClient;
+    private GiantBombClient $giantBombClient;
 
-    public function __construct(TheMovieDBClient $movieDBClient, GiantBombClient $giantBombClient)
-	{
-		$this->movieDBClient = $movieDBClient;
+    public function __construct(TheMovieDbClient $movieDBClient, GiantBombClient $giantBombClient)
+    {
+        $this->movieDBClient = $movieDBClient;
         $this->giantBombClient = $giantBombClient;
     }
 
-	public function movie()
+    public function movie()
     {
-    	if (!request('query')) return [];
+        if (!request('query')) return [];
 
-    	return $this->movieDBClient->findMovie(request('query'));
+        return $this->movieDBClient->findMovie(request('query'));
     }
 
-	public function tv()
-	{
-		if (!request('query')) return [];
+    public function tv()
+    {
+        if (!request('query')) return [];
 
-		return $this->movieDBClient->findTV(request('query'));
-	}
+        return $this->movieDBClient->findTV(request('query'));
+    }
 
     public function game()
     {

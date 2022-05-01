@@ -1,52 +1,49 @@
 <?php
 
-namespace Almanac\Posts;
+namespace App\Posts;
 
-use Almanac\Attachment;
-use Almanac\NumberToAdjective;
-use Illuminate\Database\Eloquent\Collection;
+use App\Attachment;
+use App\NumberToAdjective;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Feed\Feedable;
-use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
 
-class Post extends Model implements Feedable
+class Post extends Model
 {
-	use SoftDeletes, HasTags;
+    use SoftDeletes, HasTags;
 
-	protected $table = 'posts';
+    protected $table = 'posts';
 
-	protected $appends = [
-		'icon',
-	];
+    protected $appends = [
+        'icon',
+    ];
 
-	protected $dates = [
-		'date_completed',
-		'created_at',
-		'updated_at',
-		'deleted_at',
-	];
+    protected $dates = [
+        'date_completed',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
 
     protected $fillable = [
-	    'id',
+        'id',
         'remote_id',
-	    'type',
-	    'path',
-	    'title',
-	    'subtitle',
-	    'content',
-	    'link',
+        'type',
+        'path',
+        'title',
+        'subtitle',
+        'content',
+        'link',
         'link_post',
-	    'rating',
-	    'year',
-	    'spoilers',
-	    'date_completed',
-	    'time_played',
-	    'creator',
-	    'season',
-	    'platform',
+        'rating',
+        'year',
+        'spoilers',
+        'date_completed',
+        'time_played',
+        'creator',
+        'season',
+        'platform',
         'attachment_order',
     ];
 
@@ -72,39 +69,39 @@ class Post extends Model implements Feedable
 
     public function isType(string $type): bool
     {
-    	return $this->type === $type;
+        return $this->type === $type;
     }
 
-	public function hasTags(): bool
-	{
-		return (bool) $this->tags->count();
-	}
+    public function hasTags(): bool
+    {
+        return (bool) $this->tags->count();
+    }
 
-	public function shouldShowCount(): bool
-	{
-		return !$this->isMusic() && $this->time_viewed > 1;
-	}
+    public function shouldShowCount(): bool
+    {
+        return !$this->isMusic() && $this->time_viewed > 1;
+    }
 
-	public function isMusic(): bool
-	{
-		return $this->type === PostType::MUSIC;
-	}
+    public function isMusic(): bool
+    {
+        return $this->type === PostType::MUSIC;
+    }
 
-	protected function getHtmlAttribute()
-	{
-		return (app(ContentManager::class))->convertToHtml($this);
-	}
+    protected function getHtmlAttribute()
+    {
+        return (app(ContentManager::class))->convertToHtml($this);
+    }
 
-	protected function getPermalinkAttribute(): string
-	{
-		return sprintf(
-			'/%s/%s',
-			$this->date_completed->format('Y/m/d'),
-			$this->path
-		);
-	}
+    protected function getPermalinkAttribute(): string
+    {
+        return sprintf(
+            '/%s/%s',
+            $this->date_completed->format('Y/m/d'),
+            $this->path
+        );
+    }
 
-	public function getLinkHostAttribute()
+    public function getLinkHostAttribute()
     {
         return str_replace('www.', '', parse_url($this->link)['host'] ?? $this->link);
     }
@@ -114,62 +111,62 @@ class Post extends Model implements Feedable
         return $this->link_post ? 'link' : PostType::ICONS[$this->type];
     }
 
-	public function getVerbAttribute()
-	{
+    public function getVerbAttribute()
+    {
         return PostType::VERBS[$this->type];
-	}
+    }
 
-	public function getRelatedCountAttribute()
-	{
-		return $this->relatedPosts ? $this->relatedPosts->count() : 0;
-	}
+    public function getRelatedCountAttribute()
+    {
+        return $this->relatedPosts ? $this->relatedPosts->count() : 0;
+    }
 
-	public function getSubtitleOutputAttribute()
-	{
+    public function getSubtitleOutputAttribute()
+    {
         $rating = self::RATINGS[$this->rating] ?? null;
 
-		if (!$this->subtitle && !$this->season && !$this->platform) {
-		    return $rating;
+        if (!$this->subtitle && !$this->season && !$this->platform) {
+            return $rating;
         }
 
-		$parts = [];
+        $parts = [];
 
-		if ($this->subtitle) $parts[] = $this->subtitle;
-		if ($this->platform) $parts[] = sprintf('<a href="/?platform=%s">%s</a>', strtolower($this->platform), $this->platform);
-		if ($this->season && $this->season !== '') {
-		    $parts[] = $this->type === PostType::BOOK ? $this->season : 'Season' . ' ' . $this->season;
+        if ($this->subtitle) $parts[] = $this->subtitle;
+        if ($this->platform) $parts[] = sprintf('<a href="/?platform=%s">%s</a>', strtolower($this->platform), $this->platform);
+        if ($this->season && $this->season !== '') {
+            $parts[] = $this->type === PostType::BOOK ? $this->season : 'Season' . ' ' . $this->season;
         }
 
-		return count($parts) > 0 ? $rating . ' ' . implode(' | ', $parts) : $rating;
-	}
+        return count($parts) > 0 ? $rating . ' ' . implode(' | ', $parts) : $rating;
+    }
 
-	public function getFuturePosts()
-	{
-		$date = $this->date_completed;
-		return $this->relatedPosts->filter(function(Post $r) use ($date) {
-			return $date->lt($r->date_completed);
-		})->sortByDesc('date_completed');
-	}
+    public function getFuturePosts()
+    {
+        $date = $this->date_completed;
+        return $this->relatedPosts->filter(function(Post $r) use ($date) {
+            return $date->lt($r->date_completed);
+        })->sortByDesc('date_completed');
+    }
 
-	public function getPreviousPosts()
-	{
-		$date = $this->date_completed;
-		return $this->relatedPosts->filter(function(Post $r) use ($date) {
-			return $date->gt($r->date_completed);
-		})->sortByDesc('date_completed');
-	}
+    public function getPreviousPosts()
+    {
+        $date = $this->date_completed;
+        return $this->relatedPosts->filter(function(Post $r) use ($date) {
+            return $date->gt($r->date_completed);
+        })->sortByDesc('date_completed');
+    }
 
-	public function getTimeViewedAttribute()
-	{
-		return $this->getPreviousPosts()->count() + 1;
-	}
+    public function getTimeViewedAttribute()
+    {
+        return $this->getPreviousPosts()->count() + 1;
+    }
 
-	public function getTwitterPreviewAttribute()
-	{
-		$date = $this->date_completed->format('l jS F Y');
+    public function getTwitterPreviewAttribute()
+    {
+        $date = $this->date_completed->format('l jS F Y');
 
-		return ucfirst($this->verb) . ' on ' . $date . ' for the ' . NumberToAdjective::convert($this->time_viewed) . ' time';
-	}
+        return ucfirst($this->verb) . ' on ' . $date . ' for the ' . NumberToAdjective::convert($this->time_viewed) . ' time';
+    }
 
     public function getSortedAttachments()
     {
@@ -179,17 +176,6 @@ class Post extends Model implements Feedable
             $found = array_search($attachment->id, $this->attachment_order);
             return $found === false ? 9999999999+$attachment->id : $found;
         })->values()->all();
-    }
-
-    public function toFeedItem(): FeedItem
-    {
-       return FeedItem::create()
-           ->id($this->id)
-           ->title($this->title)
-           ->summary($this->content ?? 'No review')
-           ->updated($this->updated_at)
-           ->link($this->permalink)
-           ->author('Robb Knight');
     }
 
     public static function getFeedItems()

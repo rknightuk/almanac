@@ -54,7 +54,7 @@
                         <a href="/?category={{ $postType['key'] }}">
                             <i
                                 class="fas fa-{{ $postType['icon'] }}"
-                                @if (in_array($postType['key'], \Almanac\Posts\PostType::ICONS_SHRINK_NAV))data-fa-transform="shrink-2"@endif
+                                @if (in_array($postType['key'], \App\Posts\PostType::ICONS_SHRINK_NAV))data-fa-transform="shrink-2"@endif
                             ></i>
                         </a>
                     </div>

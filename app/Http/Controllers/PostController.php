@@ -1,45 +1,40 @@
 <?php
 
-namespace Almanac\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Almanac\Attachment;
-use Almanac\Http\Requests\CreatePost;
-use Almanac\Http\Requests\UpdatePost;
-use Almanac\Posts\PathGenerator;
-use Almanac\Posts\Post;
-use Almanac\Posts\PostQuery;
-use Almanac\Posts\PostRepository;
+use App\Attachment;
+use App\Http\Requests\CreatePost;
+use App\Http\Requests\UpdatePost;
+use App\Posts\PathGenerator;
+use App\Posts\Post;
+use App\Posts\PostQuery;
+use App\Posts\PostRepository;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PostController extends Controller
 {
-	/**
-	 * @var PathGenerator
-	 */
-	private $pathGenerator;
-	/**
-	 * @var PostRepository
-	 */
-	private $postRepository;
+    private PathGenerator $pathGenerator;
 
-	public function __construct(PathGenerator $pathGenerator, PostRepository $postRepository)
-	{
-		$this->pathGenerator = $pathGenerator;
-		$this->postRepository = $postRepository;
-	}
+    private PostRepository $postRepository;
+
+    public function __construct(PathGenerator $pathGenerator, PostRepository $postRepository)
+    {
+        $this->pathGenerator = $pathGenerator;
+        $this->postRepository = $postRepository;
+    }
 
     public function index()
     {
-	    $query = (new PostQuery())->fromRequest(request());
+        $query = (new PostQuery())->fromRequest(request());
 
-    	return $this->postRepository->paginate($query);
+        return $this->postRepository->paginate($query);
     }
 
-	public function show($id)
-	{
-		return $this->postRepository->one((new PostQuery())->id($id));
-	}
+    public function show($id)
+    {
+        return $this->postRepository->one((new PostQuery())->id($id));
+    }
 
     public function store(CreatePost $request)
     {
@@ -61,19 +56,19 @@ class PostController extends Controller
 
     public function update(UpdatePost $request, $id)
     {
-	    $postData = json_decode($request->input('post'), true);
+        $postData = json_decode($request->input('post'), true);
 
-	    $post = $this->postRepository->one((new PostQuery())->id($id));
+        $post = $this->postRepository->one((new PostQuery())->id($id));
 
         $postData = $this->formatData($postData, $id);
 
-	    $post->update($postData);
+        $post->update($postData);
 
-	    $post->syncTags($postData['tags']);
+        $post->syncTags($postData['tags']);
 
-	    $attachments = $postData['attachments'];
+        $attachments = $postData['attachments'];
 
-	    foreach ($attachments as $attachment)
+        foreach ($attachments as $attachment)
         {
             if ($attachment['id'] && $attachment['deleted_at']) {
                 $attachment = Attachment::find($attachment['id']);
@@ -86,14 +81,14 @@ class PostController extends Controller
             $this->uploadAttachments($post, $files ?? []);
         }
 
-	    return $post;
+        return $post;
     }
 
     public function destroy($id)
     {
-	    $post = Post::find($id);
+        $post = Post::find($id);
 
-	    $post->delete();
+        $post->delete();
     }
 
     /**
