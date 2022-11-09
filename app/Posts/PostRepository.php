@@ -95,4 +95,11 @@ class PostRepository {
             ->where('id', '!=', $post->id)
             ->first();
     }
+
+    public function allByType(string $type)
+    {
+        return $this->baseQuery()
+            ->where('type', $type)
+            ->get();
+    }
 }
