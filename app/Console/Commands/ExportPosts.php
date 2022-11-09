@@ -3,8 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Attachment;
+use App\ExternalSearch\MicroBlogClient;
 use App\Posts\Post;
 use App\Posts\PostRepository;
+use Carbon\Carbon;
 use DateTimeZone;
 use Illuminate\Console\Command;
 
@@ -64,9 +66,16 @@ class ExportPosts extends Command
         /** @var Post $post */
         foreach ($posts as $post)
         {
+            $rating = '';
+            foreach (range(1, $post->rating) as $r)
+            {
+                $rating .= '★';
+            }
+
             $date = $post->date_completed->toIso8601String();
             $dateForPath = $post->date_completed->format('Y-m-d');
             $category = \mb_strtoupper(\in_array($post->type, ['podcast', 'movie', 'game', 'book']) ? $post->type . 's' : $post->type);
+            $category = 'Movies';
             if (in_array($post->id, [272,55,59,60,61,62,63,393,397,399,566,572,579,563,587,638,648,673,738,947,1024,1025,987,754,753,1012,1189,1188,1186]))
             {
                 $category = 'Documentary';
@@ -76,9 +85,17 @@ class ExportPosts extends Command
                 $category = 'Stand Up';
             }
             $title = $post->title;
+            if ($post->subtitle)
+            {
+                $title .= " ($post->subtitle)";
+            }
             if ($post->season)
             {
                 $title .= ' season ' . $post->season;
+            }
+            if ($post->year)
+            {
+                $title .= " ($post->year)";
             }
             $attachments = '';
             if (count($post->getSortedAttachments()) > 0)
@@ -100,7 +117,7 @@ date: $date
 url: $post->permalink.html
 categories: $category
 ---
-Watched $title.
+$title - $rating
 
 $post->content
 
