@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\ExternalSearch\MicroBlogClient;
 use App\Posts\PathGenerator;
 use App\Posts\Post;
 use App\Posts\PostType;
@@ -16,11 +17,13 @@ class LetterboxdFetcher {
 
     private PathGenerator $pathGenerator;
     private AutoTagger $autoTagger;
+    private MicroBlogClient $microBlogClient;
 
-    public function __construct(PathGenerator $pathGenerator, AutoTagger $autoTagger)
+    public function __construct(PathGenerator $pathGenerator, AutoTagger $autoTagger, MicroBlogClient $microBlogClient)
     {
         $this->pathGenerator = $pathGenerator;
         $this->autoTagger = $autoTagger;
+        $this->microBlogClient = $microBlogClient;
     }
 
     private function getFeed(): string {
@@ -87,7 +90,8 @@ class LetterboxdFetcher {
             'remote_id' => (string) $item->guid,
         ]);
 
-        $this->autoTagger->tag($post);
+        $this->microBlogClient->createPost($post);
+//        $this->autoTagger->tag($post);
     }
 
     private function extractReview(string $rawReview): ?string
