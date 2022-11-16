@@ -41,7 +41,7 @@ $post->content
 
         $date = $post->date_completed->toIso8601String();
 
-        $this->client->request('POST', 'micropub?h=entry&content=' . $content . '&published=' . $date . '&category[]=Movies', [
+        $this->client->request('POST', 'micropub?h=entry&mp-destination=https://rknightuk.micro.blog/&content=' . $content . '&published=' . $date . '&category[]=Movies', [
             'headers' => [
                 'Authorization' => 'Bearer ' . env('MB_TOKEN'),
                 'Accept' => 'application/json',
