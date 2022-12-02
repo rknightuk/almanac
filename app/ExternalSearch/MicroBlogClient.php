@@ -3,6 +3,7 @@
 namespace App\ExternalSearch;
 
 use App\Posts\Post;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 
 class MicroBlogClient {
@@ -48,5 +49,17 @@ $post->content
             ],
         ]);
     }
+
+    public function postContent(string $content, string $category, string $title)
+    {
+        $date = Carbon::now()->toIso8601String();
+        $this->client->request('POST', 'micropub?h=entry&mp-destination=https://rknightuk.micro.blog/&content=' . $content . '&published=' . $date . '&category[]=' . $category . '&name=' . $title, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . env('MB_TOKEN'),
+                'Accept' => 'application/json',
+            ],
+        ]);
+    }
+
 
 }
