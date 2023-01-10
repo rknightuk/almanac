@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 
 class GiantBombClient {
 
-    private Client$client;
+    private Client $client;
     private array $params = [];
 
     public function __construct()

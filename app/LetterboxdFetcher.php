@@ -90,7 +90,7 @@ class LetterboxdFetcher {
             'remote_id' => (string) $item->guid,
         ]);
 
-        $this->microBlogClient->createPost($post);
+        // $this->microBlogClient->createPost($post);
 //        $this->autoTagger->tag($post);
     }
 
